@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>TradeBot Pro | Automated Trading Bots & Courses | Scale Your Profits</title>
+    <meta name="description" content="Professional trading bot courses and ready-to-use AI trading bots designed for modern traders. Automate your trading and scale your profits with TradeBot Pro.">
+    <meta name="keywords" content="trading bots, automated trading, AI trading, trading courses, forex bots, crypto trading, algorithmic trading, trading automation">
+    <meta name="author" content="TradeBot Pro">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="TradeBot Pro | Automated Trading Bots & Courses">
+    <meta property="og:description" content="Professional trading bot courses and ready-to-use AI trading bots designed for modern traders.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tradebotpro.com">
+    <meta property="og:image" content="https://tradebotpro.com/assets/og-image.jpg">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TradeBot Pro | Automated Trading Bots & Courses">
+    <meta name="twitter:description" content="Professional trading bot courses and ready-to-use AI trading bots designed for modern traders.">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="loaded">
+    
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="bi bi-robot"></i>
+                <span>TradeBot</span><span class="accent">Pro</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#bots">Bots</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#courses">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <a href="#courses" class="btn btn-primary btn-cta">Get Started</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
+                        <span class="hero-badge">
+                            <i class="bi bi-stars"></i>
+                            #1 Trading Automation Platform
+                        </span>
+                        <h1 class="hero-title">
+                            <span class="typing-text"></span>
+                        </h1>
+                        <p class="hero-subtitle">
+                            Professional Trading Bot Courses and Ready-to-Use AI Trading Bots Designed for Modern Traders.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="#bots" class="btn btn-primary btn-lg">
+                                <i class="bi bi-robot"></i>
+                                Explore Bots
+                            </a>
+                            <a href="#courses" class="btn btn-outline-light btn-lg">
+                                <i class="bi bi-mortarboard"></i>
+                                Join Course
+                            </a>
+                        </div>
+                        <div class="hero-features">
+                            <div class="feature-item">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>No Coding Required</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>24/7 Automation</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>AI-Powered</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-visual" data-aos="fade-left" data-aos-duration="1000">
+                        <div class="dashboard-mockup glass-card">
+                            <div class="dashboard-header">
+                                <div class="dashboard-title">
+                                    <i class="bi bi-graph-up-arrow"></i>
+                                    Live Trading Dashboard
+                                </div>
+                                <div class="dashboard-status">
+                                    <span class="status-dot"></span>
+                                    Active
+                                </div>
+                            </div>
+                            <div class="dashboard-stats">
+                                <div class="stat-card">
+                                    <div class="stat-label">Total Profit</div>
+                                    <div class="stat-value text-success">+$12,450.00</div>
+                                    <div class="stat-change">+24.5%</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-label">Win Rate</div>
+                                    <div class="stat-value text-primary">87.3%</div>
+                                    <div class="stat-change">+5.2%</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-label">Trades Today</div>
+                                    <div class="stat-value text-info">156</div>
+                                    <div class="stat-change">+12</div>
+                                </div>
+                            </div>
+                            <div class="dashboard-chart">
+                                <div class="chart-line"></div>
+                            </div>
+                        </div>
+                        <div class="floating-card card-1">
+                            <i class="bi bi-currency-dollar"></i>
+                            <span>$2.5M+ Generated</span>
+                        </div>
+                        <div class="floating-card card-2">
+                            <i class="bi bi-people"></i>
+                            <span>5000+ Active Users</span>
+                        </div>
+                        <div class="floating-card card-3">
+                            <i class="bi bi-shield-check"></i>
+                            <span>99.9% Uptime</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-gradient"></div>
+    </section>
+    
+    <!-- Trust Section -->
+    <section class="trust-section" id="trust">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="trust-grid">
+                        <div class="trust-item" data-aos="fade-up" data-aos-delay="0">
+                            <div class="trust-icon">
+                                <i class="bi bi-people-fill"></i>
+                            </div>
+                            <div class="trust-number" data-target="5000">0</div>
+                            <div class="trust-label">Students</div>
+                        </div>
+                        <div class="trust-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="trust-icon">
+                                <i class="bi bi-robot"></i>
+                            </div>
+                            <div class="trust-number" data-target="1200">0</div>
+                            <div class="trust-label">Active Bots</div>
+                        </div>
+                        <div class="trust-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="trust-icon">
+                                <i class="bi bi-emoji-smile-fill"></i>
+                            </div>
+                            <div class="trust-number" data-target="95">0</div>
+                            <div class="trust-label">Satisfaction</div>
+                        </div>
+                        <div class="trust-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="trust-icon">
+                                <i class="bi bi-headset"></i>
+                            </div>
+                            <div class="trust-number" data-target="24">0</div>
+                            <div class="trust-label">Support</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-image" data-aos="fade-right" data-aos-duration="1000">
+                        <div class="about-img-wrapper">
+                            <div class="about-img glass-card">
+                                <div class="about-overlay">
+                                    <i class="bi bi-play-circle"></i>
+                                </div>
+                            </div>
+                            <div class="experience-badge">
+                                <span>10+</span>
+                                <span>Years Experience</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-content" data-aos="fade-left" data-aos-duration="1000">
+                        <span class="section-badge">About Us</span>
+                        <h2 class="section-title">Revolutionizing Trading with AI-Powered Automation</h2>
+                        <p class="section-text">
+                            TradeBot Pro was founded by a team of experienced traders and AI engineers with a shared vision: to make professional-grade trading automation accessible to everyone.
+                        </p>
+                        <div class="about-features">
+                            <div class="about-feature">
+                                <div class="feature-icon">
+                                    <i class="bi bi-bullseye"></i>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>Our Mission</h4>
+                                    <p>To empower traders with cutting-edge AI tools and comprehensive education, enabling them to achieve consistent profitability in the markets.</p>
+                                </div>
+                            </div>
+                            <div class="about-feature">
+                                <div class="feature-icon">
+                                    <i class="bi bi-eye"></i>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>Our Vision</h4>
+                                    <p>To become the world's leading platform for trading automation, making algorithmic trading simple, profitable, and accessible to all.</p>
+                                </div>
+                            </div>
+                            <div class="about-feature">
+                                <div class="feature-icon">
+                                    <i class="bi bi-trophy"></i>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>Why Choose Us</h4>
+                                    <p>We combine proven trading strategies with advanced AI technology, backed by expert support and continuous innovation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header text-center" data-aos="fade-up">
+                        <span class="section-badge">Our Services</span>
+                        <h2 class="section-title">Premium Trading Solutions</h2>
+                        <p class="section-text">Comprehensive services designed to elevate your trading journey</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card glass-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="service-icon">
+                            <i class="bi bi-code-slash"></i>
+                        </div>
+                        <h3>Trading Bot Development</h3>
+                        <p>Custom-built trading bots tailored to your specific strategies and requirements. From simple to complex algorithms.</p>
+                        <a href="#contact" class="service-link">
+                            Learn More <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card glass-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-icon">
+                            <i class="bi bi-robot"></i>
+                        </div>
+                        <h3>Ready Trading Bots</h3>
+                        <p>Deploy our pre-configured, battle-tested trading bots instantly. No coding required. Start automating in minutes.</p>
+                        <a href="#bots" class="service-link">
+                            Explore Bots <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card glass-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-icon">
+                            <i class="bi bi-mortarboard"></i>
+                        </div>
+                        <h3>Trading Courses</h3>
+                        <p>Comprehensive courses from beginner to advanced levels. Learn to build, deploy, and optimize your own trading bots.</p>
+                        <a href="#courses" class="service-link">
+                            View Courses <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card glass-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="service-icon">
+                            <i class="bi bi-gear"></i>
+                        </div>
+                        <h3>Strategy Automation</h3>
+                        <p>Convert your manual trading strategies into automated systems. We handle the technical implementation.</p>
+                        <a href="#contact" class="service-link">
+                            Get Started <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card glass-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="service-icon">
+                            <i class="bi bi-cpu"></i>
+                        </div>
+                        <h3>AI Trading Solutions</h3>
+                        <p>Leverage machine learning and AI for predictive trading. Advanced algorithms that adapt to market conditions.</p>
+                        <a href="#contact" class="service-link">
+                            Learn More <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card glass-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="service-icon">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <h3>Support & Maintenance</h3>
+                        <p>24/7 technical support and ongoing maintenance for your trading systems. We ensure optimal performance.</p>
+                        <a href="#contact" class="service-link">
+                            Contact Us <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Ready Bots Section -->
+    <section class="bots-section" id="bots">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header text-center" data-aos="fade-up">
+                        <span class="section-badge">Ready Bots</span>
+                        <h2 class="section-title">Premium Trading Bots</h2>
+                        <p class="section-text">Deploy battle-tested bots and start automating your trading today</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="bots-container">
+                <!-- Bot cards will be dynamically generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Courses Section -->
+    <section class="courses-section" id="courses">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header text-center" data-aos="fade-up">
+                        <span class="section-badge">Courses</span>
+                        <h2 class="section-title">Trading Bot Courses</h2>
+                        <p class="section-text">Master trading automation with our comprehensive educational programs</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="courses-container">
+                <!-- Course cards will be dynamically generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section class="projects-section" id="projects">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header text-center" data-aos="fade-up">
+                        <span class="section-badge">Case Studies</span>
+                        <h2 class="section-title">Success Stories</h2>
+                        <p class="section-text">Real results from traders using our solutions</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="project-image">
+                            <div class="project-overlay">
+                                <a href="#" class="project-link">
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-category">Forex Trading</span>
+                            <h3>Automated Forex System</h3>
+                            <p>Complete automation of a forex trading strategy resulting in 340% annual returns.</p>
+                            <div class="project-stats">
+                                <span><i class="bi bi-graph-up"></i> +340% ROI</span>
+                                <span><i class="bi bi-clock"></i> 12 Months</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="project-image">
+                            <div class="project-overlay">
+                                <a href="#" class="project-link">
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-category">Crypto Trading</span>
+                            <h3>Crypto Arbitrage Bot</h3>
+                            <p>Multi-exchange arbitrage system generating consistent risk-free profits.</p>
+                            <div class="project-stats">
+                                <span><i class="bi bi-graph-up"></i> +180% ROI</span>
+                                <span><i class="bi bi-clock"></i> 6 Months</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="project-image">
+                            <div class="project-overlay">
+                                <a href="#" class="project-link">
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-category">Stock Trading</span>
+                            <h3>AI Stock Predictor</h3>
+                            <p>Machine learning model for stock price prediction with 78% accuracy.</p>
+                            <div class="project-stats">
+                                <span><i class="bi bi-graph-up"></i> +220% ROI</span>
+                                <span><i class="bi bi-clock"></i> 8 Months</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header text-center" data-aos="fade-up">
+                        <span class="section-badge">Testimonials</span>
+                        <h2 class="section-title">What Our Clients Say</h2>
+                        <p class="section-text">Real feedback from real traders</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="swiper testimonials-slider" data-aos="fade-up">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="testimonial-card glass-card">
+                                    <div class="testimonial-rating">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p class="testimonial-text">
+                                        "The scalping bot has completely transformed my trading. I went from breaking even to consistent profits in just 2 months. The support team is incredible!"
+                                    </p>
+                                    <div class="testimonial-author">
+                                        <div class="author-avatar">
+                                            <i class="bi bi-person-circle"></i>
+                                        </div>
+                                        <div class="author-info">
+                                            <h4>Michael Chen</h4>
+                                            <span>Professional Trader</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="testimonial-card glass-card">
+                                    <div class="testimonial-rating">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p class="testimonial-text">
+                                        "I took the Professional Course and it was worth every penny. Now I build my own custom bots and have full control over my trading strategy."
+                                    </p>
+                                    <div class="testimonial-author">
+                                        <div class="author-avatar">
+                                            <i class="bi bi-person-circle"></i>
+                                        </div>
+                                        <div class="author-info">
+                                            <h4>Sarah Johnson</h4>
+                                            <span>Algorithmic Trader</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="testimonial-card glass-card">
+                                    <div class="testimonial-rating">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p class="testimonial-text">
+                                        "The AI Signal Bot is amazing. It's like having a professional analyst working 24/7. My portfolio has grown 40% since I started using it."
+                                    </p>
+                                    <div class="testimonial-author">
+                                        <div class="author-avatar">
+                                            <i class="bi bi-person-circle"></i>
+                                        </div>
+                                        <div class="author-info">
+                                            <h4>David Rodriguez</h4>
+                                            <span>Crypto Investor</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="testimonial-card glass-card">
+                                    <div class="testimonial-rating">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p class="testimonial-text">
+                                        "Best investment I've made. The grid trading bot runs completely on autopilot and generates steady passive income. Highly recommend!"
+                                    </p>
+                                    <div class="testimonial-author">
+                                        <div class="author-avatar">
+                                            <i class="bi bi-person-circle"></i>
+                                        </div>
+                                        <div class="author-info">
+                                            <h4>Emma Thompson</h4>
+                                            <span>Passive Investor</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="testimonial-card glass-card">
+                                    <div class="testimonial-rating">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                    </div>
+                                    <p class="testimonial-text">
+                                        "The custom bot development service exceeded my expectations. They turned my manual strategy into a fully automated system perfectly."
+                                    </p>
+                                    <div class="testimonial-author">
+                                        <div class="author-avatar">
+                                            <i class="bi bi-person-circle"></i>
+                                        </div>
+                                        <div class="author-info">
+                                            <h4>James Wilson</h4>
+                                            <span>Forex Trader</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-navigation">
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header text-center" data-aos="fade-up">
+                        <span class="section-badge">FAQ</span>
+                        <h2 class="section-title">Frequently Asked Questions</h2>
+                        <p class="section-text">Get answers to common questions about our services</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="accordion" id="faqAccordion" data-aos="fade-up">
+                        <div class="accordion-item glass-card">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Do I need programming skills to use your trading bots?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    No programming skills are required! Our ready-made trading bots are designed to be user-friendly and can be deployed with just a few clicks. We also provide comprehensive setup guides and video tutorials to help you get started.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item glass-card">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    What markets do your trading bots support?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Our trading bots support multiple markets including Forex, Cryptocurrency, Stocks, Futures, and Commodities. Each bot is optimized for specific market conditions, and we can customize bots for your preferred market.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item glass-card">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    How much capital do I need to start?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    The minimum capital requirement varies depending on the bot and market. Generally, you can start with as little as $500 for spot trading bots, while futures and advanced strategies may require $2,000+. We recommend starting with capital you're comfortable with and scaling up as you gain confidence.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item glass-card">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Are your trading bots profitable?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Our bots have been backtested and live-tested with positive results. However, trading always carries risk, and past performance doesn't guarantee future results. We provide realistic profit expectations and emphasize proper risk management. Our bots include built-in risk controls to protect your capital.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item glass-card">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                    What kind of support do you provide?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We provide 24/7 support through email, live chat, and Telegram. Course students get access to private communities and direct mentorship. Premium users receive priority support with dedicated account managers. We're committed to ensuring your success.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item glass-card">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                                    Can I customize the trading strategies?
+                                </button>
+                            </h2>
+                            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes! Our Professional and Master courses teach you how to customize and build your own strategies. We also offer custom bot development services where we can implement your specific strategy. Ready-made bots come with configurable parameters that you can adjust.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item glass-card">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq7">
+                                    How secure are my funds and API keys?
+                                </button>
+                            </h2>
+                            <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Security is our top priority. Your funds always remain in your exchange account - we never have access to withdraw them. API keys are encrypted and stored securely. We recommend using API keys with trading-only permissions (no withdrawal access) for maximum security.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item glass-card">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq8">
+                                    Do you offer refunds?
+                                </button>
+                            </h2>
+                            <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We offer a 7-day money-back guarantee for all our courses and bot purchases. If you're not satisfied with the product, contact our support team within 7 days for a full refund. For custom development services, refunds are handled on a case-by-case basis.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header text-center" data-aos="fade-up">
+                        <span class="section-badge">Contact Us</span>
+                        <h2 class="section-title">Get In Touch</h2>
+                        <p class="section-text">Ready to automate your trading? Contact us today</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="contact-info" data-aos="fade-right">
+                        <div class="contact-card glass-card">
+                            <div class="contact-icon">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Our Office</h4>
+                                <p>123 Trading Street, Financial District<br>New York, NY 10004</p>
+                            </div>
+                        </div>
+                        <div class="contact-card glass-card">
+                            <div class="contact-icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email Us</h4>
+                                <p>support@tradebotpro.com<br>sales@tradebotpro.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-card glass-card">
+                            <div class="contact-icon">
+                                <i class="bi bi-telephone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Call Us</h4>
+                                <p>+1 (555) 123-4567<br>+1 (555) 987-6543</p>
+                            </div>
+                        </div>
+                        <div class="contact-card glass-card">
+                            <div class="contact-icon">
+                                <i class="bi bi-whatsapp"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>WhatsApp</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-card glass-card">
+                            <div class="contact-icon">
+                                <i class="bi bi-telegram"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Telegram</h4>
+                                <p>@TradeBotProSupport</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="contact-form-wrapper glass-card" data-aos="fade-left">
+                        <form class="contact-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Full Name</label>
+                                        <input type="text" class="form-control" id="name" placeholder="John Doe" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" class="form-control" id="email" placeholder="john@example.com" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="+1 (555) 123-4567">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <select class="form-control" id="subject">
+                                    <option value="">Select a topic</option>
+                                    <option value="bots">Trading Bots Inquiry</option>
+                                    <option value="courses">Course Information</option>
+                                    <option value="custom">Custom Development</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea class="form-control" id="message" rows="5" placeholder="Tell us about your project or inquiry..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-send"></i>
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand">
+                        <a class="navbar-brand" href="#home">
+                            <i class="bi bi-robot"></i>
+                            <span>TradeBot</span><span class="accent">Pro</span>
+                        </a>
+                        <p class="footer-description">
+                            Empowering traders with cutting-edge AI automation and comprehensive education. Your journey to automated trading success starts here.
+                        </p>
+                        <div class="social-links">
+                            <a href="#"><i class="bi bi-facebook"></i></a>
+                            <a href="#"><i class="bi bi-twitter-x"></i></a>
+                            <a href="#"><i class="bi bi-linkedin"></i></a>
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                            <a href="#"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#bots">Trading Bots</a></li>
+                            <li><a href="#courses">Courses</a></li>
+                            <li><a href="#services">Custom Development</a></li>
+                            <li><a href="#services">AI Solutions</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Courses</h4>
+                        <ul>
+                            <li><a href="#courses">Starter Course</a></li>
+                            <li><a href="#courses">Professional Course</a></li>
+                            <li><a href="#courses">Master Program</a></li>
+                            <li><a href="#contact">Custom Training</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-newsletter">
+                        <h4>Newsletter</h4>
+                        <p>Subscribe for trading tips and updates.</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Your email">
+                            <button type="submit"><i class="bi bi-send"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-bottom">
+                        <p>&copy; 2024 TradeBot Pro. All rights reserved.</p>
+                        <div class="footer-bottom-links">
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Swiper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+</body>
+</html>
