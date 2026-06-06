@@ -15,81 +15,8 @@ const CONFIG = {
 // Data Structures for Dynamic Content Generation
 // =================================================
 
-// Courses Data - Add new courses here to automatically generate cards
-const courses = [
-    {
-        id: 1,
-        title: "Starter Course",
-        subtitle: "Perfect introduction to trading bots",
-        price: "$299",
-        period: "one-time",
-        duration: "4 Weeks",
-        level: "Beginner",
-        badge: "Starter",
-        badgeClass: "",
-        featured: false,
-        description: "Perfect introduction to trading bots and automation fundamentals. Learn the basics of automated trading.",
-        features: [
-            "20+ Video Lessons",
-            "Basic Bot Setup",
-            "Risk Management",
-            "4 Weeks Duration",
-            "Certificate of Completion",
-            "Email Support"
-        ],
-        ctaText: "Enroll Now",
-        ctaClass: "btn-outline-primary"
-    },
-    {
-        id: 2,
-        title: "Professional Course",
-        subtitle: "Advanced strategies for serious traders",
-        price: "$699",
-        period: "one-time",
-        duration: "8 Weeks",
-        level: "Intermediate",
-        badge: "Most Popular",
-        badgeClass: "popular",
-        featured: true,
-        description: "Advanced strategies and custom bot development for serious traders. Build your own trading systems.",
-        features: [
-            "50+ Video Lessons",
-            "Custom Bot Development",
-            "Advanced Strategies",
-            "8 Weeks Duration",
-            "Professional Certificate",
-            "Priority Support",
-            "Private Community"
-        ],
-        ctaText: "Enroll Now",
-        ctaClass: "btn-primary"
-    },
-    {
-        id: 3,
-        title: "Master Trading Automation",
-        subtitle: "Complete mastery with AI & ML",
-        price: "$1,499",
-        period: "one-time",
-        duration: "12 Weeks",
-        level: "Advanced",
-        badge: "Premium",
-        badgeClass: "premium",
-        featured: false,
-        description: "Complete mastery of trading automation with AI and machine learning. Enterprise-level strategies.",
-        features: [
-            "100+ Video Lessons",
-            "AI & ML Integration",
-            "Enterprise Strategies",
-            "12 Weeks Duration",
-            "Master Certificate",
-            "1-on-1 Mentorship",
-            "Lifetime Updates",
-            "VIP Community Access"
-        ],
-        ctaText: "Enroll Now",
-        ctaClass: "btn-outline-primary"
-    }
-];
+// Courses Data - Loaded from courses.json or localStorage
+let courses = [];
 
 // Trading Bots Data - Add new bots here to automatically generate cards
 const tradingBots = [
@@ -189,28 +116,165 @@ const tradingBots = [
 // =================================================
 
 /**
+ * Load courses from courses.json or localStorage
+ */
+async function loadCourses() {
+    try {
+        // Try to load from localStorage first (for admin panel changes)
+        const storedCourses = localStorage.getItem('paramcgwala_courses');
+        
+        if (storedCourses) {
+            courses = JSON.parse(storedCourses);
+            console.log('✅ Courses loaded from localStorage');
+        } else {
+            // Load from courses.json
+            const response = await fetch('courses.json');
+            courses = await response.json();
+            console.log('✅ Courses loaded from courses.json');
+            // Save to localStorage for future use
+            localStorage.setItem('paramcgwala_courses', JSON.stringify(courses));
+        }
+    } catch (error) {
+        console.error('❌ Error loading courses:', error);
+        // Fallback to default courses if loading fails
+        courses = [
+            {
+                id: 1,
+                title: "Starter Course",
+                subtitle: "Perfect introduction to trading bots",
+                price: "$299",
+                period: "one-time",
+                duration: "4 Weeks",
+                level: "Beginner",
+                badge: "Starter",
+                badgeClass: "",
+                featured: false,
+                description: "Perfect introduction to trading bots and automation fundamentals. Learn the basics of automated trading.",
+                features: [
+                    "20+ Video Lessons",
+                    "Basic Bot Setup",
+                    "Risk Management",
+                    "4 Weeks Duration",
+                    "Certificate of Completion",
+                    "Email Support"
+                ],
+                ctaText: "Enroll Now",
+                ctaClass: "btn-outline-primary"
+            },
+            {
+                id: 2,
+                title: "Professional Course",
+                subtitle: "Advanced strategies for serious traders",
+                price: "$699",
+                period: "one-time",
+                duration: "8 Weeks",
+                level: "Intermediate",
+                badge: "Most Popular",
+                badgeClass: "popular",
+                featured: true,
+                description: "Advanced strategies and custom bot development for serious traders. Build your own trading systems.",
+                features: [
+                    "50+ Video Lessons",
+                    "Custom Bot Development",
+                    "Advanced Strategies",
+                    "8 Weeks Duration",
+                    "Professional Certificate",
+                    "Priority Support",
+                    "Private Community"
+                ],
+                ctaText: "Enroll Now",
+                ctaClass: "btn-primary"
+            },
+            {
+                id: 3,
+                title: "Master Trading Automation",
+                subtitle: "Complete mastery with AI & ML",
+                price: "$1,499",
+                period: "one-time",
+                duration: "12 Weeks",
+                level: "Advanced",
+                badge: "Premium",
+                badgeClass: "premium",
+                featured: false,
+                description: "Complete mastery of trading automation with AI and machine learning. Enterprise-level strategies.",
+                features: [
+                    "100+ Video Lessons",
+                    "AI & ML Integration",
+                    "Enterprise Strategies",
+                    "12 Weeks Duration",
+                    "Master Certificate",
+                    "1-on-1 Mentorship",
+                    "Lifetime Updates",
+                    "VIP Community Access"
+                ],
+                ctaText: "Enroll Now",
+                ctaClass: "btn-outline-primary"
+            }
+        ];
+    }
+}
+
+/**
  * Generate course cards dynamically from courses data
  */
 function generateCourseCards() {
     const container = document.getElementById('courses-container');
     if (!container) return;
 
-    container.innerHTML = courses.map((course, index) => `
+    // Filter only published courses
+    const publishedCourses = courses.filter(course => course.status === 'Published');
+
+    container.innerHTML = publishedCourses.map((course, index) => `
         <div class="col-lg-4 col-md-6">
             <div class="course-card glass-card ${course.featured ? 'featured' : ''}" data-aos="fade-up" data-aos-delay="${index * 100}">
                 <div class="course-badge ${course.badgeClass}">${course.badge}</div>
-                <h3>${course.title}</h3>
-                <div class="course-price">
-                    <span class="price">${course.price}</span>
-                    <span class="period">${course.period}</span>
+                <div class="course-image">
+                    <img src="${course.thumbnailBase64 || course.imageUrl || 'assets/course-placeholder.jpg'}" alt="${course.title}">
                 </div>
-                <p class="course-description">${course.description}</p>
-                <ul class="course-features">
-                    ${course.features.map(feature => `
-                        <li><i class="bi bi-check-circle-fill"></i> ${feature}</li>
-                    `).join('')}
-                </ul>
-                <button class="btn ${course.ctaClass} w-100 course-cta" data-course-id="${course.id}">${course.ctaText}</button>
+                <div class="course-content">
+                    <span class="course-category">${course.category || 'Trading'}</span>
+                    <h3>${course.title}</h3>
+                    ${course.subtitle ? `<p class="course-subtitle">${course.subtitle}</p>` : ''}
+                    ${course.instructorName ? `<p class="course-instructor"><i class="bi bi-person"></i> ${course.instructorName}</p>` : ''}
+                    <p class="course-description">${course.description}</p>
+                    
+                    <div class="course-meta">
+                        <span><i class="bi bi-clock"></i> ${course.duration}</span>
+                        <span><i class="bi bi-bar-chart"></i> ${course.level}</span>
+                    </div>
+                    
+                    <ul class="course-features">
+                        ${course.features.map(feature => `
+                            <li><i class="bi bi-check-circle-fill"></i> ${feature}</li>
+                        `).join('')}
+                    </ul>
+                    
+                    <div class="course-price">
+                        <span class="price">${course.price}</span>
+                        <span class="period">${course.period}</span>
+                    </div>
+                    
+                    <div class="course-actions">
+                        ${course.pdfDownloadLink || course.pdfBase64 ? 
+                            `<a href="${course.pdfBase64 ? '#' : course.pdfDownloadLink}" ${course.pdfBase64 ? `onclick="downloadPdf('${course.id}'); return false;"` : ''} class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-file-earmark-pdf"></i> Download PDF
+                            </a>` : ''}
+                        
+                        ${course.youtubePreviewLink ? 
+                            `<a href="${course.youtubePreviewLink}" target="_blank" class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-play-circle"></i> Watch Preview
+                            </a>` : ''}
+                        
+                        ${course.telegramGroupLink ? 
+                            `<a href="${course.telegramGroupLink}" target="_blank" class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-telegram"></i> Join Telegram
+                            </a>` : ''}
+                        
+                        <a href="${course.buyNowLink || '#contact'}" class="btn ${course.ctaClass} btn-sm">
+                            <i class="bi bi-cart"></i> Buy Now
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     `).join('');
@@ -219,6 +283,19 @@ function generateCourseCards() {
     document.querySelectorAll('.course-cta').forEach(btn => {
         btn.addEventListener('click', handleCourseClick);
     });
+}
+
+/**
+ * Download PDF from base64
+ */
+function downloadPdf(courseId) {
+    const course = courses.find(c => c.id === courseId);
+    if (course && course.pdfBase64) {
+        const link = document.createElement('a');
+        link.href = course.pdfBase64;
+        link.download = `${course.title.replace(/\s+/g, '_')}.pdf`;
+        link.click();
+    }
 }
 
 /**
@@ -723,7 +800,10 @@ function initializeChatbot() {
 // Main Application
 // =================================================
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    
+    // Load courses from courses.json or localStorage
+    await loadCourses();
     
     // Generate dynamic content
     generateCourseCards();
