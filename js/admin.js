@@ -4,15 +4,19 @@
 
 // Global Variables
 let courses = [];
+let pdfs = [];
 let currentEditingId = null;
 let deleteCourseId = null;
+let deletePdfId = null;
 let thumbnailBase64 = '';
 let bannerBase64 = '';
 let pdfBase64 = '';
+let standalonePdfBase64 = '';
 
 // Initialize Admin Panel
 document.addEventListener('DOMContentLoaded', function() {
     loadCourses();
+    loadPdfs();
     setupEventListeners();
     setupTabNavigation();
 });
@@ -72,6 +76,80 @@ async function loadCourses() {
 // Save Courses to localStorage
 function saveCoursesToStorage() {
     localStorage.setItem('paramcgwala_courses', JSON.stringify(courses));
+}
+
+// Load PDFs from localStorage
+function loadPdfs() {
+    try {
+        const storedPdfs = localStorage.getItem('paramcgwala_pdfs');
+        
+        if (storedPdfs) {
+            pdfs = JSON.parse(storedPdfs);
+            console.log('✅ PDFs loaded from localStorage');
+        } else {
+            pdfs = [];
+            console.log('✅ No PDFs found, starting fresh');
+        }
+        
+        renderPdfsTable();
+    } catch (error) {
+        console.error('❌ Error loading PDFs:', error);
+        pdfs = [];
+        renderPdfsTable();
+    }
+}
+
+// Save PDFs to localStorage
+function savePdfsToStorage() {
+    localStorage.setItem('paramcgwala_pdfs', JSON.stringify(pdfs));
+}
+
+// Render PDFs Table
+function renderPdfsTable(filteredPdfs = null) {
+    const tableBody = document.getElementById('pdfsTableBody');
+    const noPdfsMessage = document.getElementById('noPdfsMessage');
+    
+    const pdfsToRender = filteredPdfs || pdfs;
+    
+    if (pdfsToRender.length === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="6" class="text-center">
+                    <div class="no-courses-message">
+                        <i class="bi bi-file-earmark-pdf"></i>
+                        <p>No PDFs found. Add your first PDF to get started.</p>
+                    </div>
+                </td>
+            </tr>
+        `;
+        return;
+    }
+    
+    tableBody.innerHTML = pdfsToRender.map(pdf => `
+        <tr>
+            <td>${pdf.id}</td>
+            <td>
+                <strong>${pdf.title}</strong>
+                ${pdf.description ? `<br><small class="text-muted">${pdf.description}</small>` : ''}
+            </td>
+            <td><span class="status-badge">${pdf.category || 'General'}</span></td>
+            <td>${pdf.downloads || 0}</td>
+            <td>
+                ${pdf.status === 'Published' 
+                    ? '<span class="status-badge published"><i class="bi bi-check-circle"></i> Published</span>' 
+                    : '<span class="status-badge draft"><i class="bi bi-file-earmark"></i> Draft</span>'
+                }
+            </td>
+            <td>
+                <button class="action-btn edit" onclick="editPdf(${pdf.id})" title="Edit">
+                    <i class="bi bi-pencil"></i>
+                </button>
+                <button class="action-btn delete" onclick="confirmDeletePdf(${pdf.id})" title="Delete">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </td>
+        </tr>
+    `).join('');
 }
 
 // Render Courses Table
@@ -160,6 +238,37 @@ function setupEventListeners() {
     document.getElementById('courseThumbnail').addEventListener('change', handleThumbnailUpload);
     document.getElementById('courseBanner').addEventListener('change', handleBannerUpload);
     document.getElementById('coursePdf').addEventListener('change', handlePdfUpload);
+    
+    // PDF Management
+    const addPdfBtn = document.getElementById('addPdfBtn');
+    if (addPdfBtn) {
+        addPdfBtn.addEventListener('click', () => openPdfModal());
+    }
+    
+    const savePdfBtn = document.getElementById('savePdfBtn');
+    if (savePdfBtn) {
+        savePdfBtn.addEventListener('click', savePdf);
+    }
+    
+    const confirmDeletePdfBtn = document.getElementById('confirmDeletePdfBtn');
+    if (confirmDeletePdfBtn) {
+        confirmDeletePdfBtn.addEventListener('click', deletePdf);
+    }
+    
+    const pdfFileInput = document.getElementById('pdfFile');
+    if (pdfFileInput) {
+        pdfFileInput.addEventListener('change', handleStandalonePdfUpload);
+    }
+    
+    const pdfSearchInput = document.getElementById('pdfSearchInput');
+    if (pdfSearchInput) {
+        pdfSearchInput.addEventListener('input', filterPdfs);
+    }
+    
+    const pdfCategoryFilter = document.getElementById('pdfCategoryFilter');
+    if (pdfCategoryFilter) {
+        pdfCategoryFilter.addEventListener('change', filterPdfs);
+    }
 }
 
 // Open Modal for Adding/Editing Course
@@ -431,4 +540,137 @@ function handlePdfUpload(event) {
         console.log('✅ PDF uploaded');
     };
     reader.readAsDataURL(file);
+}
+
+function handleStandalonePdfUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    // Validate file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+        alert('PDF file size must be less than 10MB');
+        event.target.value = '';
+        return;
+    }
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        standalonePdfBase64 = e.target.result;
+        console.log('✅ Standalone PDF uploaded');
+    };
+    reader.readAsDataURL(file);
+}
+
+// PDF Modal Functions
+function openPdfModal(pdf = null) {
+    const modal = new bootstrap.Modal(document.getElementById('pdfModal'));
+    const modalTitle = document.getElementById('pdfModalTitle');
+    const form = document.getElementById('pdfForm');
+    
+    standalonePdfBase64 = '';
+    
+    if (pdf) {
+        modalTitle.textContent = 'Edit PDF';
+        currentEditingId = pdf.id;
+        
+        document.getElementById('pdfId').value = pdf.id;
+        document.getElementById('pdfTitle').value = pdf.title;
+        document.getElementById('pdfDescription').value = pdf.description || '';
+        document.getElementById('pdfCategory').value = pdf.category || 'General';
+        document.getElementById('pdfDownloadLink').value = pdf.downloadLink || '';
+        document.getElementById('pdfStatus').value = pdf.status || 'Draft';
+        standalonePdfBase64 = pdf.pdfBase64 || '';
+    } else {
+        modalTitle.textContent = 'Add New PDF';
+        currentEditingId = null;
+        form.reset();
+        document.getElementById('pdfStatus').value = 'Draft';
+    }
+    
+    modal.show();
+}
+
+function editPdf(id) {
+    const pdf = pdfs.find(p => p.id === id);
+    if (pdf) {
+        openPdfModal(pdf);
+    }
+}
+
+function savePdf() {
+    const form = document.getElementById('pdfForm');
+    
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+    
+    const pdfData = {
+        id: currentEditingId || Date.now(),
+        title: document.getElementById('pdfTitle').value.trim(),
+        description: document.getElementById('pdfDescription').value.trim(),
+        category: document.getElementById('pdfCategory').value,
+        downloadLink: document.getElementById('pdfDownloadLink').value.trim(),
+        status: document.getElementById('pdfStatus').value,
+        pdfBase64: standalonePdfBase64,
+        downloads: currentEditingId ? (pdfs.find(p => p.id === currentEditingId)?.downloads || 0) : 0,
+        createdAt: currentEditingId ? (pdfs.find(p => p.id === currentEditingId)?.createdAt || new Date().toISOString()) : new Date().toISOString()
+    };
+    
+    if (currentEditingId) {
+        const index = pdfs.findIndex(p => p.id === currentEditingId);
+        if (index !== -1) {
+            pdfs[index] = pdfData;
+            console.log('✅ PDF updated:', pdfData.title);
+        }
+    } else {
+        pdfs.push(pdfData);
+        console.log('✅ PDF added:', pdfData.title);
+    }
+    
+    savePdfsToStorage();
+    renderPdfsTable();
+    
+    const modal = bootstrap.Modal.getInstance(document.getElementById('pdfModal'));
+    modal.hide();
+    
+    alert(currentEditingId ? 'PDF updated successfully!' : 'PDF added successfully!');
+}
+
+function confirmDeletePdf(id) {
+    deletePdfId = id;
+    const modal = new bootstrap.Modal(document.getElementById('deletePdfModal'));
+    modal.show();
+}
+
+function deletePdf() {
+    if (deletePdfId) {
+        pdfs = pdfs.filter(p => p.id !== deletePdfId);
+        savePdfsToStorage();
+        renderPdfsTable();
+        
+        const modal = bootstrap.Modal.getInstance(document.getElementById('deletePdfModal'));
+        modal.hide();
+        
+        console.log('✅ PDF deleted:', deletePdfId);
+        alert('PDF deleted successfully!');
+        deletePdfId = null;
+    }
+}
+
+function filterPdfs() {
+    const searchTerm = document.getElementById('pdfSearchInput').value.toLowerCase();
+    const categoryFilter = document.getElementById('pdfCategoryFilter').value;
+    
+    const filtered = pdfs.filter(pdf => {
+        const matchesSearch = 
+            pdf.title.toLowerCase().includes(searchTerm) ||
+            (pdf.description && pdf.description.toLowerCase().includes(searchTerm));
+        
+        const matchesCategory = !categoryFilter || pdf.category === categoryFilter;
+        
+        return matchesSearch && matchesCategory;
+    });
+    
+    renderPdfsTable(filtered);
 }

@@ -1,3 +1,10 @@
+<?php
+require_once 'includes/auth.php';
+require_once 'includes/auth_check.php';
+
+$user = getCurrentUser();
+$is_premium = $user && ($user['role'] === 'premium' || $user['role'] === 'admin');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -149,7 +156,20 @@
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                 </ul>
-                <a href="#pricing" class="btn btn-primary btn-cta">Join Now</a>
+                <?php if ($user): ?>
+                    <div class="d-flex align-items-center gap-3">
+                        <span style="color: #fff; font-size: 0.9rem;">
+                            <i class="bi bi-person-circle"></i>
+                            <?php echo htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?>
+                        </span>
+                        <a href="dashboard.php" class="btn btn-primary btn-cta">Dashboard</a>
+                    </div>
+                <?php else: ?>
+                    <div class="auth-buttons">
+                        <a href="login.php" class="btn btn-outline-light me-2">Login</a>
+                        <a href="signup.php" class="btn btn-primary btn-cta">Sign Up</a>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </nav>
@@ -471,9 +491,9 @@
                         <p>&copy; 2024 PARAMCGWALABOTS. All rights reserved.</p>
                         <div class="footer-bottom-links">
                             <a href="admin.html" class="admin-link"><i class="bi bi-gear"></i> Admin</a>
-                            <a href="#">Privacy Policy</a>
-                            <a href="#">Terms of Service</a>
-                            <a href="#">Cookie Policy</a>
+                            <a href="privacy-policy.html">Privacy Policy</a>
+                            <a href="terms-of-service.html">Terms of Service</a>
+                            <a href="cookie-policy.html">Cookie Policy</a>
                         </div>
                     </div>
                 </div>

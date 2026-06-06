@@ -67,24 +67,44 @@
     <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Critical CSS Inline (Above the fold styles) -->
+    <style>
+        body{background:#0B0F19;color:#fff;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.6;overflow-x:hidden;margin:0;padding:0}
+        .loading-screen{position:fixed;top:0;left:0;width:100%;height:100%;background:#0B0F19;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000}
+        .loading-logo{font-size:2rem;font-weight:700;color:#00F5D4;margin-bottom:20px}
+        .loading-bar{width:200px;height:3px;background:rgba(0,245,212,0.2);border-radius:3px;overflow:hidden}
+        .loading-bar::after{content:'';display:block;width:0;height:100%;background:#00F5D4;animation:loading 1.5s ease-in-out infinite}
+        @keyframes loading{0%{width:0}50%{width:100%}100%{width:0}}
+        .loading-text{color:#AAB2C8;font-size:0.875rem;letter-spacing:2px;margin-top:10px}
+        .navbar{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 0;transition:all 0.3s ease}
+        .navbar-brand{font-size:1.5rem;font-weight:700;color:#fff;text-decoration:none}
+        .navbar-brand .accent{color:#00F5D4}
+        .hero-section{min-height:100vh;display:flex;align-items:center;padding:100px 0 70px;position:relative}
+        .hero-title{font-size:clamp(2.5rem,2rem+2.5vw,4rem);font-weight:800;line-height:1.1;margin-bottom:1rem;background:linear-gradient(135deg,#00F5D4 0%,#00BBF9 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hero-subtitle{font-size:1rem;color:#AAB2C8;margin-bottom:1.5rem;max-width:600px;line-height:1.6}
+        .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.5rem;border-radius:50px;font-weight:600;text-decoration:none;transition:all 0.3s ease;border:none;cursor:pointer;font-size:0.875rem}
+        .btn-primary{background:linear-gradient(135deg,#00F5D4 0%,#00BBF9 100%);color:#0B0F19}
+        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,245,212,0.4)}
+        .btn-outline-light{background:transparent;border:2px solid #fff;color:#fff}
+        .btn-outline-light:hover{background:#fff;color:#0B0F19}
+        .btn-success{background:#25D366;color:#fff}
+        .btn-success:hover{background:#128C7E}
+        .btn-gradient{background:linear-gradient(135deg,#9B5DE5 0%,#00F5D4 100%);color:#fff}
+        .btn-gradient:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(155,93,229,0.4)}
+        .glass-card{background:rgba(19,26,41,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+    </style>
     
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Swiper.js CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
-    
-    <!-- GSAP CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.css">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Deferred CSS Loading -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/style.css" media="print" onload="this.media='all'">
 </head>
 <body class="loaded">
     
@@ -183,7 +203,10 @@
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                 </ul>
-                <a href="courses.html" class="btn btn-primary btn-cta">Get Started</a>
+                <div id="authButtons">
+                    <a href="login.html" class="btn btn-outline-light me-2">Login</a>
+                    <a href="signup.html" class="btn btn-primary btn-cta">Sign Up</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -563,7 +586,7 @@
                     <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="0">
                         <div class="project-image">
                             <div class="project-overlay">
-                                <a href="#" class="project-link">
+                                <a href="courses.html" class="project-link">
                                     <i class="bi bi-arrow-up-right"></i>
                                 </a>
                             </div>
@@ -583,7 +606,7 @@
                     <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="project-image">
                             <div class="project-overlay">
-                                <a href="#" class="project-link">
+                                <a href="bots.html" class="project-link">
                                     <i class="bi bi-arrow-up-right"></i>
                                 </a>
                             </div>
@@ -603,7 +626,7 @@
                     <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="project-image">
                             <div class="project-overlay">
-                                <a href="#" class="project-link">
+                                <a href="market-intelligence.html" class="project-link">
                                     <i class="bi bi-arrow-up-right"></i>
                                 </a>
                             </div>
@@ -1259,9 +1282,9 @@
                         <p>&copy; 2024 PARAMCGWALABOTS. All rights reserved.</p>
                         <div class="footer-bottom-links">
                             <a href="admin.html" class="admin-link"><i class="bi bi-gear"></i> Admin</a>
-                            <a href="#">Privacy Policy</a>
-                            <a href="#">Terms of Service</a>
-                            <a href="#">Cookie Policy</a>
+                            <a href="privacy-policy.html">Privacy Policy</a>
+                            <a href="terms-of-service.html">Terms of Service</a>
+                            <a href="cookie-policy.html">Cookie Policy</a>
                         </div>
                     </div>
                 </div>
@@ -1269,24 +1292,56 @@
         </div>
     </footer>
     
-    <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap 5 JS (Deferred) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
     
-    <!-- AOS Animation Library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- AOS Animation Library (Deferred) -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     
-    <!-- Swiper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <!-- Swiper.js (Deferred) -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js" defer></script>
     
-    <!-- GSAP Animation Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <!-- GSAP Animation Library (Deferred - Load only if needed) -->
+    <script>
+        // Load GSAP only on larger screens for better performance
+        if (window.innerWidth > 768) {
+            const gsapScript = document.createElement('script');
+            gsapScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js';
+            gsapScript.defer = true;
+            document.body.appendChild(gsapScript);
+            
+            const scrollTriggerScript = document.createElement('script');
+            scrollTriggerScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js';
+            scrollTriggerScript.defer = true;
+            document.body.appendChild(scrollTriggerScript);
+            
+            const scrollToPluginScript = document.createElement('script');
+            scrollToPluginScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js';
+            scrollToPluginScript.defer = true;
+            document.body.appendChild(scrollToPluginScript);
+        }
+    </script>
     
-    <!-- Custom JS -->
-    <script src="js/script.js"></script>
+    <!-- Custom JS (Deferred) -->
+    <script src="js/script.js" defer></script>
     
-    <!-- Premium Animations JS -->
-    <script src="js/premium-animations.js"></script>
+    <!-- Premium Animations JS (Deferred - Load only on larger screens) -->
+    <script>
+        if (window.innerWidth > 768) {
+            const premiumAnimScript = document.createElement('script');
+            premiumAnimScript.src = 'js/premium-animations.js';
+            premiumAnimScript.defer = true;
+            document.body.appendChild(premiumAnimScript);
+        }
+    </script>
+    
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    
+    <!-- Supabase Config -->
+    <script src="js/supabase-config.js"></script>
+    
+    <!-- Auth Functions -->
+    <script src="js/auth.js"></script>
 </body>
 </html>

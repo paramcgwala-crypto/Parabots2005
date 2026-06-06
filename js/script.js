@@ -1007,7 +1007,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         },
     });
     
-    // Typing Effect for Hero Title
+    // Typing Effect for Hero Title - Performance Optimized with requestAnimationFrame
     const typingText = document.querySelector('.typing-text');
     const phrases = [
         'Automate Your Trading. Scale Your Profits.',
@@ -1018,9 +1018,19 @@ document.addEventListener('DOMContentLoaded', async function() {
     let phraseIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
+    let lastTime = 0;
     let typingSpeed = 100;
+    let pauseUntil = 0;
     
-    function typeEffect() {
+    function typeEffect(currentTime) {
+        if (!typingText) return;
+        
+        // Handle pause
+        if (currentTime < pauseUntil) {
+            requestAnimationFrame(typeEffect);
+            return;
+        }
+        
         const currentPhrase = phrases[phraseIndex];
         
         if (isDeleting) {
@@ -1035,32 +1045,39 @@ document.addEventListener('DOMContentLoaded', async function() {
         
         if (!isDeleting && charIndex === currentPhrase.length) {
             isDeleting = true;
-            typingSpeed = 2000; // Pause at end
+            pauseUntil = currentTime + 2000; // Pause at end
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             phraseIndex = (phraseIndex + 1) % phrases.length;
-            typingSpeed = 500; // Pause before new phrase
+            pauseUntil = currentTime + 500; // Pause before new phrase
         }
         
-        setTimeout(typeEffect, typingSpeed);
+        requestAnimationFrame(typeEffect);
     }
     
     // Start typing effect
     if (typingText) {
-        typeEffect();
+        requestAnimationFrame(typeEffect);
     }
     
-    // Sticky Navbar
+    // Sticky Navbar - Performance Optimized with requestAnimationFrame
     const navbar = document.getElementById('navbar');
     const navbarCollapse = document.querySelector('.navbar-collapse');
+    let ticking = false;
     
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                ticking = false;
+            });
+            ticking = true;
         }
-    });
+    }, { passive: true });
     
     // Close mobile menu when clicking on a link
     const navLinks = document.querySelectorAll('.nav-link');
@@ -1091,29 +1108,35 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     });
     
-    // Scroll Progress Bar
+    // Scroll Progress Bar & Back To Top Button - Combined with requestAnimationFrame
     const scrollProgress = document.getElementById('scrollProgress');
-    
-    window.addEventListener('scroll', function() {
-        const scrollTop = document.documentElement.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrollPercent = (scrollTop / scrollHeight) * 100;
-        
-        if (scrollProgress) {
-            scrollProgress.style.width = scrollPercent + '%';
-        }
-    });
-    
-    // Back To Top Button
     const backToTop = document.getElementById('backToTop');
+    let scrollTicking = false;
     
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 500) {
-            backToTop.classList.add('show');
-        } else {
-            backToTop.classList.remove('show');
+        if (!scrollTicking) {
+            window.requestAnimationFrame(function() {
+                const scrollTop = document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercent = (scrollTop / scrollHeight) * 100;
+                
+                if (scrollProgress) {
+                    scrollProgress.style.width = scrollPercent + '%';
+                }
+                
+                if (backToTop) {
+                    if (window.scrollY > 500) {
+                        backToTop.classList.add('show');
+                    } else {
+                        backToTop.classList.remove('show');
+                    }
+                }
+                
+                scrollTicking = false;
+            });
+            scrollTicking = true;
         }
-    });
+    }, { passive: true });
     
     if (backToTop) {
         backToTop.addEventListener('click', function() {
