@@ -1462,6 +1462,23 @@ section:not(.hero-section):not(.trust-section):not(.footer) {
     padding: var(--spacing-sm) var(--spacing-lg);
     border-radius: var(--radius-md);
     transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
 }
 
 .btn-primary:hover {
@@ -1478,10 +1495,27 @@ section:not(.hero-section):not(.trust-section):not(.footer) {
     padding: var(--spacing-sm) var(--spacing-lg);
     border-radius: var(--radius-md);
     transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-outline-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-1);
+    transition: left 0.5s;
+    z-index: -1;
+}
+
+.btn-outline-primary:hover::before {
+    left: 0;
 }
 
 .btn-outline-primary:hover {
-    background: var(--gradient-1);
     border-color: var(--primary);
     color: var(--dark-bg);
     transform: translateY(-3px);
@@ -1495,10 +1529,27 @@ section:not(.hero-section):not(.trust-section):not(.footer) {
     padding: var(--spacing-sm) var(--spacing-lg);
     border-radius: var(--radius-md);
     transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-outline-light::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--text);
+    transition: left 0.5s;
+    z-index: -1;
+}
+
+.btn-outline-light:hover::before {
+    left: 0;
 }
 
 .btn-outline-light:hover {
-    background: var(--text);
     color: var(--dark-bg);
     transform: translateY(-3px);
 }
@@ -1771,5 +1822,302 @@ img {
     .back-to-top,
     .scroll-progress {
         display: none;
+    }
+}
+
+/* AI Chatbot Styles */
+.chatbot-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-1);
+    border: none;
+    border-radius: 50%;
+    color: var(--dark-bg);
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 8px 25px rgba(0, 245, 212, 0.4);
+    transition: all var(--transition-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chatbot-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(0, 245, 212, 0.5);
+}
+
+.chatbot-window {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 380px;
+    max-height: 500px;
+    background: rgba(19, 26, 41, 0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    z-index: 9999;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.chatbot-window.active {
+    display: flex;
+}
+
+.chatbot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: var(--gradient-1);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.chatbot-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-weight: 700;
+    color: var(--dark-bg);
+    font-size: var(--font-size-base);
+}
+
+.chatbot-close {
+    background: transparent;
+    border: none;
+    color: var(--dark-bg);
+    font-size: 20px;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-base);
+}
+
+.chatbot-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.chatbot-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-md);
+    max-height: 350px;
+}
+
+.chatbot-message {
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.chatbot-message.user {
+    flex-direction: row-reverse;
+}
+
+.chatbot-message.bot .message-content {
+    background: rgba(0, 245, 212, 0.1);
+    border: 1px solid var(--primary);
+    border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) 0;
+    padding: var(--spacing-sm) var(--spacing-md);
+    max-width: 80%;
+}
+
+.chatbot-message.user .message-content {
+    background: var(--gradient-1);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 var(--radius-lg);
+    padding: var(--spacing-sm) var(--spacing-md);
+    max-width: 80%;
+}
+
+.chatbot-message.bot .message-content p,
+.chatbot-message.user .message-content p {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+}
+
+.chatbot-message.bot .message-content p {
+    color: var(--text);
+}
+
+.chatbot-message.user .message-content p {
+    color: var(--dark-bg);
+}
+
+.chatbot-input {
+    display: flex;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--glass-border);
+}
+
+.chatbot-input input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--text);
+    font-size: var(--font-size-sm);
+    transition: all var(--transition-base);
+}
+
+.chatbot-input input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.chatbot-input input::placeholder {
+    color: var(--muted-text);
+}
+
+.chatbot-input button {
+    width: 45px;
+    height: 45px;
+    background: var(--gradient-1);
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--dark-bg);
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    transition: transform var(--transition-base);
+}
+
+.chatbot-input button:hover {
+    transform: scale(1.05);
+}
+
+.chatbot-input button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.chatbot-typing {
+    display: flex;
+    gap: 4px;
+    padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.chatbot-typing span {
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    animation: typing 1.4s infinite;
+}
+
+.chatbot-typing span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.chatbot-typing span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        transform: translateY(0);
+    }
+    30% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Mobile Chatbot Responsive */
+@media (max-width: 480px) {
+    .chatbot-window {
+        width: calc(100% - 40px);
+        right: 20px;
+        bottom: 90px;
+        max-height: 60vh;
+    }
+    
+    .chatbot-toggle {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+}
+
+/* Improved Mobile Responsiveness */
+@media (max-width: 575px) {
+    .hero-title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .section-title {
+        font-size: var(--font-size-xl);
+    }
+    
+    .course-price .price {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .testimonial-text {
+        font-size: var(--font-size-sm);
+    }
+    
+    /* Better mobile navbar */
+    .navbar-collapse {
+        background: rgba(11, 15, 25, 0.98);
+        backdrop-filter: blur(20px);
+        padding: var(--spacing-md);
+        border-radius: var(--radius-lg);
+        margin-top: var(--spacing-sm);
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .nav-link {
+        padding: var(--spacing-sm) var(--spacing-md) !important;
+        font-size: var(--font-size-base);
+    }
+    
+    /* Better mobile buttons */
+    .btn-lg {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: var(--font-size-base);
+    }
+    
+    /* Better mobile cards */
+    .service-card,
+    .bot-card,
+    .course-card,
+    .project-card {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    /* Better mobile contact form */
+    .contact-info {
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .contact-card {
+        padding: var(--spacing-sm);
+    }
+    
+    .contact-icon {
+        width: clamp(35px, 5vw, 40px);
+        height: clamp(35px, 5vw, 40px);
+        font-size: var(--font-size-base);
+    }
+    
+    .contact-details h4 {
+        font-size: var(--font-size-sm);
+    }
+    
+    .contact-details p {
+        font-size: var(--font-size-xs);
     }
 }

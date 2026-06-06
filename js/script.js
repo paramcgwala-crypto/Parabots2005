@@ -1,6 +1,16 @@
 // ===================================
-// TradeBot Pro - JavaScript
+// PARAMCGWALABOTS - JavaScript
 // ===================================
+
+// Configuration
+const CONFIG = {
+    // N8N Webhook URLs - Replace with your actual webhook URLs
+    CONTACT_FORM_WEBHOOK: 'YOUR_N8N_CONTACT_FORM_WEBHOOK_URL_HERE',
+    CHATBOT_WEBHOOK: 'https://cgwala.app.n8n.cloud/webhook/c5b034c0-5e9c-414e-805c-ccf1642606a6/chat',
+    COMPANY_NAME: 'PARAMCGWALABOTS',
+    COMPANY_EMAIL: 'Paramcgwala@gmail.com',
+    COMPANY_PHONE: '9617422068'
+};
 
 // Data Structures for Dynamic Content Generation
 // =================================================
@@ -273,6 +283,423 @@ function handleBotClick(e) {
     }
 }
 
+// Contact Form Integration with N8N Webhook
+// =================================================
+
+/**
+ * Submit contact form to N8N webhook
+ */
+async function submitContactForm(formData) {
+    try {
+        const response = await fetch(CONFIG.CONTACT_FORM_WEBHOOK, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: formData.name,
+                email: formData.email,
+                phone: formData.phone,
+                subject: formData.subject,
+                message: formData.message,
+                timestamp: new Date().toISOString()
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        throw error;
+    }
+}
+
+/**
+ * Handle contact form submission
+ */
+async function handleContactFormSubmit(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+    
+    // Simple validation
+    if (!name || !email || !message) {
+        showFormMessage('Please fill in all required fields.', 'error');
+        return;
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        showFormMessage('Please enter a valid email address.', 'error');
+        return;
+    }
+    
+    // Show loading state
+    submitBtn.innerHTML = '<i class="bi bi-spinner"></i> Sending...';
+    submitBtn.disabled = true;
+    
+    try {
+        // Submit form to N8N webhook
+        await submitContactForm({
+            name,
+            email,
+            phone,
+            subject,
+            message
+        });
+        
+        // Show success message
+        showFormMessage('Thank you for your message! We will get back to you soon.', 'success');
+        form.reset();
+    } catch (error) {
+        // Show error message
+        showFormMessage('There was an error submitting your message. Please try again or contact us directly at ' + CONFIG.COMPANY_EMAIL, 'error');
+    } finally {
+        // Reset button state
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
+}
+
+/**
+ * Show form message (success/error)
+ */
+function showFormMessage(message, type) {
+    const formWrapper = document.querySelector('.contact-form-wrapper');
+    
+    // Remove existing message
+    const existingMessage = formWrapper.querySelector('.form-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+    
+    // Create message element
+    const messageEl = document.createElement('div');
+    messageEl.className = `form-message alert alert-${type === 'success' ? 'success' : 'danger'}`;
+    messageEl.innerHTML = `<i class="bi bi-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${message}`;
+    messageEl.style.marginBottom = 'var(--spacing-md)';
+    
+    // Insert message before form
+    const form = formWrapper.querySelector('.contact-form');
+    formWrapper.insertBefore(messageEl, form);
+    
+    // Auto-remove message after 5 seconds
+    setTimeout(() => {
+        if (messageEl.parentNode) {
+            messageEl.remove();
+        }
+    }, 5000);
+}
+
+// AI Chatbot Integration with N8N Webhook
+// =================================================
+
+let chatHistory = [];
+let isChatbotTyping = false;
+
+/**
+ * Toggle chatbot window
+ */
+function toggleChatbot() {
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    chatbotWindow.classList.toggle('active');
+    
+    // Focus input when opening
+    if (chatbotWindow.classList.contains('active')) {
+        setTimeout(() => {
+            document.getElementById('chatbotInput').focus();
+        }, 300);
+    }
+}
+
+/**
+ * Close chatbot window
+ */
+function closeChatbot() {
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    chatbotWindow.classList.remove('active');
+}
+
+/**
+ * Add message to chat
+ */
+function addChatMessage(message, isUser = false) {
+    const messagesContainer = document.getElementById('chatbotMessages');
+    const messageEl = document.createElement('div');
+    messageEl.className = `chatbot-message ${isUser ? 'user' : 'bot'}`;
+    
+    messageEl.innerHTML = `
+        <div class="message-content">
+            <p>${message}</p>
+        </div>
+    `;
+    
+    messagesContainer.appendChild(messageEl);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    
+    // Add to history
+    chatHistory.push({
+        role: isUser ? 'user' : 'assistant',
+        content: message,
+        timestamp: new Date().toISOString()
+    });
+}
+
+/**
+ * Show typing indicator
+ */
+function showTypingIndicator() {
+    const messagesContainer = document.getElementById('chatbotMessages');
+    const typingEl = document.createElement('div');
+    typingEl.className = 'chatbot-message bot typing-indicator';
+    typingEl.id = 'typingIndicator';
+    
+    typingEl.innerHTML = `
+        <div class="message-content">
+            <div class="chatbot-typing">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    `;
+    
+    messagesContainer.appendChild(typingEl);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    isChatbotTyping = true;
+}
+
+/**
+ * Remove typing indicator
+ */
+function removeTypingIndicator() {
+    const typingIndicator = document.getElementById('typingIndicator');
+    if (typingIndicator) {
+        typingIndicator.remove();
+    }
+    isChatbotTyping = false;
+}
+
+/**
+ * Send message to N8N chatbot webhook with timeout and retry
+ */
+async function sendChatMessage(message, retryCount = 0) {
+    const maxRetries = 2;
+    const timeout = 15000; // 15 seconds timeout
+    
+    console.log('🤖 Sending message to N8N webhook:', CONFIG.CHATBOT_WEBHOOK);
+    console.log('📤 Request payload:', JSON.stringify({
+        message: message,
+        history: chatHistory,
+        timestamp: new Date().toISOString()
+    }, null, 2));
+    
+    try {
+        // Create abort controller for timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeout);
+        
+        const response = await fetch(CONFIG.CHATBOT_WEBHOOK, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: message,
+                history: chatHistory,
+                timestamp: new Date().toISOString()
+            }),
+            signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+
+        console.log('📥 Response status:', response.status);
+        console.log('📥 Response headers:', Object.fromEntries(response.headers.entries()));
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('❌ Network response not ok:', response.status, errorText);
+            throw new Error(`HTTP ${response.status}: ${errorText}`);
+        }
+
+        // Try to parse as JSON first
+        const contentType = response.headers.get('content-type');
+        console.log('📄 Content-Type:', contentType);
+        
+        let responseData;
+        if (contentType && contentType.includes('application/json')) {
+            responseData = await response.json();
+            console.log('✅ JSON Response:', JSON.stringify(responseData, null, 2));
+        } else {
+            // If not JSON, get text response
+            responseData = await response.text();
+            console.log('✅ Text Response:', responseData);
+        }
+
+        // Handle different response formats
+        if (typeof responseData === 'string') {
+            return responseData;
+        } else if (responseData.response) {
+            return responseData.response;
+        } else if (responseData.message) {
+            return responseData.message;
+        } else if (responseData.output) {
+            return responseData.output;
+        } else if (responseData.text) {
+            return responseData.text;
+        } else if (Array.isArray(responseData) && responseData.length > 0) {
+            // If response is an array, join the items
+            return responseData.join('\n');
+        } else {
+            // Return the entire object as string if nothing else matches
+            console.log('⚠️ Unexpected response format, returning as string');
+            return JSON.stringify(responseData);
+        }
+    } catch (error) {
+        console.error('❌ Error sending message to chatbot:', error);
+        console.error('❌ Error details:', {
+            message: error.message,
+            stack: error.stack
+        });
+        
+        // Check if it's a timeout or connection error
+        if (error.name === 'AbortError') {
+            console.error('⏱️ Request timed out after', timeout, 'ms');
+            if (retryCount < maxRetries) {
+                console.log(`🔄 Retrying... (${retryCount + 1}/${maxRetries})`);
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retry
+                return sendChatMessage(message, retryCount + 1);
+            }
+            return 'The chatbot service is taking too long to respond. Please try again later.';
+        }
+        
+        // Check if it's a network/connection error
+        if (error.message.includes('Failed to fetch') || 
+            error.message.includes('NetworkError') ||
+            error.message.includes('connection') ||
+            error.message.includes('ECONNREFUSED')) {
+            console.error('🌐 Network connection error');
+            if (retryCount < maxRetries) {
+                console.log(`🔄 Retrying... (${retryCount + 1}/${maxRetries})`);
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retry
+                return sendChatMessage(message, retryCount + 1);
+            }
+            return 'Unable to connect to the chatbot service. Please check your internet connection and try again.';
+        }
+        
+        // Generic error
+        if (retryCount < maxRetries) {
+            console.log(`🔄 Retrying... (${retryCount + 1}/${maxRetries})`);
+            await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retry
+            return sendChatMessage(message, retryCount + 1);
+        }
+        
+        return `Error: ${error.message}. Please try again or contact us at ${CONFIG.COMPANY_EMAIL}`;
+    }
+}
+
+/**
+ * Handle chatbot message send
+ */
+async function handleChatbotSend() {
+    console.log('🚀 handleChatbotSend called');
+    const input = document.getElementById('chatbotInput');
+    const sendBtn = document.getElementById('chatbotSend');
+    const message = input.value.trim();
+    
+    console.log('💬 User message:', message);
+    
+    if (!message || isChatbotTyping) {
+        console.log('⚠️ Message empty or bot typing, returning');
+        return;
+    }
+    
+    // Add user message to chat
+    addChatMessage(message, true);
+    input.value = '';
+    
+    // Disable input while processing
+    input.disabled = true;
+    sendBtn.disabled = true;
+    
+    // Show typing indicator
+    showTypingIndicator();
+    
+    try {
+        console.log('📡 Calling sendChatMessage...');
+        // Send message to N8N webhook
+        const response = await sendChatMessage(message);
+        console.log('✅ Received response from webhook:', response);
+        
+        // Remove typing indicator
+        removeTypingIndicator();
+        
+        // Add bot response to chat
+        addChatMessage(response, false);
+    } catch (error) {
+        console.error('❌ Error in handleChatbotSend:', error);
+        // Remove typing indicator
+        removeTypingIndicator();
+        
+        // Add error message
+        addChatMessage(`Error: ${error.message}`, false);
+    } finally {
+        // Re-enable input
+        input.disabled = false;
+        sendBtn.disabled = false;
+        input.focus();
+    }
+}
+
+/**
+ * Initialize chatbot
+ */
+function initializeChatbot() {
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotClose = document.getElementById('chatbotClose');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const chatbotSend = document.getElementById('chatbotSend');
+    
+    // Toggle chatbot window
+    if (chatbotToggle) {
+        chatbotToggle.addEventListener('click', toggleChatbot);
+    }
+    
+    // Close chatbot window
+    if (chatbotClose) {
+        chatbotClose.addEventListener('click', closeChatbot);
+    }
+    
+    // Send message on button click
+    if (chatbotSend) {
+        chatbotSend.addEventListener('click', handleChatbotSend);
+    }
+    
+    // Send message on Enter key
+    if (chatbotInput) {
+        chatbotInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleChatbotSend();
+            }
+        });
+    }
+}
+
 // Main Application
 // =================================================
 
@@ -281,6 +708,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Generate dynamic content
     generateCourseCards();
     generateBotCards();
+    
+    // Initialize AI Chatbot
+    initializeChatbot();
     
     // Initialize AOS Animation Library
     AOS.init({
@@ -506,43 +936,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const newsletterForm = document.querySelector('.newsletter-form');
     
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Simple validation
-            if (!name || !email || !message) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('Please enter a valid email address.');
-                return;
-            }
-            
-            // Simulate form submission
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            
-            submitBtn.innerHTML = '<i class="bi bi-spinner"></i> Sending...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                alert('Thank you for your message! We will get back to you soon.');
-                contactForm.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
-        });
+        contactForm.addEventListener('submit', handleContactFormSubmit);
     }
     
     if (newsletterForm) {
@@ -684,7 +1078,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const currentYear = new Date().getFullYear();
     const footerYear = document.querySelector('.footer-bottom p');
     if (footerYear) {
-        footerYear.innerHTML = `&copy; ${currentYear} TradeBot Pro. All rights reserved.`;
+        footerYear.innerHTML = `&copy; ${currentYear} ${CONFIG.COMPANY_NAME}. All rights reserved.`;
     }
     
     // Add keyboard navigation support
@@ -714,7 +1108,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Console welcome message
-    console.log('%c🤖 TradeBot Pro', 'font-size: 24px; font-weight: bold; color: #00F5D4;');
+    console.log('%c🤖 PARAMCGWALABOTS', 'font-size: 24px; font-weight: bold; color: #00F5D4;');
     console.log('%cPremium Trading Automation Platform', 'font-size: 14px; color: #AAB2C8;');
     console.log('%cBuilt with ❤️ for modern traders', 'font-size: 12px; color: #9B5DE5;');
 });
