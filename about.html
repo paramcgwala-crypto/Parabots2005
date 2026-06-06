@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>About Us | PARAMCGWALABOTS - AI Automation & Trading Education</title>
+    <meta name="description" content="Learn about PARAMCGWALABOTS - your trusted partner for AI automation, trading education, and digital business solutions.">
+    <meta name="keywords" content="about PARAMCGWALABOTS, trading education, AI automation, Paramcgwala, trading bots">
+    <meta name="author" content="PARAMCGWALABOTS">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="About Us | PARAMCGWALABOTS">
+    <meta property="og:description" content="Your trusted partner for AI automation and trading education.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://paramcgwalabots.com/about.html">
+    <meta property="og:image" content="https://paramcgwalabots.com/assets/og-image.jpg">
+    <meta property="og:site_name" content="PARAMCGWALABOTS">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About Us | PARAMCGWALABOTS">
+    <meta name="twitter:description" content="Your trusted partner for AI automation and trading education.">
+    <meta name="twitter:site" content="@paramcgwala023">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    
+    <!-- GSAP CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="loaded">
+    
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">PARAMCGWALABOTS</div>
+        <div class="loading-bar"></div>
+        <div class="loading-text">LOADING...</div>
+    </div>
+    
+    <!-- Mouse Follow Glow -->
+    <div class="mouse-glow" id="mouseGlow"></div>
+    
+    <!-- Floating Particles Container -->
+    <div class="particles-container" id="particlesContainer"></div>
+    
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+    
+    <!-- AI Chatbot Button -->
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <i class="bi bi-chat-dots"></i>
+    </button>
+    
+    <!-- Sticky WhatsApp Button -->
+    <a href="https://wa.me/919617422068" target="_blank" class="whatsapp-float">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    
+    <!-- AI Chatbot Window -->
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <i class="bi bi-robot"></i>
+                <span>PARAMCGWALA AI Assistant</span>
+            </div>
+            <button class="chatbot-close" id="chatbotClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chat-message bot">
+                <div class="message-content">
+                    <p>Hello! I'm your AI assistant. How can I help you today?</p>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input-area">
+            <div class="input-wrapper">
+                <input type="text" id="chatbotInput" placeholder="Type your message...">
+                <button id="chatbotSend">
+                    <i class="bi bi-send"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-robot"></i>
+                <span>PARAMCGWALA</span><span class="accent">BOTS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="courses.html">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bots.html">Trading Bots</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ai-automation.html">AI Automation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resources.html">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bitcoin-sip.html">Bitcoin SIP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <a href="#contact" class="btn btn-primary btn-cta">Get Started</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-header-content" data-aos="fade-up">
+                        <h1>Meet Param</h1>
+                        <p>Founder of PARAMCGWALABOTS - AI Automation & Trading Expert</p>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active">About</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Founder Hero Section -->
+    <section class="founder-hero-section">
+        <div class="hero-bg-gradient"></div>
+        <div class="hero-floating-elements">
+            <div class="floating-element floating-1"></div>
+            <div class="floating-element floating-2"></div>
+            <div class="floating-element floating-3"></div>
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <div class="founder-image-container">
+                        <div class="founder-glow"></div>
+                        <div class="founder-frame">
+                            <div class="founder-image">
+                                <img src="assets/founder.jpg" alt="Param - Founder of PARAMCGWALABOTS" onerror="this.src='https://via.placeholder.com/400x500/0b0f19/00F5D4?text=Param'">
+                            </div>
+                            <div class="founder-badge badge-premium">
+                                <i class="bi bi-award-fill"></i>
+                                <span>Founder</span>
+                            </div>
+                        </div>
+                        <div class="founder-social">
+                            <a href="https://wa.me/919617422068" target="_blank" class="social-link">
+                                <i class="bi bi-whatsapp"></i>
+                            </a>
+                            <a href="https://www.youtube.com/shorts/gkRGRU7svdE" target="_blank" class="social-link">
+                                <i class="bi bi-youtube"></i>
+                            </a>
+                            <a href="https://t.me/param275" target="_blank" class="social-link">
+                                <i class="bi bi-telegram"></i>
+                            </a>
+                            <a href="https://www.instagram.com/paramcgwala023/" target="_blank" class="social-link">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/jobs/" target="_blank" class="social-link">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7" data-aos="fade-left">
+                    <div class="founder-content">
+                        <span class="hero-badge badge-premium">
+                            <i class="bi bi-stars"></i>
+                            About Me
+                        </span>
+                        <h2 class="gradient-text-animated">Paramcgwala</h2>
+                        <p class="founder-bio">
+                            I'm the founder of PARAMCGWALABOTS, specializing in AI automation, trading bots, and digital business solutions. With over 5 years of experience in automation and trading, I've helped hundreds of students and businesses transform their operations through intelligent automation.
+                        </p>
+                        <div class="founder-stats">
+                            <div class="stat-item">
+                                <div class="stat-number counter-animate" data-count="150">0</div>
+                                <div class="stat-label">AI Automations Built</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number counter-animate" data-count="50">0</div>
+                                <div class="stat-label">Trading Bot Solutions</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number counter-animate" data-count="500">0</div>
+                                <div class="stat-label">Students Trained</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number counter-animate" data-count="24">0</div>
+                                <div class="stat-label">Client Support</div>
+                            </div>
+                        </div>
+                        <div class="founder-actions">
+                            <a href="https://wa.me/919617422068" target="_blank" class="btn btn-premium magnetic-btn">
+                                <i class="bi bi-whatsapp"></i> Connect on WhatsApp
+                            </a>
+                            <a href="#contact" class="btn btn-outline-light magnetic-btn">
+                                <i class="bi bi-envelope"></i> Send Message
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Journey Section -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">My Journey</span>
+                        <h2>The Path to Automation Excellence</h2>
+                        <p>From curiosity to expertise - my story in AI and trading</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="timeline glass-card">
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>2019 - The Beginning</h4>
+                                <p>Started exploring automation and trading algorithms. Built my first trading bot and realized the power of AI in financial markets.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>2020 - n8n Mastery</h4>
+                                <p>Discovered n8n and became an expert in workflow automation. Built 50+ custom automations for businesses across various industries.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>2021 - Teaching Begins</h4>
+                                <p>Started sharing knowledge through courses and workshops. Helped first 100 students learn AI automation and trading.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>2022 - PARAMCGWALABOTS Founded</h4>
+                                <p>Launched PARAMCGWALABOTS as a full-time venture. Expanded offerings to include trading bots, courses, and consulting.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>2023 - Scaling Impact</h4>
+                                <p>Reached 500+ students and 50+ bot deployments. Built a community of traders and automation enthusiasts.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>2024 - Global Reach</h4>
+                                <p>Expanded globally with students from 20+ countries. Launched premium AI automation and trading programs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="glass-card journey-visual">
+                        <h3>Key Milestones</h3>
+                        <div class="milestone-list">
+                            <div class="milestone-item">
+                                <i class="bi bi-trophy-fill"></i>
+                                <div>
+                                    <h4>150+ AI Automations</h4>
+                                    <p>Built for businesses worldwide</p>
+                                </div>
+                            </div>
+                            <div class="milestone-item">
+                                <i class="bi bi-people-fill"></i>
+                                <div>
+                                    <h4>500+ Students</h4>
+                                    <p>Trained in automation & trading</p>
+                                </div>
+                            </div>
+                            <div class="milestone-item">
+                                <i class="bi bi-robot"></i>
+                                <div>
+                                    <h4>50+ Trading Bots</h4>
+                                    <p>Deployed for clients</p>
+                                </div>
+                            </div>
+                            <div class="milestone-item">
+                                <i class="bi bi-globe"></i>
+                                <div>
+                                    <h4>20+ Countries</h4>
+                                    <p>Global student base</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">Expertise</span>
+                        <h2>Skills & Technologies</h2>
+                        <p>Tools and technologies I specialize in</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="skill-card glass-card premium-card">
+                        <div class="skill-icon">
+                            <i class="bi bi-diagram-3"></i>
+                        </div>
+                        <h3>n8n Automation</h3>
+                        <p>Expert in building complex workflows with 500+ nodes and integrations</p>
+                        <div class="skill-level">
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 95%"></div>
+                            </div>
+                            <span>95%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="skill-card glass-card premium-card">
+                        <div class="skill-icon">
+                            <i class="bi bi-currency-bitcoin"></i>
+                        </div>
+                        <h3>Trading Algorithms</h3>
+                        <p>Building profitable trading strategies for Forex, Crypto, and Stocks</p>
+                        <div class="skill-level">
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 90%"></div>
+                            </div>
+                            <span>90%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="skill-card glass-card premium-card">
+                        <div class="skill-icon">
+                            <i class="bi bi-cpu"></i>
+                        </div>
+                        <h3>AI & Machine Learning</h3>
+                        <p>Implementing ML models for prediction and pattern recognition</p>
+                        <div class="skill-level">
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 85%"></div>
+                            </div>
+                            <span>85%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="skill-card glass-card premium-card">
+                        <div class="skill-icon">
+                            <i class="bi bi-code-slash"></i>
+                        </div>
+                        <h3>Python Development</h3>
+                        <p>Custom bot development and API integrations</p>
+                        <div class="skill-level">
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 88%"></div>
+                            </div>
+                            <span>88%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">Portfolio</span>
+                        <h2>Featured Projects</h2>
+                        <p>Some of my notable work in automation and trading</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-card glass-card premium-card">
+                        <div class="project-icon">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h3>Forex Trading Bot</h3>
+                        <p>Automated trading system with 15-25% monthly returns, risk management, and multi-timeframe analysis.</p>
+                        <div class="project-tags">
+                            <span class="tag-premium">Python</span>
+                            <span class="tag-premium">MT4</span>
+                            <span class="tag-premium">API</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-card glass-card premium-card">
+                        <div class="project-icon">
+                            <i class="bi bi-lightning"></i>
+                        </div>
+                        <h3>Lead Automation System</h3>
+                        <p>Complete lead generation and nurturing workflow using n8n, CRM integration, and automated follow-ups.</p>
+                        <div class="project-tags">
+                            <span class="tag-premium">n8n</span>
+                            <span class="tag-premium">CRM</span>
+                            <span class="tag-premium">API</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-card glass-card premium-card">
+                        <div class="project-icon">
+                            <i class="bi bi-currency-exchange"></i>
+                        </div>
+                        <h3>Crypto Arbitrage Bot</h3>
+                        <p>Multi-exchange arbitrage trading bot with real-time price monitoring and automatic execution.</p>
+                        <div class="project-tags">
+                            <span class="tag-premium">Python</span>
+                            <span class="tag-premium">WebSocket</span>
+                            <span class="tag-premium">Crypto</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Achievements Section -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">Recognition</span>
+                        <h2>Achievements & Certifications</h2>
+                        <p>Milestones and professional recognition</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="achievements-list glass-card">
+                        <div class="achievement-item">
+                            <i class="bi bi-award-fill"></i>
+                            <div>
+                                <h4>Top Automation Expert</h4>
+                                <p>Recognized as top n8n automation expert in India (2023)</p>
+                            </div>
+                        </div>
+                        <div class="achievement-item">
+                            <i class="bi bi-patch-check-fill"></i>
+                            <div class="achievement-item">
+                                <i class="bi bi-award-fill"></i>
+                                <div>
+                                    <h4>Certified n8n Expert</h4>
+                                    <p>Official n8n certification for advanced workflow automation</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="achievement-item">
+                            <i class="bi bi-star-fill"></i>
+                            <div>
+                                <h4>5-Star Instructor</h4>
+                                <p>Average 5-star rating from 500+ students across all courses</p>
+                            </div>
+                        </div>
+                        <div class="achievement-item">
+                            <i class="bi bi-rocket-fill"></i>
+                            <div>
+                                <h4>Startup Success</h4>
+                                <p>Built PARAMCGWALABOTS from zero to a 6-figure business</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="glass-card certifications-visual">
+                        <h3>Certifications</h3>
+                        <div class="certification-grid">
+                            <div class="cert-item">
+                                <i class="bi bi-patch-check"></i>
+                                <span>n8n Advanced</span>
+                            </div>
+                            <div class="cert-item">
+                                <i class="bi bi-patch-check"></i>
+                                <span>Python for Finance</span>
+                            </div>
+                            <div class="cert-item">
+                                <i class="bi bi-patch-check"></i>
+                                <span>Machine Learning</span>
+                            </div>
+                            <div class="cert-item">
+                                <i class="bi bi-patch-check"></i>
+                                <span>Trading Strategies</span>
+                            </div>
+                            <div class="cert-item">
+                                <i class="bi bi-patch-check"></i>
+                                <span>API Development</span>
+                            </div>
+                            <div class="cert-item">
+                                <i class="bi bi-patch-check"></i>
+                                <span>Cloud Architecture</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">Our Purpose</span>
+                        <h2>Our Mission & Vision</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="mission-card glass-card">
+                        <div class="mission-icon">
+                            <i class="bi bi-bullseye"></i>
+                        </div>
+                        <h3>Our Mission</h3>
+                        <p>To empower traders and businesses with intelligent automation solutions that simplify complex processes, maximize efficiency, and drive sustainable growth.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="mission-card glass-card">
+                        <div class="mission-icon">
+                            <i class="bi bi-eye"></i>
+                        </div>
+                        <h3>Our Vision</h3>
+                        <p>To become the global leader in AI-powered trading and business automation, setting new standards for innovation, accessibility, and results.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">What We Believe</span>
+                        <h2>Our Core Values</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="value-card glass-card">
+                        <div class="value-icon">
+                            <i class="bi bi-lightning-charge"></i>
+                        </div>
+                        <h3>Innovation</h3>
+                        <p>Constantly pushing boundaries with cutting-edge technology and creative solutions.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="value-card glass-card">
+                        <div class="value-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3>Integrity</h3>
+                        <p>Building trust through transparency, honesty, and ethical business practices.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="value-card glass-card">
+                        <div class="value-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h3>Community</h3>
+                        <p>Fostering a supportive ecosystem where everyone can learn and grow together.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="value-card glass-card">
+                        <div class="value-icon">
+                            <i class="bi bi-trophy"></i>
+                        </div>
+                        <h3>Excellence</h3>
+                        <p>Delivering premium quality in everything we do, from education to automation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="cta-content glass-card" data-aos="fade-up">
+                        <h2>Ready to Start Your Journey?</h2>
+                        <p>Join thousands of successful traders and businesses who trust PARAMCGWALABOTS</p>
+                        <a href="contact.html" class="btn btn-primary btn-lg">Get In Touch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand">
+                        <a href="index.html">
+                            <i class="bi bi-robot"></i>
+                            <span>PARAMCGWALA</span><span class="accent">BOTS</span>
+                        </a>
+                        <p>AI Automation, Trading Bots & Digital Solutions for Modern Traders and Businesses.</p>
+                        <div class="footer-social">
+                            <a href="https://wa.me/919617422068" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                            <a href="https://www.youtube.com/shorts/gkRGRU7svdE" target="_blank"><i class="bi bi-youtube"></i></a>
+                            <a href="https://t.me/param275" target="_blank"><i class="bi bi-telegram"></i></a>
+                            <a href="https://www.instagram.com/paramcgwala023/" target="_blank"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=61590147527192" target="_blank"><i class="bi bi-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="courses.html">Courses</a></li>
+                            <li><a href="bots.html">Trading Bots</a></li>
+                            <li><a href="ai-automation.html">AI Automation</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="resources.html">Free Resources</a></li>
+                            <li><a href="bitcoin-sip.html">Bitcoin SIP</a></li>
+                            <li><a href="testimonials.html">Testimonials</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Courses</h4>
+                        <ul>
+                            <li><a href="courses.html">Forex Trading</a></li>
+                            <li><a href="courses.html">AI Automation</a></li>
+                            <li><a href="courses.html">n8n Masterclass</a></li>
+                            <li><a href="courses.html">Risk Management</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><i class="bi bi-whatsapp"></i> +91 9617422068</li>
+                            <li><i class="bi bi-envelope"></i> Paramcgwala@gmail.com</li>
+                            <li><i class="bi bi-geo-alt"></i> Bhilai, India</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-bottom">
+                        <p>&copy; 2024 PARAMCGWALABOTS. All rights reserved.</p>
+                        <div class="footer-bottom-links">
+                            <a href="admin.html" class="admin-link"><i class="bi bi-gear"></i> Admin</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Swiper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    
+    <!-- Premium Animations JS -->
+    <script src="js/premium-animations.js"></script>
+</body>
+</html>

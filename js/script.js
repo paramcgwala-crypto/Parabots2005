@@ -255,14 +255,19 @@ function generateCourseCards() {
                     </div>
                     
                     <div class="course-actions">
+                        ${course.videoLink ? 
+                            `<a href="${course.videoLink}" target="_blank" class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-play-circle"></i> Watch Preview
+                            </a>` : ''}
+                        
                         ${course.pdfDownloadLink || course.pdfBase64 ? 
                             `<a href="${course.pdfBase64 ? '#' : course.pdfDownloadLink}" ${course.pdfBase64 ? `onclick="downloadPdf('${course.id}'); return false;"` : ''} class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-file-earmark-pdf"></i> Download PDF
                             </a>` : ''}
                         
-                        ${course.youtubePreviewLink ? 
-                            `<a href="${course.youtubePreviewLink}" target="_blank" class="btn btn-outline-primary btn-sm">
-                                <i class="bi bi-play-circle"></i> Watch Preview
+                        ${course.whatsappLink ? 
+                            `<a href="${course.whatsappLink}" target="_blank" class="btn btn-success btn-sm">
+                                <i class="bi bi-whatsapp"></i> WhatsApp
                             </a>` : ''}
                         
                         ${course.telegramGroupLink ? 
@@ -296,6 +301,148 @@ function downloadPdf(courseId) {
         link.download = `${course.title.replace(/\s+/g, '_')}.pdf`;
         link.click();
     }
+}
+
+/**
+ * Initialize Founder Stats Counter Animation
+ */
+function initFounderStatsCounter() {
+    const statNumbers = document.querySelectorAll('.stat-number[data-count]');
+    
+    const observerOptions = {
+        threshold: 0.5
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                const count = parseInt(target.getAttribute('data-count'));
+                animateCounter(target, count);
+                observer.unobserve(target);
+            }
+        });
+    }, observerOptions);
+    
+    statNumbers.forEach(stat => observer.observe(stat));
+}
+
+/**
+ * Animate Counter
+ */
+function animateCounter(element, target) {
+    let current = 0;
+    const increment = target / 50;
+    const duration = 2000;
+    const stepTime = duration / 50;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target + '+';
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(current) + '+';
+        }
+    }, stepTime);
+}
+
+/**
+ * Initialize Resources Filter
+ */
+function initResourcesFilter() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const resourceItems = document.querySelectorAll('.resource-item');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            button.classList.add('active');
+            
+            const filter = button.getAttribute('data-filter');
+            
+            resourceItems.forEach(item => {
+                const category = item.getAttribute('data-category');
+                
+                if (filter === 'all' || category === filter) {
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 300);
+                }
+            });
+        });
+    });
+}
+
+/**
+ * Initialize Download Modal
+ */
+function initDownloadModal() {
+    const downloadButtons = document.querySelectorAll('.download-btn');
+    const downloadModal = document.getElementById('downloadModal');
+    const confirmDownloadBtn = document.getElementById('confirmDownload');
+    const downloadForm = document.getElementById('downloadForm');
+    
+    downloadButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const resource = button.getAttribute('data-resource');
+            document.getElementById('resourceId').value = resource;
+            downloadModal.classList.add('show');
+            downloadModal.style.display = 'block';
+        });
+    });
+    
+    confirmDownloadBtn.addEventListener('click', async () => {
+        const name = document.getElementById('downloadName').value;
+        const email = document.getElementById('downloadEmail').value;
+        const phone = document.getElementById('downloadPhone').value;
+        const resource = document.getElementById('resourceId').value;
+        
+        if (!name || !email) {
+            alert('Please fill in all required fields');
+            return;
+        }
+        
+        // Submit to n8n webhook
+        try {
+            const response = await fetch(CONFIG.CONTACT_FORM_WEBHOOK, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    resource: resource,
+                    type: 'resource_download',
+                    timestamp: new Date().toISOString()
+                })
+            });
+            
+            if (response.ok) {
+                alert('Thank you! Your download will start shortly.');
+                downloadModal.classList.remove('show');
+                downloadModal.style.display = 'none';
+                downloadForm.reset();
+            } else {
+                throw new Error('Network response was not ok');
+            }
+        } catch (error) {
+            console.error('Error submitting download form:', error);
+            alert('There was an error. Please try again.');
+        }
+    });
 }
 
 /**
@@ -812,6 +959,19 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Initialize AI Chatbot
     initializeChatbot();
     
+    // Initialize Founder Stats Counter Animation
+    initFounderStatsCounter();
+    
+    // Initialize Resources Filter (if on resources page)
+    if (document.querySelector('.filter-buttons')) {
+        initResourcesFilter();
+    }
+    
+    // Initialize Download Modal (if on resources page)
+    if (document.getElementById('downloadModal')) {
+        initDownloadModal();
+    }
+    
     // Initialize AOS Animation Library
     AOS.init({
         duration: 800,
@@ -1211,6 +1371,356 @@ document.addEventListener('DOMContentLoaded', async function() {
     console.log('%c🤖 PARAMCGWALABOTS', 'font-size: 24px; font-weight: bold; color: #00F5D4;');
     console.log('%cPremium Trading Automation Platform', 'font-size: 14px; color: #AAB2C8;');
     console.log('%cBuilt with ❤️ for modern traders', 'font-size: 12px; color: #9B5DE5;');
+    
+    // ===================================
+    // GSAP Animations & Premium Effects
+    // ===================================
+    
+    // Register GSAP plugins
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Mouse Glow Effect
+        const mouseGlow = document.getElementById('mouseGlow');
+        if (mouseGlow) {
+            document.addEventListener('mousemove', (e) => {
+                gsap.to(mouseGlow, {
+                    x: e.clientX - 150,
+                    y: e.clientY - 150,
+                    duration: 0.5,
+                    ease: 'power2.out'
+                });
+            });
+        }
+        
+        // Intelligence Cards GSAP Animation
+        const intelligenceCards = document.querySelectorAll('.intelligence-card');
+        intelligenceCards.forEach((card, index) => {
+            gsap.fromTo(card, 
+                { 
+                    opacity: 0,
+                    y: 50,
+                    scale: 0.9
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.6,
+                    delay: index * 0.1,
+                    ease: 'back.out(1.7)',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+        
+        // Tool Cards GSAP Animation
+        const toolCards = document.querySelectorAll('.tool-card');
+        toolCards.forEach((card, index) => {
+            gsap.fromTo(card,
+                {
+                    opacity: 0,
+                    x: -50
+                },
+                {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.6,
+                    delay: index * 0.15,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+        
+        // Quick Links GSAP Animation
+        const quickLinks = document.querySelectorAll('.quick-link-card');
+        quickLinks.forEach((link, index) => {
+            gsap.fromTo(link,
+                {
+                    opacity: 0,
+                    y: 30,
+                    rotation: -5
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    rotation: 0,
+                    duration: 0.5,
+                    delay: index * 0.1,
+                    ease: 'elastic.out(1, 0.5)',
+                    scrollTrigger: {
+                        trigger: link,
+                        start: 'top 90%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+        
+        // Intelligence Header Animation
+        const intelligenceHeaders = document.querySelectorAll('.intelligence-header');
+        intelligenceHeaders.forEach(header => {
+            gsap.fromTo(header,
+                {
+                    opacity: 0,
+                    x: -30
+                },
+                {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: header,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+        
+        // Magnetic Button Effect
+        const magneticBtns = document.querySelectorAll('.magnetic-btn');
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                gsap.to(btn, {
+                    x: x * 0.3,
+                    y: y * 0.3,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.5,
+                    ease: 'elastic.out(1, 0.5)'
+                });
+            });
+        });
+        
+        // Parallax Effect for Intelligence Cards
+        const premiumCards = document.querySelectorAll('.premium-card');
+        premiumCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                gsap.to(card, {
+                    rotateX: rotateX,
+                    rotateY: rotateY,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    rotateX: 0,
+                    rotateY: 0,
+                    duration: 0.5,
+                    ease: 'elastic.out(1, 0.5)'
+                });
+            });
+        });
+        
+        // Counter Animation for Tool Results
+        const toolResults = document.querySelectorAll('.tool-result');
+        toolResults.forEach(result => {
+            if (result.classList.contains('show')) {
+                gsap.fromTo(result,
+                    {
+                        opacity: 0,
+                        y: 20
+                    },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.4,
+                        ease: 'power2.out'
+                    }
+                );
+            }
+        });
+        
+        // Intelligence CTA Animation
+        const intelligenceCTA = document.querySelector('.intelligence-cta');
+        if (intelligenceCTA) {
+            gsap.fromTo(intelligenceCTA,
+                {
+                    opacity: 0,
+                    scale: 0.9
+                },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: 'elastic.out(1, 0.5)',
+                    scrollTrigger: {
+                        trigger: intelligenceCTA,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        }
+    }
+    
+    // Floating Particles Animation
+    const particlesContainer = document.getElementById('particlesContainer');
+    if (particlesContainer) {
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.cssText = `
+                position: absolute;
+                width: ${Math.random() * 4 + 2}px;
+                height: ${Math.random() * 4 + 2}px;
+                background: rgba(0, 245, 212, ${Math.random() * 0.5 + 0.2});
+                border-radius: 50%;
+                left: ${Math.random() * 100}%;
+                top: ${Math.random() * 100}%;
+                pointer-events: none;
+            `;
+            particlesContainer.appendChild(particle);
+            
+            gsap.to(particle, {
+                y: -window.innerHeight,
+                x: (Math.random() - 0.5) * 200,
+                duration: Math.random() * 10 + 10,
+                repeat: -1,
+                ease: 'none',
+                delay: Math.random() * 5
+            });
+        }
+    }
+    
+    // Tool Calculator Functions
+    window.calculateRisk = function() {
+        const balance = parseFloat(document.getElementById('riskBalance')?.value);
+        const riskPercent = parseFloat(document.getElementById('riskPercent')?.value);
+        const stopLoss = parseFloat(document.getElementById('riskStopLoss')?.value);
+        const resultDiv = document.getElementById('riskResult');
+        
+        if (balance && riskPercent && stopLoss && resultDiv) {
+            const riskAmount = balance * (riskPercent / 100);
+            const positionSize = riskAmount / stopLoss;
+            
+            resultDiv.innerHTML = `
+                <div class="result-item">
+                    <span>Risk Amount:</span>
+                    <strong>$${riskAmount.toFixed(2)}</strong>
+                </div>
+                <div class="result-item">
+                    <span>Position Size:</span>
+                    <strong>${positionSize.toFixed(2)} lots</strong>
+                </div>
+            `;
+            resultDiv.classList.add('show');
+            
+            gsap.fromTo(resultDiv,
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+            );
+        }
+    };
+    
+    window.calculatePosition = function() {
+        const balance = parseFloat(document.getElementById('posBalance')?.value);
+        const risk = parseFloat(document.getElementById('posRisk')?.value);
+        const entry = parseFloat(document.getElementById('posEntry')?.value);
+        const stop = parseFloat(document.getElementById('posStop')?.value);
+        const resultDiv = document.getElementById('posResult');
+        
+        if (balance && risk && entry && stop && resultDiv) {
+            const pipValue = (entry - stop);
+            const positionSize = risk / pipValue;
+            
+            resultDiv.innerHTML = `
+                <div class="result-item">
+                    <span>Risk Amount:</span>
+                    <strong>$${risk.toFixed(2)}</strong>
+                </div>
+                <div class="result-item">
+                    <span>Pip Value:</span>
+                    <strong>${pipValue.toFixed(5)}</strong>
+                </div>
+                <div class="result-item">
+                    <span>Position Size:</span>
+                    <strong>${positionSize.toFixed(2)} lots</strong>
+                </div>
+            `;
+            resultDiv.classList.add('show');
+            
+            gsap.fromTo(resultDiv,
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+            );
+        }
+    };
+    
+    window.calculateSIP = function() {
+        const monthlyAmount = parseFloat(document.getElementById('sipAmount')?.value);
+        const years = parseFloat(document.getElementById('sipYears')?.value);
+        const annualReturn = parseFloat(document.getElementById('sipReturn')?.value) / 100;
+        const resultDiv = document.getElementById('sipResult');
+        
+        if (monthlyAmount && years && annualReturn && resultDiv) {
+            const months = years * 12;
+            const monthlyReturn = annualReturn / 12;
+            
+            let futureValue = 0;
+            for (let i = 0; i < months; i++) {
+                futureValue = (futureValue + monthlyAmount) * (1 + monthlyReturn);
+            }
+            
+            const totalInvested = monthlyAmount * months;
+            const returns = futureValue - totalInvested;
+            
+            resultDiv.innerHTML = `
+                <div class="result-item">
+                    <span>Total Invested:</span>
+                    <strong>$${totalInvested.toFixed(2)}</strong>
+                </div>
+                <div class="result-item">
+                    <span>Future Value:</span>
+                    <strong>$${futureValue.toFixed(2)}</strong>
+                </div>
+                <div class="result-item">
+                    <span>Returns:</span>
+                    <strong class="text-success">$${returns.toFixed(2)}</strong>
+                </div>
+            `;
+            resultDiv.classList.add('show');
+            
+            gsap.fromTo(resultDiv,
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+            );
+        }
+    };
 });
 
 // Additional utility functions

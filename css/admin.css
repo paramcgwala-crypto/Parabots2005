@@ -49,8 +49,116 @@ body {
 
 /* Admin Container */
 .admin-container {
-    padding: var(--spacing-xl) 0;
+    padding: 0;
     min-height: calc(100vh - 80px);
+}
+
+/* Admin Sidebar */
+.admin-sidebar {
+    background: var(--admin-card-bg);
+    border-right: 1px solid var(--admin-border);
+    padding: var(--spacing-lg) 0;
+    min-height: calc(100vh - 80px);
+}
+
+.admin-sidebar .nav {
+    gap: var(--spacing-xs);
+}
+
+.admin-sidebar .nav-link {
+    color: var(--admin-text);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    transition: all var(--transition-base);
+    font-weight: 500;
+}
+
+.admin-sidebar .nav-link i {
+    font-size: var(--font-size-lg);
+    width: 24px;
+}
+
+.admin-sidebar .nav-link:hover {
+    background: rgba(0, 245, 212, 0.1);
+    color: var(--admin-primary);
+}
+
+.admin-sidebar .nav-link.active {
+    background: var(--gradient-1);
+    color: var(--dark-bg);
+    font-weight: 600;
+}
+
+/* Admin Content */
+.admin-content {
+    padding: var(--spacing-xl);
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Admin Table */
+.admin-table {
+    margin: 0;
+    color: var(--admin-text);
+}
+
+.admin-table thead {
+    background: rgba(0, 245, 212, 0.05);
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-table th {
+    color: var(--admin-white);
+    font-weight: 600;
+    padding: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.admin-table td {
+    padding: var(--spacing-md);
+    vertical-align: middle;
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-table tbody tr:hover {
+    background: rgba(0, 245, 212, 0.02);
+}
+
+.admin-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Table Container */
+.table-container {
+    background: var(--admin-card-bg);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    backdrop-filter: blur(20px);
 }
 
 /* Admin Header */

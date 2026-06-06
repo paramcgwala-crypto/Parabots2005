@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>n8n Automation Course | PARAMCGWALABOTS - Master Workflow Automation</title>
+    <meta name="description" content="Learn n8n workflow automation with PARAMCGWALABOTS. Master no-code automation, API integrations, and build powerful automated workflows.">
+    <meta name="keywords" content="n8n course, workflow automation, no-code automation, API integration, n8n training, PARAMCGWALABOTS">
+    <meta name="author" content="PARAMCGWALABOTS">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="n8n Automation Course | PARAMCGWALABOTS">
+    <meta property="og:description" content="Master n8n workflow automation with our comprehensive course.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://paramcgwalabots.com/n8n-course.html">
+    <meta property="og:image" content="https://paramcgwalabots.com/assets/og-image.jpg">
+    <meta property="og:site_name" content="PARAMCGWALABOTS">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="n8n Automation Course | PARAMCGWALABOTS">
+    <meta name="twitter:description" content="Master n8n workflow automation with our comprehensive course.">
+    <meta name="twitter:site" content="@paramcgwala023">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    
+    <!-- GSAP CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="loaded">
+    
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">PARAMCGWALABOTS</div>
+        <div class="loading-bar"></div>
+        <div class="loading-text">LOADING...</div>
+    </div>
+    
+    <!-- Mouse Follow Glow -->
+    <div class="mouse-glow" id="mouseGlow"></div>
+    
+    <!-- Floating Particles Container -->
+    <div class="particles-container" id="particlesContainer"></div>
+    
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+    
+    <!-- AI Chatbot Button -->
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <i class="bi bi-chat-dots"></i>
+    </button>
+    
+    <!-- Sticky WhatsApp Button -->
+    <a href="https://wa.me/919617422068" target="_blank" class="whatsapp-float">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    
+    <!-- AI Chatbot Window -->
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <i class="bi bi-robot"></i>
+                <span>PARAMCGWALA AI Assistant</span>
+            </div>
+            <button class="chatbot-close" id="chatbotClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chat-message bot">
+                <div class="message-content">
+                    <p>Hi! I'm your AI assistant. How can I help you today?</p>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Type your message...">
+            <button id="chatbotSend">
+                <i class="bi bi-send"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="brand-text">PARAMCGWALA</span>
+                <span class="brand-accent">BOTS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="courses.html">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bots.html">Trading Bots</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ai-automation.html">AI Automation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resources.html">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bitcoin-sip.html">Bitcoin SIP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <a href="courses.html" class="btn btn-primary btn-cta">Get Started</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-section landing-hero">
+        <div class="hero-bg-gradient"></div>
+        <div class="hero-floating-elements">
+            <div class="floating-element floating-1"></div>
+            <div class="floating-element floating-2"></div>
+            <div class="floating-element floating-3"></div>
+            <div class="floating-element floating-4"></div>
+        </div>
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
+                        <span class="hero-badge badge-premium">
+                            <i class="bi bi-lightning"></i>
+                            No-Code Automation
+                        </span>
+                        <h1 class="hero-title gradient-text-animated">
+                            Master n8n Workflow Automation
+                        </h1>
+                        <p class="hero-subtitle">
+                            Learn to build powerful automated workflows without coding. Connect apps, automate tasks, and scale your business with n8n.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="#pricing" class="btn btn-premium btn-lg magnetic-btn">
+                                <i class="bi bi-cart"></i>
+                                Enroll Now
+                            </a>
+                            <a href="#curriculum" class="btn btn-outline-light btn-lg magnetic-btn">
+                                <i class="bi bi-list-check"></i>
+                                View Curriculum
+                            </a>
+                            <a href="https://wa.me/919617422068" target="_blank" class="btn btn-success btn-lg magnetic-btn">
+                                <i class="bi bi-whatsapp"></i>
+                                WhatsApp Us
+                            </a>
+                        </div>
+                        <div class="hero-features">
+                            <div class="feature-item">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>No Coding Required</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>500+ Integrations</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>Self-Hosted Option</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>Lifetime Access</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-visual" data-aos="fade-left" data-aos-duration="1000">
+                        <div class="workflow-visual glass-card">
+                            <div class="workflow-nodes">
+                                <div class="workflow-node node-1">
+                                    <i class="bi bi-envelope"></i>
+                                    <span>Email</span>
+                                </div>
+                                <div class="workflow-connector"></div>
+                                <div class="workflow-node node-2">
+                                    <i class="bi bi-gear"></i>
+                                    <span>Process</span>
+                                </div>
+                                <div class="workflow-connector"></div>
+                                <div class="workflow-node node-3">
+                                    <i class="bi bi-database"></i>
+                                    <span>Database</span>
+                                </div>
+                                <div class="workflow-connector"></div>
+                                <div class="workflow-node node-4">
+                                    <i class="bi bi-slack"></i>
+                                    <span>Slack</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- What You'll Learn Section -->
+    <section class="section" id="curriculum">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">Curriculum</span>
+                        <h2>What You'll Learn</h2>
+                        <p>Master n8n from basics to advanced automation techniques</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card premium-card">
+                        <div class="module-icon">
+                            <i class="bi bi-play-circle"></i>
+                        </div>
+                        <h3>Getting Started</h3>
+                        <ul class="module-topics">
+                            <li><i class="bi bi-check"></i> n8n installation & setup</li>
+                            <li><i class="bi bi-check"></i> Understanding workflow editor</li>
+                            <li><i class="bi bi-check"></i> First workflow creation</li>
+                            <li><i class="bi bi-check"></i> Node types & connections</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card premium-card">
+                        <div class="module-icon">
+                            <i class="bi bi-diagram-3"></i>
+                        </div>
+                        <h3>Workflow Building</h3>
+                        <ul class="module-topics">
+                            <li><i class="bi bi-check"></i> Advanced node configurations</li>
+                            <li><i class="bi bi-check"></i> Data transformation</li>
+                            <li><i class="bi bi-check"></i> Conditional logic</li>
+                            <li><i class="bi bi-check"></i> Error handling</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass-card premium-card">
+                        <div class="module-icon">
+                            <i class="bi bi-plug"></i>
+                        </div>
+                        <h3>Integrations</h3>
+                        <ul class="module-topics">
+                            <li><i class="bi bi-check"></i> API connections</li>
+                            <li><i class="bi bi-check"></i> Webhook workflows</li>
+                            <li><i class="bi bi-check"></i> Database integrations</li>
+                            <li><i class="bi bi-check"></i> Third-party apps</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="glass-card premium-card">
+                        <div class="module-icon">
+                            <i class="bi bi-code-slash"></i>
+                        </div>
+                        <h3>Advanced Techniques</h3>
+                        <ul class="module-topics">
+                            <li><i class="bi bi-check"></i> Custom nodes</li>
+                            <li><i class="bi bi-check"></i> JavaScript expressions</li>
+                            <li><i class="bi bi-check"></i> Sub-workflows</li>
+                            <li><i class="bi bi-check"></i> Performance optimization</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="glass-card premium-card">
+                        <div class="module-icon">
+                            <i class="bi bi-cloud"></i>
+                        </div>
+                        <h3>Deployment</h3>
+                        <ul class="module-topics">
+                            <li><i class="bi bi-check"></i> Cloud deployment</li>
+                            <li><i class="bi bi-check"></i> Self-hosting setup</li>
+                            <li><i class="bi bi-check"></i> Security best practices</li>
+                            <li><i class="bi bi-check"></i> Monitoring & logging</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="glass-card premium-card">
+                        <div class="module-icon">
+                            <i class="bi bi-briefcase"></i>
+                        </div>
+                        <h3>Real Projects</h3>
+                        <ul class="module-topics">
+                            <li><i class="bi bi-check"></i> Lead automation system</li>
+                            <li><i class="bi bi-check"></i> Social media automation</li>
+                            <li><i class="bi bi-check"></i> E-commerce workflows</li>
+                            <li><i class="bi bi-check"></i> Reporting dashboards</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section class="section" id="pricing">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">Pricing</span>
+                        <h2>Choose Your Plan</h2>
+                        <p>Invest in your automation skills today</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card pricing-card">
+                        <div class="pricing-header">
+                            <h3>Basic</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">199</span>
+                                <span class="period">/one-time</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> 20+ video lessons</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Basic workflows</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Community access</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Email support</li>
+                            <li><i class="bi bi-x-circle"></i> Advanced modules</li>
+                            <li><i class="bi bi-x-circle"></i> 1-on-1 mentoring</li>
+                        </ul>
+                        <a href="https://wa.me/919617422068?text=I'm interested in the Basic n8n Course" target="_blank" class="btn btn-outline-primary btn-lg magnetic-btn">
+                            Get Started
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card pricing-card featured">
+                        <div class="popular-badge">Most Popular</div>
+                        <div class="pricing-header">
+                            <h3>Pro</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">499</span>
+                                <span class="period">/one-time</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> 50+ video lessons</li>
+                            <li><i class="bi bi-check-circle-fill"></i> All workflows</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Community access</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Priority support</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Advanced modules</li>
+                            <li><i class="bi bi-x-circle"></i> 1-on-1 mentoring</li>
+                        </ul>
+                        <a href="https://wa.me/919617422068?text=I'm interested in the Pro n8n Course" target="_blank" class="btn btn-premium btn-lg magnetic-btn">
+                            Get Started
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass-card pricing-card">
+                        <div class="pricing-header">
+                            <h3>Premium</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">999</span>
+                                <span class="period">/one-time</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> 100+ video lessons</li>
+                            <li><i class="bi bi-check-circle-fill"></i> All workflows</li>
+                            <li><i class="bi bi-check-circle-fill"></i> VIP community</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 24/7 support</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Advanced modules</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 1-on-1 mentoring</li>
+                        </ul>
+                        <a href="https://wa.me/919617422068?text=I'm interested in the Premium n8n Course" target="_blank" class="btn btn-outline-primary btn-lg magnetic-btn">
+                            Get Started
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">Testimonials</span>
+                        <h2>What Our Students Say</h2>
+                        <p>Real results from real students</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="swiper testimonials-swiper" data-aos="fade-up">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="glass-card testimonial-card">
+                            <div class="testimonial-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <p class="testimonial-text">"This n8n course transformed how I work. I automated 80% of my daily tasks and saved countless hours every week."</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">JD</div>
+                                <div class="author-info">
+                                    <h4>John Doe</h4>
+                                    <span>Business Owner</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <div class="glass-card testimonial-card">
+                            <div class="testimonial-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <p class="testimonial-text">"Finally, a no-code automation course that actually teaches real-world scenarios. The projects are incredibly practical."</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">SM</div>
+                                <div class="author-info">
+                                    <h4>Sarah Miller</h4>
+                                    <span>Marketing Manager</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <div class="glass-card testimonial-card">
+                            <div class="testimonial-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <p class="testimonial-text">"The mentorship alone is worth the price. Param helped me build custom workflows for my specific business needs."</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">RK</div>
+                                <div class="author-info">
+                                    <h4>Raj Kumar</h4>
+                                    <span>Entrepreneur</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">FAQ</span>
+                        <h2>Frequently Asked Questions</h2>
+                        <p>Got questions? We've got answers</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item glass-card" data-aos="fade-up" data-aos-delay="100">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Do I need coding experience?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    No coding experience is required! n8n is a no-code platform designed for everyone. Our course starts from the basics and gradually builds up to advanced techniques.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item glass-card" data-aos="fade-up" data-aos-delay="200">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    How long do I have access to the course?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    You get lifetime access to all course materials, including any future updates. Learn at your own pace, forever.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item glass-card" data-aos="fade-up" data-aos-delay="300">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    What integrations are covered?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We cover 50+ popular integrations including Gmail, Slack, Google Sheets, Notion, Airtable, Shopify, WordPress, and many more. You'll also learn how to connect any API.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item glass-card" data-aos="fade-up" data-aos-delay="400">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Is there a refund policy?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, we offer a 30-day money-back guarantee. If you're not satisfied with the course, contact us within 30 days for a full refund.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">Contact</span>
+                        <h2>Get In Touch</h2>
+                        <p>Have questions? We're here to help</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="glass-card contact-info">
+                        <h3>Contact Information</h3>
+                        <div class="contact-item">
+                            <i class="bi bi-whatsapp"></i>
+                            <div>
+                                <h4>WhatsApp</h4>
+                                <a href="https://wa.me/919617422068" target="_blank">+91 9617422068</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="bi bi-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <a href="mailto:Paramcgwala@gmail.com">Paramcgwala@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="bi bi-telegram"></i>
+                            <div>
+                                <h4>Telegram</h4>
+                                <a href="https://t.me/param275" target="_blank">@param275</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="glass-card contact-form">
+                        <h3>Send Us a Message</h3>
+                        <form id="contactForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name *</label>
+                                <input type="text" class="form-control input-premium" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email *</label>
+                                <input type="email" class="form-control input-premium" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="tel" class="form-control input-premium" id="phone">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message *</label>
+                                <textarea class="form-control input-premium" id="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-premium magnetic-btn">
+                                <i class="bi bi-send"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-brand">
+                        <span class="brand-text">PARAMCGWALA</span>
+                        <span class="brand-accent">BOTS</span>
+                    </div>
+                    <p class="footer-description">
+                        Helping traders and businesses automate workflows, build AI systems, deploy trading bots, and scale using automation.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://wa.me/919617422068" target="_blank" class="social-link">
+                            <i class="bi bi-whatsapp"></i>
+                        </a>
+                        <a href="https://www.youtube.com/shorts/gkRGRU7svdE" target="_blank" class="social-link">
+                            <i class="bi bi-youtube"></i>
+                        </a>
+                        <a href="https://t.me/param275" target="_blank" class="social-link">
+                            <i class="bi bi-telegram"></i>
+                        </a>
+                        <a href="https://www.instagram.com/paramcgwala023/" target="_blank" class="social-link">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/jobs/" target="_blank" class="social-link">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="bots.html">Trading Bots</a></li>
+                        <li><a href="ai-automation.html">AI Automation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-4">
+                    <h5>Resources</h5>
+                    <ul class="footer-links">
+                        <li><a href="resources.html">Free Resources</a></li>
+                        <li><a href="bitcoin-sip.html">Bitcoin SIP</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-4">
+                    <h5>Newsletter</h5>
+                    <p class="footer-description">Subscribe for updates and exclusive content.</p>
+                    <form class="footer-newsletter">
+                        <div class="input-group">
+                            <input type="email" class="form-control input-premium" placeholder="Enter your email">
+                            <button class="btn btn-premium" type="submit">
+                                <i class="bi bi-send"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 PARAMCGWALABOTS. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Swiper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    
+    <!-- Premium Animations JS -->
+    <script src="js/premium-animations.js"></script>
+</body>
+</html>

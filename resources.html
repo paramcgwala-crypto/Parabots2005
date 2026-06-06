@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Free Resources | PARAMCGWALABOTS - Trading & Automation Resources</title>
+    <meta name="description" content="Download free PDF guides, templates, checklists for Forex trading, AI automation, n8n workflows, risk management, and Bitcoin SIP from PARAMCGWALABOTS.">
+    <meta name="keywords" content="free resources, trading guides, PDF downloads, forex education, AI automation resources, n8n templates, PARAMCGWALABOTS">
+    <meta name="author" content="PARAMCGWALABOTS">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Free Resources | PARAMCGWALABOTS">
+    <meta property="og:description" content="Download free PDF guides, templates, checklists for trading and automation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://paramcgwalabots.com/resources.html">
+    <meta property="og:image" content="https://paramcgwalabots.com/assets/og-image.jpg">
+    <meta property="og:site_name" content="PARAMCGWALABOTS">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Resources | PARAMCGWALABOTS">
+    <meta name="twitter:description" content="Download free PDF guides, templates, checklists for trading and automation.">
+    <meta name="twitter:site" content="@paramcgwala023">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    
+    <!-- GSAP CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="loaded">
+    
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">PARAMCGWALABOTS</div>
+        <div class="loading-bar"></div>
+        <div class="loading-text">LOADING...</div>
+    </div>
+    
+    <!-- Mouse Follow Glow -->
+    <div class="mouse-glow" id="mouseGlow"></div>
+    
+    <!-- Floating Particles Container -->
+    <div class="particles-container" id="particlesContainer"></div>
+    
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+    
+    <!-- AI Chatbot Button -->
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <i class="bi bi-chat-dots"></i>
+    </button>
+    
+    <!-- Sticky WhatsApp Button -->
+    <a href="https://wa.me/919617422068" target="_blank" class="whatsapp-float">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    
+    <!-- AI Chatbot Window -->
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <i class="bi bi-robot"></i>
+                <span>PARAMCGWALA AI Assistant</span>
+            </div>
+            <button class="chatbot-close" id="chatbotClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chat-message bot">
+                <div class="message-content">
+                    <p>Hello! I'm your AI assistant. How can I help you today?</p>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input-area">
+            <div class="input-wrapper">
+                <input type="text" id="chatbotInput" placeholder="Type your message...">
+                <button id="chatbotSend">
+                    <i class="bi bi-send"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-robot"></i>
+                <span>PARAMCGWALA</span><span class="accent">BOTS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="courses.html">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bots.html">Trading Bots</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ai-automation.html">AI Automation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="resources.html">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bitcoin-sip.html">Bitcoin SIP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <a href="#contact" class="btn btn-primary btn-cta">Get Started</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-header-content" data-aos="fade-up">
+                        <h1>Free Resources</h1>
+                        <p>Download Free PDF Guides, Templates, and Checklists</p>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active">Resources</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Resources Filter Section -->
+    <section class="resources-filter-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="filter-buttons" data-aos="fade-up">
+                        <button class="filter-btn active" data-filter="all">All Resources</button>
+                        <button class="filter-btn" data-filter="forex">Forex Basics</button>
+                        <button class="filter-btn" data-filter="risk">Risk Management</button>
+                        <button class="filter-btn" data-filter="psychology">Trading Psychology</button>
+                        <button class="filter-btn" data-filter="ai">AI Automation</button>
+                        <button class="filter-btn" data-filter="n8n">n8n Workflows</button>
+                        <button class="filter-btn" data-filter="bitcoin">Bitcoin SIP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Resources Grid Section -->
+    <section class="resources-grid-section">
+        <div class="container">
+            <div class="row" id="resources-container">
+                <!-- Forex Basics Resources -->
+                <div class="col-lg-4 col-md-6 resource-item" data-category="forex" data-aos="fade-up" data-aos-delay="100">
+                    <div class="resource-card glass-card">
+                        <div class="resource-icon">
+                            <i class="bi bi-currency-dollar"></i>
+                        </div>
+                        <h3>Forex Trading Basics Guide</h3>
+                        <p>Complete beginner's guide to understanding forex markets, currency pairs, and trading fundamentals.</p>
+                        <div class="resource-meta">
+                            <span><i class="bi bi-file-earmark-pdf"></i> PDF</span>
+                            <span><i class="bi bi-clock"></i> 15 min read</span>
+                        </div>
+                        <button class="btn btn-outline-primary download-btn" data-resource="forex-basics">
+                            <i class="bi bi-download"></i> Download Free
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Risk Management Resources -->
+                <div class="col-lg-4 col-md-6 resource-item" data-category="risk" data-aos="fade-up" data-aos-delay="200">
+                    <div class="resource-card glass-card">
+                        <div class="resource-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3>Risk Management Checklist</h3>
+                        <p>Essential risk management checklist for traders to protect capital and minimize losses.</p>
+                        <div class="resource-meta">
+                            <span><i class="bi bi-file-earmark-pdf"></i> PDF</span>
+                            <span><i class="bi bi-clock"></i> 10 min read</span>
+                        </div>
+                        <button class="btn btn-outline-primary download-btn" data-resource="risk-checklist">
+                            <i class="bi bi-download"></i> Download Free
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Trading Psychology Resources -->
+                <div class="col-lg-4 col-md-6 resource-item" data-category="psychology" data-aos="fade-up" data-aos-delay="300">
+                    <div class="resource-card glass-card">
+                        <div class="resource-icon">
+                            <i class="bi bi-psychology"></i>
+                        </div>
+                        <h3>Trading Psychology Guide</h3>
+                        <p>Master your mindset with this comprehensive guide to trading psychology and emotional control.</p>
+                        <div class="resource-meta">
+                            <span><i class="bi bi-file-earmark-pdf"></i> PDF</span>
+                            <span><i class="bi bi-clock"></i> 20 min read</span>
+                        </div>
+                        <button class="btn btn-outline-primary download-btn" data-resource="psychology-guide">
+                            <i class="bi bi-download"></i> Download Free
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- AI Automation Resources -->
+                <div class="col-lg-4 col-md-6 resource-item" data-category="ai" data-aos="fade-up" data-aos-delay="400">
+                    <div class="resource-card glass-card">
+                        <div class="resource-icon">
+                            <i class="bi bi-robot"></i>
+                        </div>
+                        <h3>AI Automation Starter Kit</h3>
+                        <p>Get started with AI automation using this comprehensive starter kit with templates and examples.</p>
+                        <div class="resource-meta">
+                            <span><i class="bi bi-file-earmark-pdf"></i> PDF</span>
+                            <span><i class="bi bi-clock"></i> 25 min read</span>
+                        </div>
+                        <button class="btn btn-outline-primary download-btn" data-resource="ai-starter">
+                            <i class="bi bi-download"></i> Download Free
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- n8n Workflows Resources -->
+                <div class="col-lg-4 col-md-6 resource-item" data-category="n8n" data-aos="fade-up" data-aos-delay="500">
+                    <div class="resource-card glass-card">
+                        <div class="resource-icon">
+                            <i class="bi bi-diagram-3"></i>
+                        </div>
+                        <h3>n8n Workflow Templates</h3>
+                        <p>Collection of ready-to-use n8n workflow templates for common automation tasks.</p>
+                        <div class="resource-meta">
+                            <span><i class="bi bi-file-earmark-pdf"></i> PDF</span>
+                            <span><i class="bi bi-clock"></i> 30 min read</span>
+                        </div>
+                        <button class="btn btn-outline-primary download-btn" data-resource="n8n-templates">
+                            <i class="bi bi-download"></i> Download Free
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Bitcoin SIP Resources -->
+                <div class="col-lg-4 col-md-6 resource-item" data-category="bitcoin" data-aos="fade-up" data-aos-delay="600">
+                    <div class="resource-card glass-card">
+                        <div class="resource-icon">
+                            <i class="bi bi-currency-bitcoin"></i>
+                        </div>
+                        <h3>Bitcoin SIP Guide</h3>
+                        <p>Complete guide to Bitcoin SIP (Systematic Investment Plan) strategy for long-term wealth building.</p>
+                        <div class="resource-meta">
+                            <span><i class="bi bi-file-earmark-pdf"></i> PDF</span>
+                            <span><i class="bi bi-clock"></i> 20 min read</span>
+                        </div>
+                        <button class="btn btn-outline-primary download-btn" data-resource="bitcoin-sip">
+                            <i class="bi bi-download"></i> Download Free
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Download Modal -->
+    <div class="modal fade" id="downloadModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Download Resource</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="downloadForm">
+                        <div class="form-group">
+                            <label for="downloadName">Name *</label>
+                            <input type="text" class="form-control" id="downloadName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="downloadEmail">Email *</label>
+                            <input type="email" class="form-control" id="downloadEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="downloadPhone">Phone</label>
+                            <input type="tel" class="form-control" id="downloadPhone" placeholder="+91 XXXXX XXXXX">
+                        </div>
+                        <input type="hidden" id="resourceId">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmDownload">Download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="cta-content glass-card" data-aos="fade-up">
+                        <h2>Want More Advanced Resources?</h2>
+                        <p>Join our premium courses for in-depth training and exclusive resources</p>
+                        <a href="courses.html" class="btn btn-primary btn-lg">Explore Courses</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand">
+                        <a href="index.html">
+                            <i class="bi bi-robot"></i>
+                            <span>PARAMCGWALA</span><span class="accent">BOTS</span>
+                        </a>
+                        <p>AI Automation, Trading Bots & Digital Solutions for Modern Traders and Businesses.</p>
+                        <div class="footer-social">
+                            <a href="https://wa.me/919617422068" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                            <a href="https://www.youtube.com/shorts/gkRGRU7svdE" target="_blank"><i class="bi bi-youtube"></i></a>
+                            <a href="https://t.me/param275" target="_blank"><i class="bi bi-telegram"></i></a>
+                            <a href="https://www.instagram.com/paramcgwala023/" target="_blank"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=61590147527192" target="_blank"><i class="bi bi-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="courses.html">Courses</a></li>
+                            <li><a href="bots.html">Trading Bots</a></li>
+                            <li><a href="ai-automation.html">AI Automation</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="resources.html">Free Resources</a></li>
+                            <li><a href="bitcoin-sip.html">Bitcoin SIP</a></li>
+                            <li><a href="testimonials.html">Testimonials</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Courses</h4>
+                        <ul>
+                            <li><a href="courses.html">Forex Trading</a></li>
+                            <li><a href="courses.html">AI Automation</a></li>
+                            <li><a href="courses.html">n8n Masterclass</a></li>
+                            <li><a href="courses.html">Risk Management</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><i class="bi bi-whatsapp"></i> +91 9617422068</li>
+                            <li><i class="bi bi-envelope"></i> Paramcgwala@gmail.com</li>
+                            <li><i class="bi bi-geo-alt"></i> Bhilai, India</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-bottom">
+                        <p>&copy; 2024 PARAMCGWALABOTS. All rights reserved.</p>
+                        <div class="footer-bottom-links">
+                            <a href="admin.html" class="admin-link"><i class="bi bi-gear"></i> Admin</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Swiper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    
+    <!-- Premium Animations JS -->
+    <script src="js/premium-animations.js"></script>
+</body>
+</html>

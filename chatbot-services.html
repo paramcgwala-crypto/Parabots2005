@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Chatbot Services | PARAMCGWALABOTS - AI Chatbot Development</title>
+    <meta name="description" content="Custom AI chatbot development services for businesses. WhatsApp, Telegram, website chatbots with n8n automation integration.">
+    <meta name="keywords" content="chatbot services, AI chatbot development, WhatsApp bot, Telegram bot, n8n chatbot, PARAMCGWALABOTS">
+    <meta name="author" content="PARAMCGWALABOTS">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Chatbot Services | PARAMCGWALABOTS">
+    <meta property="og:description" content="Custom AI chatbot development services for businesses.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://paramcgwalabots.com/chatbot-services.html">
+    <meta property="og:image" content="https://paramcgwalabots.com/assets/og-image.jpg">
+    <meta property="og:site_name" content="PARAMCGWALABOTS">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Chatbot Services | PARAMCGWALABOTS">
+    <meta name="twitter:description" content="Custom AI chatbot development services for businesses.">
+    <meta name="twitter:site" content="@paramcgwala023">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    
+    <!-- GSAP CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="loaded">
+    
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">PARAMCGWALABOTS</div>
+        <div class="loading-bar"></div>
+        <div class="loading-text">LOADING...</div>
+    </div>
+    
+    <!-- Mouse Follow Glow -->
+    <div class="mouse-glow" id="mouseGlow"></div>
+    
+    <!-- Floating Particles Container -->
+    <div class="particles-container" id="particlesContainer"></div>
+    
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+    
+    <!-- AI Chatbot Button -->
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <i class="bi bi-chat-dots"></i>
+    </button>
+    
+    <!-- Sticky WhatsApp Button -->
+    <a href="https://wa.me/919617422068" target="_blank" class="whatsapp-float">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    
+    <!-- AI Chatbot Window -->
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <i class="bi bi-robot"></i>
+                <span>PARAMCGWALA AI Assistant</span>
+            </div>
+            <button class="chatbot-close" id="chatbotClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chat-message bot">
+                <div class="message-content">
+                    <p>Hello! I'm your AI assistant. How can I help you today?</p>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input-area">
+            <div class="input-wrapper">
+                <input type="text" id="chatbotInput" placeholder="Type your message...">
+                <button id="chatbotSend">
+                    <i class="bi bi-send"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-robot"></i>
+                <span>PARAMCGWALA</span><span class="accent">BOTS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="courses.html">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bots.html">Trading Bots</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ai-automation.html">AI Automation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resources.html">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bitcoin-sip.html">Bitcoin SIP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <a href="#contact" class="btn btn-primary btn-cta">Get Started</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-header-content" data-aos="fade-up">
+                        <h1>Chatbot Services</h1>
+                        <p>Custom AI Chatbot Development & Integration</p>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active">Chatbot Services</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">Our Services</span>
+                        <h2>AI Chatbot Solutions</h2>
+                        <p>Custom chatbot development for all platforms</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card glass-card premium-card">
+                        <div class="service-icon">
+                            <i class="bi bi-chat-dots"></i>
+                        </div>
+                        <h3>Website Chatbots</h3>
+                        <p>Engage website visitors with intelligent chatbots that provide instant support and capture leads.</p>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Live Chat Integration</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Lead Capture</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 24/7 Support</li>
+                        </ul>
+                        <a href="contact.html" class="btn btn-outline-primary">
+                            <i class="bi bi-info-circle"></i> Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card glass-card premium-card">
+                        <div class="service-icon">
+                            <i class="bi bi-whatsapp"></i>
+                        </div>
+                        <h3>WhatsApp Chatbots</h3>
+                        <p>Automate customer communication on WhatsApp with intelligent bots for marketing and support.</p>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> WhatsApp Business API</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Bulk Messaging</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Auto Replies</li>
+                        </ul>
+                        <a href="contact.html" class="btn btn-outline-primary">
+                            <i class="bi bi-info-circle"></i> Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card glass-card premium-card">
+                        <div class="service-icon">
+                            <i class="bi bi-telegram"></i>
+                        </div>
+                        <h3>Telegram Chatbots</h3>
+                        <p>Build powerful Telegram bots for communities, customer support, and automation.</p>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Group Management</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Payment Integration</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Custom Commands</li>
+                        </ul>
+                        <a href="contact.html" class="btn btn-outline-primary">
+                            <i class="bi bi-info-circle"></i> Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">Why Choose Us</span>
+                        <h2>Advanced Chatbot Features</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-item glass-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-cpu"></i>
+                        </div>
+                        <h3>AI-Powered</h3>
+                        <p>Leverage advanced AI and NLP for natural, intelligent conversations.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-item glass-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-diagram-3"></i>
+                        </div>
+                        <h3>n8n Integration</h3>
+                        <p>Seamlessly connect with your existing tools and workflows.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-item glass-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-translate"></i>
+                        </div>
+                        <h3>Multi-Language</h3>
+                        <p>Support multiple languages to reach a global audience.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-item glass-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h3>Analytics Dashboard</h3>
+                        <p>Track performance with comprehensive analytics and reporting.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="cta-content glass-card" data-aos="fade-up">
+                        <h2>Ready to Build Your Chatbot?</h2>
+                        <p>Contact us to discuss your chatbot development needs</p>
+                        <a href="contact.html" class="btn btn-primary btn-lg">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand">
+                        <a href="index.html">
+                            <i class="bi bi-robot"></i>
+                            <span>PARAMCGWALA</span><span class="accent">BOTS</span>
+                        </a>
+                        <p>AI Automation, Trading Bots & Digital Solutions for Modern Traders and Businesses.</p>
+                        <div class="footer-social">
+                            <a href="https://wa.me/919617422068" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                            <a href="https://www.youtube.com/shorts/gkRGRU7svdE" target="_blank"><i class="bi bi-youtube"></i></a>
+                            <a href="https://t.me/param275" target="_blank"><i class="bi bi-telegram"></i></a>
+                            <a href="https://www.instagram.com/paramcgwala023/" target="_blank"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=61590147527192" target="_blank"><i class="bi bi-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="courses.html">Courses</a></li>
+                            <li><a href="bots.html">Trading Bots</a></li>
+                            <li><a href="ai-automation.html">AI Automation</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="resources.html">Free Resources</a></li>
+                            <li><a href="bitcoin-sip.html">Bitcoin SIP</a></li>
+                            <li><a href="testimonials.html">Testimonials</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Courses</h4>
+                        <ul>
+                            <li><a href="courses.html">Forex Trading</a></li>
+                            <li><a href="courses.html">AI Automation</a></li>
+                            <li><a href="courses.html">n8n Masterclass</a></li>
+                            <li><a href="courses.html">Risk Management</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><i class="bi bi-whatsapp"></i> +91 9617422068</li>
+                            <li><i class="bi bi-envelope"></i> Paramcgwala@gmail.com</li>
+                            <li><i class="bi bi-geo-alt"></i> Bhilai, India</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-bottom">
+                        <p>&copy; 2024 PARAMCGWALABOTS. All rights reserved.</p>
+                        <div class="footer-bottom-links">
+                            <a href="admin.html" class="admin-link"><i class="bi bi-gear"></i> Admin</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Swiper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    
+    <!-- Premium Animations JS -->
+    <script src="js/premium-animations.js"></script>
+</body>
+</html>

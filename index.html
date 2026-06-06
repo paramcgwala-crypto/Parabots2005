@@ -32,6 +32,38 @@
     <meta name="twitter:description" content="Professional trading bot courses and ready-to-use AI trading bots designed for modern traders.">
     <meta name="twitter:site" content="@paramcgwala023">
     
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "PARAMCGWALABOTS",
+        "url": "https://paramcgwalabots.com",
+        "logo": "https://paramcgwalabots.com/assets/logo.png",
+        "description": "AI Automation, Trading Bots & Digital Solutions for Modern Traders and Businesses",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+91 9617422068",
+            "contactType": "customer service",
+            "email": "Paramcgwala@gmail.com",
+            "availableLanguage": "English"
+        },
+        "sameAs": [
+            "https://wa.me/919617422068",
+            "https://www.youtube.com/shorts/gkRGRU7svdE",
+            "https://t.me/param275",
+            "https://www.instagram.com/paramcgwala023/",
+            "https://www.facebook.com/profile.php?id=61590147527192"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "32 Akad Housing Board",
+            "addressLocality": "Bhilai",
+            "addressCountry": "India"
+        }
+    }
+    </script>
+    
     <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -48,13 +80,29 @@
     <!-- Swiper.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
     
+    <!-- GSAP CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.css">
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="loaded">
     
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">PARAMCGWALABOTS</div>
+        <div class="loading-bar"></div>
+        <div class="loading-text">LOADING...</div>
+    </div>
+    
+    <!-- Mouse Follow Glow -->
+    <div class="mouse-glow" id="mouseGlow"></div>
+    
+    <!-- Floating Particles Container -->
+    <div class="particles-container" id="particlesContainer"></div>
+    
     <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scrollProgress"></div>git push -u origin main
+    <div class="scroll-progress" id="scrollProgress"></div>
     
     
     <!-- Back To Top Button -->
@@ -66,6 +114,11 @@
     <button class="chatbot-toggle" id="chatbotToggle">
         <i class="bi bi-chat-dots"></i>
     </button>
+    
+    <!-- Sticky WhatsApp Button -->
+    <a href="https://wa.me/919617422068" target="_blank" class="whatsapp-float">
+        <i class="bi bi-whatsapp"></i>
+    </a>
     
     <!-- AI Chatbot Window -->
     <div class="chatbot-window" id="chatbotWindow">
@@ -109,53 +162,105 @@
                         <a class="nav-link active" href="#home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                        <a class="nav-link" href="courses.html">Courses</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#services">Services</a>
+                        <a class="nav-link" href="bots.html">Trading Bots</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#bots">Bots</a>
+                        <a class="nav-link" href="ai-automation.html">AI Automation</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#courses">Courses</a>
+                        <a class="nav-link" href="resources.html">Resources</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                        <a class="nav-link" href="bitcoin-sip.html">Bitcoin SIP</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="market-intelligence.html">Market Intelligence</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                 </ul>
-                <a href="#courses" class="btn btn-primary btn-cta">Get Started</a>
+                <a href="courses.html" class="btn btn-primary btn-cta">Get Started</a>
             </div>
         </div>
     </nav>
     
     <!-- Hero Section -->
     <section class="hero-section" id="home">
+        <div class="hero-bg-gradient"></div>
+        <div class="hero-floating-elements">
+            <div class="floating-element floating-1"></div>
+            <div class="floating-element floating-2"></div>
+            <div class="floating-element floating-3"></div>
+            <div class="floating-element floating-4"></div>
+        </div>
         <div class="container">
             <div class="row align-items-center min-vh-100">
-                <div class="col-lg-6">
-                    <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
-                        <span class="hero-badge">
+                <div class="col-lg-5">
+                    <div class="founder-section" data-aos="fade-right" data-aos-duration="1000">
+                        <div class="founder-image-container">
+                            <div class="founder-glow"></div>
+                            <div class="founder-frame">
+                                <div class="founder-image">
+                                    <img src="assets/founder.jpg" alt="Param - Founder of PARAMCGWALABOTS" loading="lazy" onerror="this.src='https://via.placeholder.com/400x500/0b0f19/00F5D4?text=Param'">
+                                </div>
+                                <div class="founder-badge badge-premium">
+                                    <i class="bi bi-award-fill"></i>
+                                    <span>Founder</span>
+                                </div>
+                            </div>
+                            <div class="founder-stats">
+                                <div class="stat-item">
+                                    <div class="stat-number counter-animate" data-count="150">0</div>
+                                    <div class="stat-label">AI Automations Built</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number counter-animate" data-count="50">0</div>
+                                    <div class="stat-label">Trading Bot Solutions</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number counter-animate" data-count="500">0</div>
+                                    <div class="stat-label">Students Trained</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number counter-animate" data-count="24">0</div>
+                                    <div class="stat-label">Client Support</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="hero-content" data-aos="fade-left" data-aos-duration="1000">
+                        <span class="hero-badge badge-premium">
                             <i class="bi bi-stars"></i>
-                            #1 Trading Automation Platform
+                            AI Automation & Trading Education
                         </span>
-                        <h1 class="hero-title">
-                            <span class="typing-text"></span>
+                        <h1 class="hero-title gradient-text-animated">
+                            AI Automation, Trading Bots & Digital Solutions
                         </h1>
                         <p class="hero-subtitle">
-                            Professional Trading Bot Courses and Ready-to-Use AI Trading Bots Designed for Modern Traders by PARAMCGWALABOTS.
+                            I help traders and businesses automate workflows, build AI systems, deploy trading bots, and scale using automation.
                         </p>
                         <div class="hero-buttons">
-                            <a href="#bots" class="btn btn-primary btn-lg">
-                                <i class="bi bi-robot"></i>
-                                Explore Bots
-                            </a>
-                            <a href="#courses" class="btn btn-outline-light btn-lg">
+                            <a href="courses.html" class="btn btn-premium btn-lg magnetic-btn">
                                 <i class="bi bi-mortarboard"></i>
-                                Join Course
+                                Explore Courses
+                            </a>
+                            <a href="bots.html" class="btn btn-outline-light btn-lg magnetic-btn">
+                                <i class="bi bi-robot"></i>
+                                View Trading Bots
+                            </a>
+                            <a href="contact.html" class="btn btn-gradient btn-lg magnetic-btn">
+                                <i class="bi bi-calendar-check"></i>
+                                Book Consultation
+                            </a>
+                            <a href="https://wa.me/919617422068" target="_blank" class="btn btn-success btn-lg magnetic-btn">
+                                <i class="bi bi-whatsapp"></i>
+                                Join WhatsApp
                             </a>
                         </div>
                         <div class="hero-features">
@@ -171,60 +276,48 @@
                                 <i class="bi bi-check-circle-fill"></i>
                                 <span>AI-Powered</span>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="hero-visual" data-aos="fade-left" data-aos-duration="1000">
-                        <div class="dashboard-mockup glass-card">
-                            <div class="dashboard-header">
-                                <div class="dashboard-title">
-                                    <i class="bi bi-graph-up-arrow"></i>
-                                    Live Trading Dashboard
-                                </div>
-                                <div class="dashboard-status">
-                                    <span class="status-dot"></span>
-                                    Active
-                                </div>
+                            <div class="feature-item">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>Instant Results</span>
                             </div>
-                            <div class="dashboard-stats">
-                                <div class="stat-card">
-                                    <div class="stat-label">Total Profit</div>
-                                    <div class="stat-value text-success">+$12,450.00</div>
-                                    <div class="stat-change">+24.5%</div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="stat-label">Win Rate</div>
-                                    <div class="stat-value text-primary">87.3%</div>
-                                    <div class="stat-change">+5.2%</div>
-                                </div>
-                                <div class="stat-card">
-                                    <div class="stat-label">Trades Today</div>
-                                    <div class="stat-value text-info">156</div>
-                                    <div class="stat-change">+12</div>
-                                </div>
-                            </div>
-                            <div class="dashboard-chart">
-                                <div class="chart-line"></div>
-                            </div>
-                        </div>
-                        <div class="floating-card card-1">
-                            <i class="bi bi-currency-dollar"></i>
-                            <span>$2.5M+ Generated</span>
-                        </div>
-                        <div class="floating-card card-2">
-                            <i class="bi bi-people"></i>
-                            <span>5000+ Active Users</span>
-                        </div>
-                        <div class="floating-card card-3">
-                            <i class="bi bi-shield-check"></i>
-                            <span>99.9% Uptime</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="hero-gradient"></div>
+    </section>
+
+    <!-- Founder Bio Section -->
+    <section class="founder-bio-section" id="founder">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="founder-bio glass-card" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="founder-bio-content">
+                            <h2>Meet Param</h2>
+                            <p>Founder of PARAMCGWALABOTS. Helping people learn AI Automation, Trading Bots, n8n Workflows, Forex Education, and Digital Business Systems.</p>
+                            <div class="founder-social">
+                                <a href="https://wa.me/919617422068" target="_blank" class="social-link">
+                                    <i class="bi bi-whatsapp"></i>
+                                </a>
+                                <a href="https://www.youtube.com/shorts/gkRGRU7svdE" target="_blank" class="social-link">
+                                    <i class="bi bi-youtube"></i>
+                                </a>
+                                <a href="https://t.me/param275" target="_blank" class="social-link">
+                                    <i class="bi bi-telegram"></i>
+                                </a>
+                                <a href="https://www.instagram.com/paramcgwala023/" target="_blank" class="social-link">
+                                    <i class="bi bi-instagram"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/jobs/" target="_blank" class="social-link">
+                                    <i class="bi bi-linkedin"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     
     <!-- Trust Section -->
@@ -673,6 +766,201 @@
         </div>
     </section>
     
+    <!-- Market Intelligence Hub Section -->
+    <section class="market-intelligence-section" id="market-intelligence">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header text-center" data-aos="fade-up">
+                        <span class="section-badge">Market Intelligence</span>
+                        <h2 class="section-title">Premium Market Intelligence Hub</h2>
+                        <p class="section-text">Access real-time market data, news, and analysis from premium sources</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Forex News Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="intelligence-header" data-aos="fade-up">
+                        <div class="intelligence-icon">
+                            <i class="bi bi-currency-dollar"></i>
+                        </div>
+                        <h3 class="intelligence-title">Forex News</h3>
+                        <a href="market-intelligence.html" class="intelligence-link">
+                            View All <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <a href="https://www.forexfactory.com/" target="_blank" class="intelligence-card forex-card glass-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-icon">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h4>Forex Factory</h4>
+                        <p>Economic Calendar • High Impact News</p>
+                        <div class="card-features">
+                            <span><i class="bi bi-check-circle-fill"></i> Economic Calendar</span>
+                            <span><i class="bi bi-check-circle-fill"></i> High Impact News</span>
+                        </div>
+                        <div class="card-action">
+                            <span>Visit Site</span>
+                            <i class="bi bi-box-arrow-up-right"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="https://www.investing.com/" target="_blank" class="intelligence-card investing-card glass-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-icon">
+                            <i class="bi bi-bar-chart-line"></i>
+                        </div>
+                        <h4>Investing.com</h4>
+                        <p>Live Market News • Forex • Commodities</p>
+                        <div class="card-features">
+                            <span><i class="bi bi-check-circle-fill"></i> Live Market News</span>
+                            <span><i class="bi bi-check-circle-fill"></i> Market Analysis</span>
+                        </div>
+                        <div class="card-action">
+                            <span>Visit Site</span>
+                            <i class="bi bi-box-arrow-up-right"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="https://www.fxstreet.com/" target="_blank" class="intelligence-card fxstreet-card glass-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-icon">
+                            <i class="bi bi-lightning"></i>
+                        </div>
+                        <h4>FXStreet</h4>
+                        <p>Real-time Forex News • Analysis</p>
+                        <div class="card-features">
+                            <span><i class="bi bi-check-circle-fill"></i> Real-time News</span>
+                            <span><i class="bi bi-check-circle-fill"></i> Technical Analysis</span>
+                        </div>
+                        <div class="card-action">
+                            <span>Visit Site</span>
+                            <i class="bi bi-box-arrow-up-right"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="https://www.myfxbook.com/calendar" target="_blank" class="intelligence-card myfxbook-card glass-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card-icon">
+                            <i class="bi bi-calendar-event"></i>
+                        </div>
+                        <h4>Myfxbook Calendar</h4>
+                        <p>Economic Calendar • Trading Tools</p>
+                        <div class="card-features">
+                            <span><i class="bi bi-check-circle-fill"></i> Economic Calendar</span>
+                            <span><i class="bi bi-check-circle-fill"></i> Trading Tools</span>
+                        </div>
+                        <div class="card-action">
+                            <span>Visit Site</span>
+                            <i class="bi bi-box-arrow-up-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Crypto News Section -->
+            <div class="row mt-5 mb-3">
+                <div class="col-12">
+                    <div class="intelligence-header" data-aos="fade-up">
+                        <div class="intelligence-icon crypto-icon">
+                            <i class="bi bi-currency-bitcoin"></i>
+                        </div>
+                        <h3 class="intelligence-title">Crypto News</h3>
+                        <a href="market-intelligence.html" class="intelligence-link">
+                            View All <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-2-4 col-md-4 col-sm-6">
+                    <a href="https://coinmarketcap.com/" target="_blank" class="intelligence-card crypto-card coinmarketcap-card glass-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-icon">
+                            <i class="bi bi-pie-chart"></i>
+                        </div>
+                        <h4>CoinMarketCap</h4>
+                        <div class="card-action">
+                            <span>Visit Site</span>
+                            <i class="bi bi-box-arrow-up-right"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2-4 col-md-4 col-sm-6">
+                    <a href="https://www.coindesk.com/" target="_blank" class="intelligence-card crypto-card coindesk-card glass-card" data-aos="fade-up" data-aos-delay="50">
+                        <div class="card-icon">
+                            <i class="bi bi-newspaper"></i>
+                        </div>
+                        <h4>CoinDesk</h4>
+                        <div class="card-action">
+                            <span>Visit Site</span>
+                            <i class="bi bi-box-arrow-up-right"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2-4 col-md-4 col-sm-6">
+                    <a href="https://cointelegraph.com/" target="_blank" class="intelligence-card crypto-card cointelegraph-card glass-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-icon">
+                            <i class="bi bi-broadcast"></i>
+                        </div>
+                        <h4>Cointelegraph</h4>
+                        <div class="card-action">
+                            <span>Visit Site</span>
+                            <i class="bi bi-box-arrow-up-right"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2-4 col-md-4 col-sm-6">
+                    <a href="https://cryptopanic.com/" target="_blank" class="intelligence-card crypto-card cryptopanic-card glass-card" data-aos="fade-up" data-aos-delay="150">
+                        <div class="card-icon">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                        <h4>CryptoPanic</h4>
+                        <div class="card-action">
+                            <span>Visit Site</span>
+                            <i class="bi bi-box-arrow-up-right"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2-4 col-md-4 col-sm-6">
+                    <a href="https://www.tradingview.com/crypto/" target="_blank" class="intelligence-card crypto-card tradingview-card glass-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-icon">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h4>TradingView Crypto</h4>
+                        <div class="card-action">
+                            <span>Visit Site</span>
+                            <i class="bi bi-box-arrow-up-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- CTA Section -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="intelligence-cta glass-card" data-aos="fade-up">
+                        <div class="cta-content">
+                            <h3>Access Full Trader Command Center</h3>
+                            <p>Get comprehensive market intelligence with advanced tools, calculators, and real-time data</p>
+                            <a href="market-intelligence.html" class="btn btn-premium btn-lg magnetic-btn">
+                                <i class="bi bi-command"></i>
+                                Open Command Center
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- FAQ Section -->
     <section class="faq-section" id="faq">
         <div class="container">
@@ -913,11 +1201,11 @@
                             Empowering traders with cutting-edge AI automation and comprehensive education. Your journey to automated trading success starts here.
                         </p>
                         <div class="social-links">
-                            <a href="https://www.facebook.com/profile.php?id=61590147527192" target="_blank"><i class="bi bi-facebook"></i></a>
-                            <a href="https://web.telegram.org/k/" target="_blank"><i class="bi bi-twitter-x"></i></a>
-                            <a href="https://www.linkedin.com/jobs/" target="_blank"><i class="bi bi-linkedin"></i></a>
-                            <a href="https://www.instagram.com/paramcgwala023/" target="_blank"><i class="bi bi-instagram"></i></a>
+                            <a href="https://wa.me/919617422068" target="_blank"><i class="bi bi-whatsapp"></i></a>
                             <a href="https://www.youtube.com/shorts/gkRGRU7svdE" target="_blank"><i class="bi bi-youtube"></i></a>
+                            <a href="https://t.me/param275" target="_blank"><i class="bi bi-telegram"></i></a>
+                            <a href="https://www.instagram.com/paramcgwala023/" target="_blank"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=61590147527192" target="_blank"><i class="bi bi-facebook"></i></a>
                         </div>
                     </div>
                 </div>
@@ -990,7 +1278,15 @@
     <!-- Swiper.js -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
     <!-- Custom JS -->
     <script src="js/script.js"></script>
+    
+    <!-- Premium Animations JS -->
+    <script src="js/premium-animations.js"></script>
 </body>
 </html>

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>SMC Trading Course | PARAMCGWALABOTS - Smart Money Concepts</title>
+    <meta name="description" content="Master SMC (Smart Money Concepts) trading with PARAMCGWALABOTS. Learn order blocks, liquidity, and market structure analysis.">
+    <meta name="keywords" content="SMC trading, smart money concepts, order blocks, liquidity, market structure, PARAMCGWALABOTS">
+    <meta name="author" content="PARAMCGWALABOTS">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="SMC Trading Course | PARAMCGWALABOTS">
+    <meta property="og:description" content="Master SMC Smart Money Concepts and institutional trading strategies.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://paramcgwalabots.com/smc-course.html">
+    <meta property="og:image" content="https://paramcgwalabots.com/assets/og-image.jpg">
+    <meta property="og:site_name" content="PARAMCGWALABOTS">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SMC Trading Course | PARAMCGWALABOTS">
+    <meta name="twitter:description" content="Master SMC Smart Money Concepts and institutional trading strategies.">
+    <meta name="twitter:site" content="@paramcgwala023">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    
+    <!-- GSAP CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="loaded">
+    
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">PARAMCGWALABOTS</div>
+        <div class="loading-bar"></div>
+        <div class="loading-text">LOADING...</div>
+    </div>
+    
+    <!-- Mouse Follow Glow -->
+    <div class="mouse-glow" id="mouseGlow"></div>
+    
+    <!-- Floating Particles Container -->
+    <div class="particles-container" id="particlesContainer"></div>
+    
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+    
+    <!-- AI Chatbot Button -->
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <i class="bi bi-chat-dots"></i>
+    </button>
+    
+    <!-- Sticky WhatsApp Button -->
+    <a href="https://wa.me/919617422068" target="_blank" class="whatsapp-float">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    
+    <!-- AI Chatbot Window -->
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <i class="bi bi-robot"></i>
+                <span>PARAMCGWALA AI Assistant</span>
+            </div>
+            <button class="chatbot-close" id="chatbotClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chat-message bot">
+                <div class="message-content">
+                    <p>Hello! I'm your AI assistant. How can I help you today?</p>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input-area">
+            <div class="input-wrapper">
+                <input type="text" id="chatbotInput" placeholder="Type your message...">
+                <button id="chatbotSend">
+                    <i class="bi bi-send"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-robot"></i>
+                <span>PARAMCGWALA</span><span class="accent">BOTS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="courses.html">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bots.html">Trading Bots</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ai-automation.html">AI Automation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resources.html">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bitcoin-sip.html">Bitcoin SIP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <a href="#pricing" class="btn btn-primary btn-cta">Enroll Now</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Course Hero Section -->
+    <section class="course-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <div class="course-hero-content">
+                        <span class="course-badge badge-premium">Advanced</span>
+                        <h1>SMC Trading Masterclass</h1>
+                        <p>Master Smart Money Concepts including order blocks, liquidity, market structure, and institutional trading strategies used by professional traders.</p>
+                        <div class="course-meta">
+                            <span><i class="bi bi-clock"></i> 12 Weeks</span>
+                            <span><i class="bi bi-person-video"></i> 70+ Video Lessons</span>
+                            <span><i class="bi bi-trophy"></i> Certificate</span>
+                            <span><i class="bi bi-people"></i> 1,500+ Students</span>
+                        </div>
+                        <div class="course-actions">
+                            <a href="#pricing" class="btn btn-primary btn-lg">
+                                <i class="bi bi-cart"></i> Enroll Now
+                            </a>
+                            <a href="#curriculum" class="btn btn-outline-primary btn-lg">
+                                <i class="bi bi-list"></i> View Curriculum
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-left">
+                    <div class="course-preview glass-card">
+                        <div class="preview-video">
+                            <i class="bi bi-play-circle"></i>
+                        </div>
+                        <div class="preview-info">
+                            <h3>Course Preview</h3>
+                            <p>Watch a free preview of SMC trading strategies and concepts.</p>
+                            <a href="#" class="btn btn-outline-primary">
+                                <i class="bi bi-play"></i> Watch Preview
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- What You'll Learn Section -->
+    <section class="learn-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">Course Content</span>
+                        <h2>What You'll Learn</h2>
+                        <p>Advanced Smart Money Concepts for professional trading</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="learn-item glass-card">
+                        <div class="learn-icon">
+                            <i class="bi bi-diagram-3"></i>
+                        </div>
+                        <h3>Market Structure</h3>
+                        <p>Deep dive into market structure, trend analysis, and institutional order flow.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="learn-item glass-card">
+                        <div class="learn-icon">
+                            <i class="bi bi-box"></i>
+                        </div>
+                        <h3>Order Blocks</h3>
+                        <p>Master bullish and bearish order blocks for precise entry and exit points.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="learn-item glass-card">
+                        <div class="learn-icon">
+                            <i class="bi bi-droplet"></i>
+                        </div>
+                        <h3>Liquidity Concepts</h3>
+                        <p>Understand liquidity pools, sweeps, and how institutions manipulate price.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="learn-item glass-card">
+                        <div class="learn-icon">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h3>Imbalances (FVG)</h3>
+                        <p>Trade fair value gaps and price imbalances like institutional traders.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Curriculum Section -->
+    <section class="curriculum-section" id="curriculum">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">Detailed Curriculum</span>
+                        <h2>Course Curriculum</h2>
+                        <p>12 weeks of comprehensive SMC trading education</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="accordion" id="curriculumAccordion">
+                        <div class="accordion-item glass-card" data-aos="fade-up" data-aos-delay="100">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#week1">
+                                    <span class="week-number">Week 1</span>
+                                    <span class="week-title">SMC Fundamentals</span>
+                                    <span class="lesson-count">6 Lessons</span>
+                                </button>
+                            </h2>
+                            <div id="week1" class="accordion-collapse collapse show" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="curriculum-list">
+                                        <li><i class="bi bi-play-circle"></i> Introduction to SMC</li>
+                                        <li><i class="bi bi-play-circle"></i> Market Structure Basics</li>
+                                        <li><i class="bi bi-play-circle"></i> Liquidity Fundamentals</li>
+                                        <li><i class="bi bi-play-circle"></i> Order Block Theory</li>
+                                        <li><i class="bi bi-play-circle"></i> Setting Up SMC Charts</li>
+                                        <li><i class="bi bi-play-circle"></i> Practice Exercises</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item glass-card" data-aos="fade-up" data-aos-delay="200">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#week2">
+                                    <span class="week-number">Week 2</span>
+                                    <span class="week-title">Order Blocks Deep Dive</span>
+                                    <span class="lesson-count">8 Lessons</span>
+                                </button>
+                            </h2>
+                            <div id="week2" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="curriculum-list">
+                                        <li><i class="bi bi-play-circle"></i> Bullish Order Blocks</li>
+                                        <li><i class="bi bi-play-circle"></i> Bearish Order Blocks</li>
+                                        <li><i class="bi bi-play-circle"></i> OB Identification Techniques</li>
+                                        <li><i class="bi bi-play-circle"></i> OB Mitigation & Re-tests</li>
+                                        <li><i class="bi bi-play-circle"></i> OB with FVG Confluence</li>
+                                        <li><i class="bi bi-play-circle"></i> Multiple OB Analysis</li>
+                                        <li><i class="bi bi-play-circle"></i> OB Trading Strategies</li>
+                                        <li><i class="bi bi-play-circle"></i> Live Trading Examples</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item glass-card" data-aos="fade-up" data-aos-delay="300">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#week3">
+                                    <span class="week-number">Week 3</span>
+                                    <span class="week-title">Liquidity Analysis</span>
+                                    <span class="lesson-count">7 Lessons</span>
+                                </button>
+                            </h2>
+                            <div id="week3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="curriculum-list">
+                                        <li><i class="bi bi-play-circle"></i> Buy/Side Liquidity</li>
+                                        <li><i class="bi bi-play-circle"></i> Sell/Side Liquidity</li>
+                                        <li><i class="bi bi-play-circle"></i> Liquidity Sweeps</li>
+                                        <li><i class="bi bi-play-circle"></i> Liquidity Pools</li>
+                                        <li><i class="bi bi-play-circle"></i> Stop Hunt Identification</li>
+                                        <li><i class="bi bi-play-circle"></i> Liquidity Mapping</li>
+                                        <li><i class="bi bi-play-circle"></i> Live Trading Examples</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item glass-card" data-aos="fade-up" data-aos-delay="400">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#week4">
+                                    <span class="week-number">Week 4</span>
+                                    <span class="week-title">Fair Value Gaps</span>
+                                    <span class="lesson-count">6 Lessons</span>
+                                </button>
+                            </h2>
+                            <div id="week4" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="curriculum-list">
+                                        <li><i class="bi bi-play-circle"></i> Understanding FVGs</li>
+                                        <li><i class="bi bi-play-circle"></i> Bullish & Bearish FVGs</li>
+                                        <li><i class="bi bi-play-circle"></i> FVG Confluence Analysis</li>
+                                        <li><i class="bi bi-play-circle"></i> Trading FVG Retracements</li>
+                                        <li><i class="bi bi-play-circle"></i> FVG with Order Blocks</li>
+                                        <li><i class="bi bi-play-circle"></i> Live Trading Examples</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-badge">Pricing</span>
+                        <h2>Choose Your Plan</h2>
+                        <p>Flexible pricing options to suit your learning needs</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="pricing-card glass-card">
+                        <div class="pricing-header">
+                            <h3>Basic</h3>
+                            <div class="price">
+                                <span class="amount">$349</span>
+                                <span class="period">/one-time</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> 70+ Video Lessons</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Course Materials</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Community Access</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Email Support</li>
+                            <li class="disabled"><i class="bi bi-x-circle"></i> Live Trading Sessions</li>
+                            <li class="disabled"><i class="bi bi-x-circle"></i> 1-on-1 Mentorship</li>
+                        </ul>
+                        <a href="https://wa.me/919617422068" target="_blank" class="btn btn-outline-primary">
+                            Get Started
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pricing-card glass-card premium">
+                        <div class="pricing-badge">Most Popular</div>
+                        <div class="pricing-header">
+                            <h3>Pro</h3>
+                            <div class="price">
+                                <span class="amount">$549</span>
+                                <span class="period">/one-time</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Everything in Basic</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Live Trading Sessions</li>
+                            <li><i class="bi bi-check-circle-fill"></i> SMC Indicators</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Priority Support</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Certificate of Completion</li>
+                            <li class="disabled"><i class="bi bi-x-circle"></i> 1-on-1 Mentorship</li>
+                        </ul>
+                        <a href="https://wa.me/919617422068" target="_blank" class="btn btn-primary">
+                            Get Started
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="pricing-card glass-card">
+                        <div class="pricing-header">
+                            <h3>Premium</h3>
+                            <div class="price">
+                                <span class="amount">$999</span>
+                                <span class="period">/one-time</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Everything in Pro</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 1-on-1 Mentorship</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Trading Bot Access</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Lifetime Updates</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Private Telegram Group</li>
+                            <li><i class="bi bi-check-circle-fill"></i> VIP Support</li>
+                        </ul>
+                        <a href="https://wa.me/919617422068" target="_blank" class="btn btn-outline-primary">
+                            Get Started
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="cta-content glass-card" data-aos="fade-up">
+                        <h2>Ready to Master SMC Trading?</h2>
+                        <p>Join our SMC course and learn to trade with institutional precision</p>
+                        <a href="#pricing" class="btn btn-primary btn-lg">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand">
+                        <a href="index.html">
+                            <i class="bi bi-robot"></i>
+                            <span>PARAMCGWALA</span><span class="accent">BOTS</span>
+                        </a>
+                        <p>AI Automation, Trading Bots & Digital Solutions for Modern Traders and Businesses.</p>
+                        <div class="footer-social">
+                            <a href="https://wa.me/919617422068" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                            <a href="https://www.youtube.com/shorts/gkRGRU7svdE" target="_blank"><i class="bi bi-youtube"></i></a>
+                            <a href="https://t.me/param275" target="_blank"><i class="bi bi-telegram"></i></a>
+                            <a href="https://www.instagram.com/paramcgwala023/" target="_blank"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=61590147527192" target="_blank"><i class="bi bi-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="courses.html">Courses</a></li>
+                            <li><a href="bots.html">Trading Bots</a></li>
+                            <li><a href="ai-automation.html">AI Automation</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="resources.html">Free Resources</a></li>
+                            <li><a href="bitcoin-sip.html">Bitcoin SIP</a></li>
+                            <li><a href="testimonials.html">Testimonials</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Courses</h4>
+                        <ul>
+                            <li><a href="forex-course.html">Forex Trading</a></li>
+                            <li><a href="smc-course.html">SMC Concepts</a></li>
+                            <li><a href="courses.html">n8n Masterclass</a></li>
+                            <li><a href="courses.html">Risk Management</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><i class="bi bi-whatsapp"></i> +91 9617422068</li>
+                            <li><i class="bi bi-envelope"></i> Paramcgwala@gmail.com</li>
+                            <li><i class="bi bi-geo-alt"></i> Bhilai, India</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-bottom">
+                        <p>&copy; 2024 PARAMCGWALABOTS. All rights reserved.</p>
+                        <div class="footer-bottom-links">
+                            <a href="admin.html" class="admin-link"><i class="bi bi-gear"></i> Admin</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Swiper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    
+    <!-- Premium Animations JS -->
+    <script src="js/premium-animations.js"></script>
+</body>
+</html>

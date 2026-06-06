@@ -14,7 +14,35 @@ let pdfBase64 = '';
 document.addEventListener('DOMContentLoaded', function() {
     loadCourses();
     setupEventListeners();
+    setupTabNavigation();
 });
+
+// Setup Tab Navigation
+function setupTabNavigation() {
+    const tabLinks = document.querySelectorAll('.admin-sidebar .nav-link');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all links
+            tabLinks.forEach(l => l.classList.remove('active'));
+            // Add active class to clicked link
+            this.classList.add('active');
+            
+            // Hide all tab contents
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Show selected tab content
+            const tabId = this.getAttribute('data-tab');
+            const tabContent = document.getElementById(tabId + '-tab');
+            if (tabContent) {
+                tabContent.classList.add('active');
+            }
+        });
+    });
+}
 
 // Load Courses from localStorage or courses.json
 async function loadCourses() {
@@ -165,6 +193,8 @@ function openModal(course = null) {
         document.getElementById('coursePdfLink').value = course.pdfDownloadLink || '';
         document.getElementById('courseYoutubeLink').value = course.youtubePreviewLink || '';
         document.getElementById('courseTelegramLink').value = course.telegramGroupLink || '';
+        document.getElementById('courseWhatsappLink').value = course.whatsappLink || '';
+        document.getElementById('courseVideoLink').value = course.videoLink || '';
         document.getElementById('courseInstructor').value = course.instructorName || '';
         document.getElementById('courseStatus').value = course.status || 'Draft';
         document.getElementById('courseFeatures').value = course.features ? course.features.join('\n') : '';
@@ -219,6 +249,8 @@ function saveCourse() {
         pdfDownloadLink: document.getElementById('coursePdfLink').value.trim(),
         youtubePreviewLink: document.getElementById('courseYoutubeLink').value.trim(),
         telegramGroupLink: document.getElementById('courseTelegramLink').value.trim(),
+        whatsappLink: document.getElementById('courseWhatsappLink').value.trim(),
+        videoLink: document.getElementById('courseVideoLink').value.trim(),
         instructorName: document.getElementById('courseInstructor').value.trim(),
         status: document.getElementById('courseStatus').value,
         thumbnailBase64: thumbnailBase64,

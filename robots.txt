@@ -1,0 +1,15 @@
+# Robots.txt for PARAMCGWALABOTS
+
+User-agent: *
+Allow: /
+
+# Disallow admin panel from indexing
+Disallow: /admin.html
+
+# Disallow certain directories if any
+Disallow: /assets/
+Disallow: /css/
+Disallow: /js/
+
+# Sitemap location
+Sitemap: https://paramcgwalabots.com/sitemap.xml
