@@ -6,7 +6,7 @@
 const CONFIG = {
     // N8N Webhook URLs - Replace with your actual webhook URLs
     CONTACT_FORM_WEBHOOK: 'YOUR_N8N_CONTACT_FORM_WEBHOOK_URL_HERE',
-    CHATBOT_WEBHOOK: 'https://cgwala.app.n8n.cloud/webhook/c5b034c0-5e9c-414e-805c-ccf1642606a6/chat',
+    CHATBOT_WEBHOOK: 'https://cgwala.app.n8n.cloud/webhook/e48e3e76-31a9-4033-9d6f-ccec51586100/chat',
     COMPANY_NAME: 'PARAMCGWALABOTS',
     COMPANY_EMAIL: 'Paramcgwala@gmail.com',
     COMPANY_PHONE: '9617422068'
