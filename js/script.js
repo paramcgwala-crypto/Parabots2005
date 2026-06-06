@@ -469,11 +469,7 @@ function showTypingIndicator() {
     
     typingEl.innerHTML = `
         <div class="message-content">
-            <div class="chatbot-typing">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <p>AI is typing...</p>
         </div>
     `;
     
@@ -497,8 +493,8 @@ function removeTypingIndicator() {
  * Send message to N8N chatbot webhook with timeout and retry
  */
 async function sendChatMessage(message, retryCount = 0) {
-    const maxRetries = 2;
-    const timeout = 15000; // 15 seconds timeout
+    const maxRetries = 1; // Retry once
+    const timeout = 30000; // 30 seconds timeout
     
     console.log('🤖 Sending message to N8N webhook:', CONFIG.CHATBOT_WEBHOOK);
     console.log('📤 Request payload:', JSON.stringify({
@@ -540,43 +536,55 @@ async function sendChatMessage(message, retryCount = 0) {
         const contentType = response.headers.get('content-type');
         console.log('📄 Content-Type:', contentType);
         
-        let responseData;
+        let data;
         if (contentType && contentType.includes('application/json')) {
-            responseData = await response.json();
-            console.log('✅ JSON Response:', JSON.stringify(responseData, null, 2));
+            data = await response.json();
+            console.log("Webhook Response:", data);
         } else {
             // If not JSON, get text response
-            responseData = await response.text();
-            console.log('✅ Text Response:', responseData);
+            data = await response.text();
+            console.log('✅ Text Response:', data);
         }
 
-        // Handle different response formats
-        if (typeof responseData === 'string') {
-            return responseData;
-        } else if (responseData.response) {
-            return responseData.response;
-        } else if (responseData.message) {
-            return responseData.message;
-        } else if (responseData.output) {
-            return responseData.output;
-        } else if (responseData.text) {
-            return responseData.text;
-        } else if (Array.isArray(responseData) && responseData.length > 0) {
-            // If response is an array, join the items
-            return responseData.join('\n');
+        // Handle different response formats - prioritize data.response
+        if (typeof data === 'string') {
+            if (!data || data.trim() === '') {
+                throw new Error('Empty response from server');
+            }
+            return data;
+        } else if (data.response) {
+            if (!data.response || data.response.trim() === '') {
+                throw new Error('Empty response from server');
+            }
+            return data.response;
+        } else if (data.message) {
+            if (!data.message || data.message.trim() === '') {
+                throw new Error('Empty response from server');
+            }
+            return data.message;
+        } else if (data.output) {
+            if (!data.output || data.output.trim() === '') {
+                throw new Error('Empty response from server');
+            }
+            return data.output;
+        } else if (data.text) {
+            if (!data.text || data.text.trim() === '') {
+                throw new Error('Empty response from server');
+            }
+            return data.text;
+        } else if (Array.isArray(data) && data.length > 0) {
+            const joined = data.join('\n');
+            if (!joined || joined.trim() === '') {
+                throw new Error('Empty response from server');
+            }
+            return joined;
         } else {
-            // Return the entire object as string if nothing else matches
-            console.log('⚠️ Unexpected response format, returning as string');
-            return JSON.stringify(responseData);
+            throw new Error('Invalid response format from server');
         }
     } catch (error) {
-        console.error('❌ Error sending message to chatbot:', error);
-        console.error('❌ Error details:', {
-            message: error.message,
-            stack: error.stack
-        });
+        console.error("Chatbot Error:", error);
         
-        // Check if it's a timeout or connection error
+        // Check if it's a timeout error
         if (error.name === 'AbortError') {
             console.error('⏱️ Request timed out after', timeout, 'ms');
             if (retryCount < maxRetries) {
@@ -584,7 +592,7 @@ async function sendChatMessage(message, retryCount = 0) {
                 await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retry
                 return sendChatMessage(message, retryCount + 1);
             }
-            return 'The chatbot service is taking too long to respond. Please try again later.';
+            return "Sorry, I'm temporarily unavailable. Please try again.";
         }
         
         // Check if it's a network/connection error
@@ -598,17 +606,29 @@ async function sendChatMessage(message, retryCount = 0) {
                 await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retry
                 return sendChatMessage(message, retryCount + 1);
             }
-            return 'Unable to connect to the chatbot service. Please check your internet connection and try again.';
+            return "Sorry, I'm temporarily unavailable. Please try again.";
         }
         
-        // Generic error
+        // Check if it's an empty response error
+        if (error.message.includes('Empty response')) {
+            console.error('📭 Empty response from server');
+            return "Sorry, I'm temporarily unavailable. Please try again.";
+        }
+        
+        // Check if it's an invalid JSON error
+        if (error.message.includes('JSON') || error.message.includes('parse')) {
+            console.error('📄 Invalid JSON response');
+            return "Sorry, I'm temporarily unavailable. Please try again.";
+        }
+        
+        // Generic error - retry once
         if (retryCount < maxRetries) {
             console.log(`🔄 Retrying... (${retryCount + 1}/${maxRetries})`);
             await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retry
             return sendChatMessage(message, retryCount + 1);
         }
         
-        return `Error: ${error.message}. Please try again or contact us at ${CONFIG.COMPANY_EMAIL}`;
+        return "Sorry, I'm temporarily unavailable. Please try again.";
     }
 }
 
