@@ -3,7 +3,9 @@
 // ===================================
 
 // Register GSAP Plugins
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+if (typeof gsap !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+}
 
 // ===================================
 // Loading Screen Animation
@@ -404,15 +406,21 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize other animations after a short delay
     setTimeout(() => {
-        initMouseGlow();
-        initParticles();
-        initScrollAnimations();
-        initMagneticButtons();
-        initTiltCards();
-        initScrollReveal();
-        initSmoothScroll();
-        initPremiumCards();
-        initGradientText();
+        if (typeof gsap !== 'undefined') {
+            initMouseGlow();
+            initParticles();
+            initScrollAnimations();
+            initMagneticButtons();
+            initTiltCards();
+            initScrollReveal();
+            initSmoothScroll();
+            initPremiumCards();
+            initGradientText();
+        } else {
+            // Safe static initializers
+            initPremiumCards();
+            initGradientText();
+        }
     }, 100);
 });
 

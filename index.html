@@ -1978,15 +1978,8 @@
     <!-- Custom JS (Deferred) -->
     <script src="js/script.min.js" defer></script>
     
-    <!-- Premium Animations JS (Deferred - Load only on larger screens) -->
-    <script>
-        if (window.innerWidth > 768) {
-            const premiumAnimScript = document.createElement('script');
-            premiumAnimScript.src = 'js/premium-animations.js';
-            premiumAnimScript.defer = true;
-            document.body.appendChild(premiumAnimScript);
-        }
-    </script>
+    <!-- Premium Animations JS (Deferred) -->
+    <script src="js/premium-animations.js" defer></script>
     
     <!-- Supabase JS SDK (Deferred) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script>
