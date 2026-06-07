@@ -674,3 +674,821 @@ function filterPdfs() {
     
     renderPdfsTable(filtered);
 }
+
+// ===================================
+// Testimonials CRUD
+// ===================================
+let testimonials = [];
+let currentTestimonialId = null;
+let deleteTestimonialId = null;
+
+function loadTestimonials() {
+    try {
+        const stored = localStorage.getItem('paramcgwala_testimonials');
+        if (stored) {
+            testimonials = JSON.parse(stored);
+        } else {
+            testimonials = [
+                { id: 1, name: 'Rahul K.', role: 'Professional Trader', text: 'PARAMCGWALA completely changed the way I approach trading. The bots are incredibly accurate and the community support is unmatched.', rating: 5, initials: 'RK', result: '+127%', resultLabel: '6-month return', status: 'Published' },
+                { id: 2, name: 'Priya S.', role: 'Beginner Trader', text: 'I started with zero knowledge and now I am consistently profitable. The structured courses make complex concepts easy to understand.', rating: 5, initials: 'PS', result: '+89%', resultLabel: '3-month return', status: 'Published' },
+                { id: 3, name: 'Amit V.', role: 'Full-time Investor', text: 'The automation features save me hours every day. I can run my entire trading strategy on autopilot while focusing on analysis.', rating: 5, initials: 'AV', result: '+200%', resultLabel: 'Annual return', status: 'Published' },
+                { id: 4, name: 'Neha M.', role: 'Part-time Trader', text: 'Finally a platform that delivers on its promises. The telegram signals are accurate and the community is incredibly helpful.', rating: 5, initials: 'NM', result: '+156%', resultLabel: '4-month return', status: 'Published' }
+            ];
+            saveTestimonialsToStorage();
+        }
+        renderTestimonialsTable();
+    } catch (error) {
+        console.error('Error loading testimonials:', error);
+        testimonials = [];
+        renderTestimonialsTable();
+    }
+}
+
+function saveTestimonialsToStorage() {
+    localStorage.setItem('paramcgwala_testimonials', JSON.stringify(testimonials));
+}
+
+function renderTestimonialsTable() {
+    const tableBody = document.getElementById('testimonialsTableBody');
+    if (!tableBody) return;
+    
+    if (testimonials.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="6" class="text-center"><div class="no-courses-message"><i class="bi bi-chat-quote"></i><p>No testimonials found. Add your first testimonial to get started.</p></div></td></tr>`;
+        return;
+    }
+    
+    tableBody.innerHTML = testimonials.map(t => `
+        <tr>
+            <td>${t.id}</td>
+            <td><strong>${t.name}</strong>${t.role ? `<br><small class="text-muted">${t.role}</small>` : ''}</td>
+            <td>${'★'.repeat(t.rating)}${'☆'.repeat(5 - t.rating)}</td>
+            <td>${t.result || '-'}</td>
+            <td>${t.status === 'Published' ? '<span class="status-badge published"><i class="bi bi-check-circle"></i> Published</span>' : '<span class="status-badge draft"><i class="bi bi-file-earmark"></i> Draft</span>'}</td>
+            <td>
+                <button class="action-btn edit" onclick="editTestimonial(${t.id})" title="Edit"><i class="bi bi-pencil"></i></button>
+                <button class="action-btn delete" onclick="confirmDeleteTestimonial(${t.id})" title="Delete"><i class="bi bi-trash"></i></button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function openTestimonialModal(testimonial = null) {
+    const modal = new bootstrap.Modal(document.getElementById('testimonialModal'));
+    const modalTitle = document.getElementById('testimonialModalTitle');
+    const form = document.getElementById('testimonialForm');
+    
+    if (testimonial) {
+        modalTitle.textContent = 'Edit Testimonial';
+        currentTestimonialId = testimonial.id;
+        document.getElementById('testimonialName').value = testimonial.name;
+        document.getElementById('testimonialRole').value = testimonial.role || '';
+        document.getElementById('testimonialText').value = testimonial.text;
+        document.getElementById('testimonialRating').value = testimonial.rating;
+        document.getElementById('testimonialInitials').value = testimonial.initials || '';
+        document.getElementById('testimonialResult').value = testimonial.result || '';
+        document.getElementById('testimonialResultLabel').value = testimonial.resultLabel || '';
+        document.getElementById('testimonialStatus').value = testimonial.status || 'Published';
+    } else {
+        modalTitle.textContent = 'Add New Testimonial';
+        currentTestimonialId = null;
+        form.reset();
+        document.getElementById('testimonialRating').value = '5';
+        document.getElementById('testimonialStatus').value = 'Published';
+    }
+    
+    modal.show();
+}
+
+function editTestimonial(id) {
+    const t = testimonials.find(x => x.id === id);
+    if (t) openTestimonialModal(t);
+}
+
+function saveTestimonial() {
+    const form = document.getElementById('testimonialForm');
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    
+    const data = {
+        id: currentTestimonialId || Date.now(),
+        name: document.getElementById('testimonialName').value.trim(),
+        role: document.getElementById('testimonialRole').value.trim(),
+        text: document.getElementById('testimonialText').value.trim(),
+        rating: parseInt(document.getElementById('testimonialRating').value),
+        initials: document.getElementById('testimonialInitials').value.trim(),
+        result: document.getElementById('testimonialResult').value.trim(),
+        resultLabel: document.getElementById('testimonialResultLabel').value.trim(),
+        status: document.getElementById('testimonialStatus').value
+    };
+    
+    if (currentTestimonialId) {
+        const idx = testimonials.findIndex(x => x.id === currentTestimonialId);
+        if (idx !== -1) testimonials[idx] = data;
+    } else {
+        testimonials.push(data);
+    }
+    
+    saveTestimonialsToStorage();
+    renderTestimonialsTable();
+    bootstrap.Modal.getInstance(document.getElementById('testimonialModal')).hide();
+    alert(currentTestimonialId ? 'Testimonial updated!' : 'Testimonial added!');
+}
+
+function confirmDeleteTestimonial(id) {
+    deleteTestimonialId = id;
+    new bootstrap.Modal(document.getElementById('deleteTestimonialModal')).show();
+}
+
+function deleteTestimonial() {
+    if (deleteTestimonialId) {
+        testimonials = testimonials.filter(x => x.id !== deleteTestimonialId);
+        saveTestimonialsToStorage();
+        renderTestimonialsTable();
+        bootstrap.Modal.getInstance(document.getElementById('deleteTestimonialModal')).hide();
+        deleteTestimonialId = null;
+    }
+}
+
+// ===================================
+// Resources CRUD
+// ===================================
+let resources = [];
+let currentResourceId = null;
+let deleteResourceId = null;
+
+function loadResources() {
+    try {
+        const stored = localStorage.getItem('paramcgwala_resources');
+        if (stored) {
+            resources = JSON.parse(stored);
+        } else {
+            resources = [];
+            saveResourcesToStorage();
+        }
+        renderResourcesTable();
+    } catch (error) {
+        console.error('Error loading resources:', error);
+        resources = [];
+        renderResourcesTable();
+    }
+}
+
+function saveResourcesToStorage() {
+    localStorage.setItem('paramcgwala_resources', JSON.stringify(resources));
+}
+
+function renderResourcesTable() {
+    const tableBody = document.getElementById('resourcesTableBody');
+    if (!tableBody) return;
+    
+    if (resources.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="5" class="text-center"><div class="no-courses-message"><i class="bi bi-bookmark"></i><p>No resources found. Add your first resource to get started.</p></div></td></tr>`;
+        return;
+    }
+    
+    tableBody.innerHTML = resources.map(r => `
+        <tr>
+            <td>${r.id}</td>
+            <td><strong>${r.title}</strong></td>
+            <td><span class="status-badge">${r.type}</span></td>
+            <td>${r.status === 'Published' ? '<span class="status-badge published"><i class="bi bi-check-circle"></i> Published</span>' : '<span class="status-badge draft"><i class="bi bi-file-earmark"></i> Draft</span>'}</td>
+            <td>
+                <button class="action-btn edit" onclick="editResource(${r.id})" title="Edit"><i class="bi bi-pencil"></i></button>
+                <button class="action-btn delete" onclick="confirmDeleteResource(${r.id})" title="Delete"><i class="bi bi-trash"></i></button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function openResourceModal(resource = null) {
+    const modal = new bootstrap.Modal(document.getElementById('resourceModal'));
+    const modalTitle = document.getElementById('resourceModalTitle');
+    const form = document.getElementById('resourceForm');
+    
+    if (resource) {
+        modalTitle.textContent = 'Edit Resource';
+        currentResourceId = resource.id;
+        document.getElementById('resourceTitle').value = resource.title;
+        document.getElementById('resourceType').value = resource.type;
+        document.getElementById('resourceDescription').value = resource.description;
+        document.getElementById('resourceUrl').value = resource.url || '';
+        document.getElementById('resourceStatus').value = resource.status || 'Published';
+    } else {
+        modalTitle.textContent = 'Add New Resource';
+        currentResourceId = null;
+        form.reset();
+        document.getElementById('resourceType').value = 'PDF';
+        document.getElementById('resourceStatus').value = 'Published';
+    }
+    
+    modal.show();
+}
+
+function editResource(id) {
+    const r = resources.find(x => x.id === id);
+    if (r) openResourceModal(r);
+}
+
+function saveResource() {
+    const form = document.getElementById('resourceForm');
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    
+    const data = {
+        id: currentResourceId || Date.now(),
+        title: document.getElementById('resourceTitle').value.trim(),
+        type: document.getElementById('resourceType').value,
+        description: document.getElementById('resourceDescription').value.trim(),
+        url: document.getElementById('resourceUrl').value.trim(),
+        status: document.getElementById('resourceStatus').value
+    };
+    
+    if (currentResourceId) {
+        const idx = resources.findIndex(x => x.id === currentResourceId);
+        if (idx !== -1) resources[idx] = data;
+    } else {
+        resources.push(data);
+    }
+    
+    saveResourcesToStorage();
+    renderResourcesTable();
+    bootstrap.Modal.getInstance(document.getElementById('resourceModal')).hide();
+    alert(currentResourceId ? 'Resource updated!' : 'Resource added!');
+}
+
+function confirmDeleteResource(id) {
+    deleteResourceId = id;
+    new bootstrap.Modal(document.getElementById('deleteResourceModal')).show();
+}
+
+function deleteResource() {
+    if (deleteResourceId) {
+        resources = resources.filter(x => x.id !== deleteResourceId);
+        saveResourcesToStorage();
+        renderResourcesTable();
+        bootstrap.Modal.getInstance(document.getElementById('deleteResourceModal')).hide();
+        deleteResourceId = null;
+    }
+}
+
+// ===================================
+// Pricing Plans CRUD
+// ===================================
+let pricingPlans = [];
+let currentPricingId = null;
+let deletePricingId = null;
+
+function loadPricingPlans() {
+    try {
+        const stored = localStorage.getItem('paramcgwala_pricing');
+        if (stored) {
+            pricingPlans = JSON.parse(stored);
+        } else {
+            pricingPlans = [
+                { id: 1, name: 'Starter', price: 'Free', period: 'forever', features: ['Access to basic bots', 'Community forum access', 'Weekly market insights', 'Basic support'], featured: false, status: 'Published' },
+                { id: 2, name: 'Pro Trader', price: '$299', period: 'one-time', features: ['All starter features', 'Premium trading bots', 'Real-time signals', 'Advanced analytics', 'Priority support', 'Private telegram group'], featured: true, status: 'Published' },
+                { id: 3, name: 'Enterprise', price: '$999', period: 'one-time', features: ['All pro features', 'Custom bot development', 'API access', 'Dedicated account manager', 'White-label solution', '24/7 phone support'], featured: false, status: 'Published' }
+            ];
+            savePricingToStorage();
+        }
+        renderPricingTable();
+    } catch (error) {
+        console.error('Error loading pricing:', error);
+        pricingPlans = [];
+        renderPricingTable();
+    }
+}
+
+function savePricingToStorage() {
+    localStorage.setItem('paramcgwala_pricing', JSON.stringify(pricingPlans));
+}
+
+function renderPricingTable() {
+    const tableBody = document.getElementById('pricingTableBody');
+    if (!tableBody) return;
+    
+    if (pricingPlans.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="5" class="text-center"><div class="no-courses-message"><i class="bi bi-currency-dollar"></i><p>No pricing plans found. Add your first plan to get started.</p></div></td></tr>`;
+        return;
+    }
+    
+    tableBody.innerHTML = pricingPlans.map(p => `
+        <tr>
+            <td>${p.id}</td>
+            <td><strong>${p.name}</strong>${p.featured ? ' <span class="badge bg-warning text-dark">Featured</span>' : ''}</td>
+            <td>${p.price}<small class="text-muted">/${p.period || ''}</small></td>
+            <td>${p.status === 'Published' ? '<span class="status-badge published"><i class="bi bi-check-circle"></i> Published</span>' : '<span class="status-badge draft"><i class="bi bi-file-earmark"></i> Draft</span>'}</td>
+            <td>
+                <button class="action-btn edit" onclick="editPricing(${p.id})" title="Edit"><i class="bi bi-pencil"></i></button>
+                <button class="action-btn delete" onclick="confirmDeletePricing(${p.id})" title="Delete"><i class="bi bi-trash"></i></button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function openPricingModal(plan = null) {
+    const modal = new bootstrap.Modal(document.getElementById('pricingModal'));
+    const modalTitle = document.getElementById('pricingModalTitle');
+    const form = document.getElementById('pricingForm');
+    
+    if (plan) {
+        modalTitle.textContent = 'Edit Pricing Plan';
+        currentPricingId = plan.id;
+        document.getElementById('planName').value = plan.name;
+        document.getElementById('planPrice').value = plan.price;
+        document.getElementById('planPeriod').value = plan.period || '';
+        document.getElementById('planFeatures').value = (plan.features || []).join('\n');
+        document.getElementById('planFeatured').checked = plan.featured || false;
+        document.getElementById('planStatus').value = plan.status || 'Published';
+    } else {
+        modalTitle.textContent = 'Add New Plan';
+        currentPricingId = null;
+        form.reset();
+        document.getElementById('planStatus').value = 'Published';
+    }
+    
+    modal.show();
+}
+
+function editPricing(id) {
+    const p = pricingPlans.find(x => x.id === id);
+    if (p) openPricingModal(p);
+}
+
+function savePricing() {
+    const form = document.getElementById('pricingForm');
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    
+    const data = {
+        id: currentPricingId || Date.now(),
+        name: document.getElementById('planName').value.trim(),
+        price: document.getElementById('planPrice').value.trim(),
+        period: document.getElementById('planPeriod').value.trim(),
+        features: document.getElementById('planFeatures').value.split('\n').map(f => f.trim()).filter(f => f),
+        featured: document.getElementById('planFeatured').checked,
+        status: document.getElementById('planStatus').value
+    };
+    
+    if (currentPricingId) {
+        const idx = pricingPlans.findIndex(x => x.id === currentPricingId);
+        if (idx !== -1) pricingPlans[idx] = data;
+    } else {
+        pricingPlans.push(data);
+    }
+    
+    savePricingToStorage();
+    renderPricingTable();
+    bootstrap.Modal.getInstance(document.getElementById('pricingModal')).hide();
+    alert(currentPricingId ? 'Plan updated!' : 'Plan added!');
+}
+
+function confirmDeletePricing(id) {
+    deletePricingId = id;
+    new bootstrap.Modal(document.getElementById('deletePricingModal')).show();
+}
+
+function deletePricing() {
+    if (deletePricingId) {
+        pricingPlans = pricingPlans.filter(x => x.id !== deletePricingId);
+        savePricingToStorage();
+        renderPricingTable();
+        bootstrap.Modal.getInstance(document.getElementById('deletePricingModal')).hide();
+        deletePricingId = null;
+    }
+}
+
+// ===================================
+// FAQs CRUD
+// ===================================
+let faqs = [];
+let currentFaqId = null;
+let deleteFaqId = null;
+
+function loadFaqs() {
+    try {
+        const stored = localStorage.getItem('paramcgwala_faqs');
+        if (stored) {
+            faqs = JSON.parse(stored);
+        } else {
+            faqs = [];
+            saveFaqsToStorage();
+        }
+        renderFaqsTable();
+    } catch (error) {
+        console.error('Error loading FAQs:', error);
+        faqs = [];
+        renderFaqsTable();
+    }
+}
+
+function saveFaqsToStorage() {
+    localStorage.setItem('paramcgwala_faqs', JSON.stringify(faqs));
+}
+
+function renderFaqsTable() {
+    const tableBody = document.getElementById('faqsTableBody');
+    if (!tableBody) return;
+    
+    if (faqs.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="5" class="text-center"><div class="no-courses-message"><i class="bi bi-question-circle"></i><p>No FAQs found. Add your first FAQ to get started.</p></div></td></tr>`;
+        return;
+    }
+    
+    tableBody.innerHTML = faqs.map(f => `
+        <tr>
+            <td>${f.id}</td>
+            <td><strong>${f.question}</strong></td>
+            <td><span class="status-badge">${f.category || 'General'}</span></td>
+            <td>${f.status === 'Published' ? '<span class="status-badge published"><i class="bi bi-check-circle"></i> Published</span>' : '<span class="status-badge draft"><i class="bi bi-file-earmark"></i> Draft</span>'}</td>
+            <td>
+                <button class="action-btn edit" onclick="editFaq(${f.id})" title="Edit"><i class="bi bi-pencil"></i></button>
+                <button class="action-btn delete" onclick="confirmDeleteFaq(${f.id})" title="Delete"><i class="bi bi-trash"></i></button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function openFaqModal(faq = null) {
+    const modal = new bootstrap.Modal(document.getElementById('faqModal'));
+    const modalTitle = document.getElementById('faqModalTitle');
+    const form = document.getElementById('faqForm');
+    
+    if (faq) {
+        modalTitle.textContent = 'Edit FAQ';
+        currentFaqId = faq.id;
+        document.getElementById('faqQuestion').value = faq.question;
+        document.getElementById('faqAnswer').value = faq.answer;
+        document.getElementById('faqCategory').value = faq.category || 'Trading';
+        document.getElementById('faqOrder').value = faq.order || 0;
+        document.getElementById('faqStatus').value = faq.status || 'Published';
+    } else {
+        modalTitle.textContent = 'Add New FAQ';
+        currentFaqId = null;
+        form.reset();
+        document.getElementById('faqCategory').value = 'Trading';
+        document.getElementById('faqOrder').value = '0';
+        document.getElementById('faqStatus').value = 'Published';
+    }
+    
+    modal.show();
+}
+
+function editFaq(id) {
+    const f = faqs.find(x => x.id === id);
+    if (f) openFaqModal(f);
+}
+
+function saveFaq() {
+    const form = document.getElementById('faqForm');
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    
+    const data = {
+        id: currentFaqId || Date.now(),
+        question: document.getElementById('faqQuestion').value.trim(),
+        answer: document.getElementById('faqAnswer').value.trim(),
+        category: document.getElementById('faqCategory').value,
+        order: parseInt(document.getElementById('faqOrder').value) || 0,
+        status: document.getElementById('faqStatus').value
+    };
+    
+    if (currentFaqId) {
+        const idx = faqs.findIndex(x => x.id === currentFaqId);
+        if (idx !== -1) faqs[idx] = data;
+    } else {
+        faqs.push(data);
+    }
+    
+    saveFaqsToStorage();
+    renderFaqsTable();
+    bootstrap.Modal.getInstance(document.getElementById('faqModal')).hide();
+    alert(currentFaqId ? 'FAQ updated!' : 'FAQ added!');
+}
+
+function confirmDeleteFaq(id) {
+    deleteFaqId = id;
+    new bootstrap.Modal(document.getElementById('deleteFaqModal')).show();
+}
+
+function deleteFaq() {
+    if (deleteFaqId) {
+        faqs = faqs.filter(x => x.id !== deleteFaqId);
+        saveFaqsToStorage();
+        renderFaqsTable();
+        bootstrap.Modal.getInstance(document.getElementById('deleteFaqModal')).hide();
+        deleteFaqId = null;
+    }
+}
+
+// ===================================
+// Videos CRUD
+// ===================================
+let videos = [];
+let currentVideoId = null;
+let deleteVideoId = null;
+
+function loadVideos() {
+    try {
+        const stored = localStorage.getItem('paramcgwala_videos');
+        if (stored) {
+            videos = JSON.parse(stored);
+        } else {
+            videos = [];
+            saveVideosToStorage();
+        }
+        renderVideosTable();
+    } catch (error) {
+        console.error('Error loading videos:', error);
+        videos = [];
+        renderVideosTable();
+    }
+}
+
+function saveVideosToStorage() {
+    localStorage.setItem('paramcgwala_videos', JSON.stringify(videos));
+}
+
+function renderVideosTable() {
+    const tableBody = document.getElementById('videosTableBody');
+    if (!tableBody) return;
+    
+    if (videos.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="6" class="text-center"><div class="no-courses-message"><i class="bi bi-play-circle"></i><p>No videos found. Add your first video to get started.</p></div></td></tr>`;
+        return;
+    }
+    
+    tableBody.innerHTML = videos.map(v => `
+        <tr>
+            <td>${v.id}</td>
+            <td><strong>${v.title}</strong></td>
+            <td><span class="status-badge">${v.category || 'Course'}</span></td>
+            <td>${v.duration || '-'}</td>
+            <td>${v.status === 'Published' ? '<span class="status-badge published"><i class="bi bi-check-circle"></i> Published</span>' : '<span class="status-badge draft"><i class="bi bi-file-earmark"></i> Draft</span>'}</td>
+            <td>
+                <button class="action-btn edit" onclick="editVideo(${v.id})" title="Edit"><i class="bi bi-pencil"></i></button>
+                <button class="action-btn delete" onclick="confirmDeleteVideo(${v.id})" title="Delete"><i class="bi bi-trash"></i></button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function openVideoModal(video = null) {
+    const modal = new bootstrap.Modal(document.getElementById('videoModal'));
+    const modalTitle = document.getElementById('videoModalTitle');
+    const form = document.getElementById('videoForm');
+    
+    if (video) {
+        modalTitle.textContent = 'Edit Video';
+        currentVideoId = video.id;
+        document.getElementById('videoTitle').value = video.title;
+        document.getElementById('videoCategory').value = video.category || 'Course';
+        document.getElementById('videoDuration').value = video.duration || '';
+        document.getElementById('videoDescription').value = video.description || '';
+        document.getElementById('videoUrl').value = video.url || '';
+        document.getElementById('videoThumbnail').value = video.thumbnail || '';
+        document.getElementById('videoStatus').value = video.status || 'Published';
+        document.getElementById('videoFeatured').value = video.featured ? 'true' : 'false';
+    } else {
+        modalTitle.textContent = 'Add New Video';
+        currentVideoId = null;
+        form.reset();
+        document.getElementById('videoCategory').value = 'Course';
+        document.getElementById('videoStatus').value = 'Published';
+        document.getElementById('videoFeatured').value = 'false';
+    }
+    
+    modal.show();
+}
+
+function editVideo(id) {
+    const v = videos.find(x => x.id === id);
+    if (v) openVideoModal(v);
+}
+
+function saveVideo() {
+    const form = document.getElementById('videoForm');
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    
+    const data = {
+        id: currentVideoId || Date.now(),
+        title: document.getElementById('videoTitle').value.trim(),
+        category: document.getElementById('videoCategory').value,
+        duration: document.getElementById('videoDuration').value.trim(),
+        description: document.getElementById('videoDescription').value.trim(),
+        url: document.getElementById('videoUrl').value.trim(),
+        thumbnail: document.getElementById('videoThumbnail').value.trim(),
+        status: document.getElementById('videoStatus').value,
+        featured: document.getElementById('videoFeatured').value === 'true'
+    };
+    
+    if (currentVideoId) {
+        const idx = videos.findIndex(x => x.id === currentVideoId);
+        if (idx !== -1) videos[idx] = data;
+    } else {
+        videos.push(data);
+    }
+    
+    saveVideosToStorage();
+    renderVideosTable();
+    bootstrap.Modal.getInstance(document.getElementById('videoModal')).hide();
+    alert(currentVideoId ? 'Video updated!' : 'Video added!');
+}
+
+function confirmDeleteVideo(id) {
+    deleteVideoId = id;
+    new bootstrap.Modal(document.getElementById('deleteVideoModal')).show();
+}
+
+function deleteVideo() {
+    if (deleteVideoId) {
+        videos = videos.filter(x => x.id !== deleteVideoId);
+        saveVideosToStorage();
+        renderVideosTable();
+        bootstrap.Modal.getInstance(document.getElementById('deleteVideoModal')).hide();
+        deleteVideoId = null;
+    }
+}
+
+// ===================================
+// Landing Pages CRUD
+// ===================================
+let landingPages = [];
+let currentLandingPageId = null;
+let deleteLandingPageId = null;
+
+function loadLandingPages() {
+    try {
+        const stored = localStorage.getItem('paramcgwala_landing_pages');
+        if (stored) {
+            landingPages = JSON.parse(stored);
+        } else {
+            landingPages = [];
+            saveLandingPagesToStorage();
+        }
+        renderLandingPagesTable();
+    } catch (error) {
+        console.error('Error loading landing pages:', error);
+        landingPages = [];
+        renderLandingPagesTable();
+    }
+}
+
+function saveLandingPagesToStorage() {
+    localStorage.setItem('paramcgwala_landing_pages', JSON.stringify(landingPages));
+}
+
+function renderLandingPagesTable() {
+    const tableBody = document.getElementById('landingPagesTableBody');
+    if (!tableBody) return;
+    
+    if (landingPages.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="6" class="text-center"><div class="no-courses-message"><i class="bi bi-layout-text-window"></i><p>No landing pages found. Add your first page to get started.</p></div></td></tr>`;
+        return;
+    }
+    
+    tableBody.innerHTML = landingPages.map(p => `
+        <tr>
+            <td>${p.id}</td>
+            <td><strong>${p.title}</strong>${p.featured ? ' <span class="badge bg-warning text-dark">Featured</span>' : ''}</td>
+            <td>${p.slug || '-'}</td>
+            <td>${p.views || 0}</td>
+            <td>${p.status === 'Published' ? '<span class="status-badge published"><i class="bi bi-check-circle"></i> Published</span>' : '<span class="status-badge draft"><i class="bi bi-file-earmark"></i> Draft</span>'}</td>
+            <td>
+                <button class="action-btn edit" onclick="editLandingPage(${p.id})" title="Edit"><i class="bi bi-pencil"></i></button>
+                <button class="action-btn delete" onclick="confirmDeleteLandingPage(${p.id})" title="Delete"><i class="bi bi-trash"></i></button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function openLandingPageModal(page = null) {
+    const modal = new bootstrap.Modal(document.getElementById('landingPageModal'));
+    const modalTitle = document.getElementById('landingPageModalTitle');
+    const form = document.getElementById('landingPageForm');
+    
+    if (page) {
+        modalTitle.textContent = 'Edit Landing Page';
+        currentLandingPageId = page.id;
+        document.getElementById('landingPageTitle').value = page.title;
+        document.getElementById('landingPageSlug').value = page.slug || '';
+        document.getElementById('landingPageDescription').value = page.description || '';
+        document.getElementById('landingPageStatus').value = page.status || 'Published';
+        document.getElementById('landingPageViews').value = page.views || 0;
+        document.getElementById('landingPageFeatured').checked = page.featured || false;
+    } else {
+        modalTitle.textContent = 'Add New Landing Page';
+        currentLandingPageId = null;
+        form.reset();
+        document.getElementById('landingPageStatus').value = 'Published';
+        document.getElementById('landingPageViews').value = 0;
+        document.getElementById('landingPageFeatured').checked = false;
+    }
+    
+    modal.show();
+}
+
+function editLandingPage(id) {
+    const p = landingPages.find(x => x.id === id);
+    if (p) openLandingPageModal(p);
+}
+
+function saveLandingPage() {
+    const form = document.getElementById('landingPageForm');
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    
+    const data = {
+        id: currentLandingPageId || Date.now(),
+        title: document.getElementById('landingPageTitle').value.trim(),
+        slug: document.getElementById('landingPageSlug').value.trim(),
+        description: document.getElementById('landingPageDescription').value.trim(),
+        status: document.getElementById('landingPageStatus').value,
+        views: parseInt(document.getElementById('landingPageViews').value) || 0,
+        featured: document.getElementById('landingPageFeatured').checked
+    };
+    
+    if (currentLandingPageId) {
+        const idx = landingPages.findIndex(x => x.id === currentLandingPageId);
+        if (idx !== -1) landingPages[idx] = data;
+    } else {
+        landingPages.push(data);
+    }
+    
+    saveLandingPagesToStorage();
+    renderLandingPagesTable();
+    bootstrap.Modal.getInstance(document.getElementById('landingPageModal')).hide();
+    alert(currentLandingPageId ? 'Landing page updated!' : 'Landing page added!');
+}
+
+function confirmDeleteLandingPage(id) {
+    deleteLandingPageId = id;
+    new bootstrap.Modal(document.getElementById('deleteLandingPageModal')).show();
+}
+
+function deleteLandingPage() {
+    if (deleteLandingPageId) {
+        landingPages = landingPages.filter(x => x.id !== deleteLandingPageId);
+        saveLandingPagesToStorage();
+        renderLandingPagesTable();
+        bootstrap.Modal.getInstance(document.getElementById('deleteLandingPageModal')).hide();
+        deleteLandingPageId = null;
+    }
+}
+
+// Hook up new tab CRUD events + initialize data
+document.addEventListener('DOMContentLoaded', function() {
+    // Defer to let original DOMContentLoaded handler run first
+    setTimeout(function() {
+        // Init data stores
+        loadTestimonials();
+        loadResources();
+        loadPricingPlans();
+        loadFaqs();
+        loadVideos();
+        loadLandingPages();
+
+        // Testimonial events
+        const addTestimonialBtn = document.getElementById('addTestimonialBtn');
+        if (addTestimonialBtn) addTestimonialBtn.addEventListener('click', () => openTestimonialModal());
+        const saveTestimonialBtn = document.getElementById('saveTestimonialBtn');
+        if (saveTestimonialBtn) saveTestimonialBtn.addEventListener('click', saveTestimonial);
+        const confirmDeleteTestimonialBtn = document.getElementById('confirmDeleteTestimonialBtn');
+        if (confirmDeleteTestimonialBtn) confirmDeleteTestimonialBtn.addEventListener('click', deleteTestimonial);
+
+        // Resource events
+        const addResourceBtn = document.getElementById('addResourceBtn');
+        if (addResourceBtn) addResourceBtn.addEventListener('click', () => openResourceModal());
+        const saveResourceBtn = document.getElementById('saveResourceBtn');
+        if (saveResourceBtn) saveResourceBtn.addEventListener('click', saveResource);
+        const confirmDeleteResourceBtn = document.getElementById('confirmDeleteResourceBtn');
+        if (confirmDeleteResourceBtn) confirmDeleteResourceBtn.addEventListener('click', deleteResource);
+
+        // Pricing events
+        const addPricingBtn = document.getElementById('addPricingBtn');
+        if (addPricingBtn) addPricingBtn.addEventListener('click', () => openPricingModal());
+        const savePricingBtn = document.getElementById('savePricingBtn');
+        if (savePricingBtn) savePricingBtn.addEventListener('click', savePricing);
+        const confirmDeletePricingBtn = document.getElementById('confirmDeletePricingBtn');
+        if (confirmDeletePricingBtn) confirmDeletePricingBtn.addEventListener('click', deletePricing);
+
+        // FAQ events
+        const addFaqBtn = document.getElementById('addFaqBtn');
+        if (addFaqBtn) addFaqBtn.addEventListener('click', () => openFaqModal());
+        const saveFaqBtn = document.getElementById('saveFaqBtn');
+        if (saveFaqBtn) saveFaqBtn.addEventListener('click', saveFaq);
+        const confirmDeleteFaqBtn = document.getElementById('confirmDeleteFaqBtn');
+        if (confirmDeleteFaqBtn) confirmDeleteFaqBtn.addEventListener('click', deleteFaq);
+
+        // Video events
+        const addVideoBtn = document.getElementById('addVideoBtn');
+        if (addVideoBtn) addVideoBtn.addEventListener('click', () => openVideoModal());
+        const saveVideoBtn = document.getElementById('saveVideoBtn');
+        if (saveVideoBtn) saveVideoBtn.addEventListener('click', saveVideo);
+        const confirmDeleteVideoBtn = document.getElementById('confirmDeleteVideoBtn');
+        if (confirmDeleteVideoBtn) confirmDeleteVideoBtn.addEventListener('click', deleteVideo);
+
+        // Landing Page events
+        const addLandingPageBtn = document.getElementById('addLandingPageBtn');
+        if (addLandingPageBtn) addLandingPageBtn.addEventListener('click', () => openLandingPageModal());
+        const saveLandingPageBtn = document.getElementById('saveLandingPageBtn');
+        if (saveLandingPageBtn) saveLandingPageBtn.addEventListener('click', saveLandingPage);
+        const confirmDeleteLandingPageBtn = document.getElementById('confirmDeleteLandingPageBtn');
+        if (confirmDeleteLandingPageBtn) confirmDeleteLandingPageBtn.addEventListener('click', deleteLandingPage);
+    }, 100);
+});
