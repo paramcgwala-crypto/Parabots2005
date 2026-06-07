@@ -14,6 +14,7 @@ $user = getCurrentUser();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Premium Content | PARAMCGWALABOTS</title>
+    <meta name="description" content="Access premium PARAMCGWALABOTS content including exclusive trading bots, advanced trading courses, and direct expert support.">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">

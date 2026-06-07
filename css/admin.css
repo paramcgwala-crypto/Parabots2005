@@ -567,3 +567,35 @@ body {
         padding: 6px;
     }
 }
+
+/* Skeleton Loading Animation */
+@keyframes skeleton-glow {
+    0% { background-color: rgba(255, 255, 255, 0.05); }
+    50% { background-color: rgba(255, 255, 255, 0.1); }
+    100% { background-color: rgba(255, 255, 255, 0.05); }
+}
+
+.skeleton-row td {
+    padding: var(--spacing-md) !important;
+    vertical-align: middle;
+}
+
+.skeleton-bar {
+    height: 16px;
+    border-radius: 4px;
+    animation: skeleton-glow 1.5s ease-in-out infinite;
+    width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+.skeleton-bar.short { width: 35%; }
+.skeleton-bar.medium { width: 65%; }
+.skeleton-bar.long { width: 85%; }
+.skeleton-thumbnail {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-md);
+    animation: skeleton-glow 1.5s ease-in-out infinite;
+    display: inline-block;
+    vertical-align: middle;
+}

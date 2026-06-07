@@ -6,13 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- SEO Meta Tags -->
-    <title>Market Intelligence Hub | PARAMCGWALABOTS</title>
-    <meta name="description" content="Premium Market Intelligence Hub with real-time Forex and Crypto news, trading tools, calculators, and market analysis.">
-    <meta name="keywords" content="market intelligence, forex news, crypto news, trading tools, economic calendar, trading calculators">
+    <title>Forex & Market Hub | Real-Time Trading Terminal | PARAMCGWALABOTS</title>
+    <meta name="description" content="Access the PARAMCGWALA Premium Forex & Market Hub. Real-time tickers, Economic Calendar, live Trading Signals, currency strength overview, market analysis, and gold & crypto updates.">
+    <meta name="keywords" content="forex factory, economic calendar, trading signals, gold updates, market sentiment, currency strength, session tracker, trading education">
     <meta name="author" content="PARAMCGWALABOTS">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://s3.tradingview.com">
+    <link rel="dns-prefetch" href="https://s3.tradingview.com">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,75 +23,413 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- GSAP CSS -->
-    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Specific Styles for Market Hub */
+        .market-terminal {
+            background: radial-gradient(circle at top right, rgba(0, 245, 212, 0.05), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(0, 187, 249, 0.05), transparent 40%);
+            padding-top: 100px;
+            padding-bottom: 60px;
+        }
+        
+        .terminal-header {
+            margin-bottom: 30px;
+        }
+
+        .navigation-hub-bar {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+            margin-bottom: 30px;
+            scrollbar-width: none;
+        }
+        .navigation-hub-bar::-webkit-scrollbar {
+            display: none;
+        }
+        .hub-nav-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--muted-text);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all var(--transition-base);
+            cursor: pointer;
+        }
+        .hub-nav-btn:hover, .hub-nav-btn.active {
+            background: var(--gradient-1);
+            border-color: var(--primary);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Widgets Grid */
+        .terminal-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+        }
+
+        .terminal-card {
+            grid-column: span 12;
+        }
+        @media (min-width: 992px) {
+            .col-lg-3-custom { grid-column: span 3; }
+            .col-lg-6-custom { grid-column: span 6; }
+            .col-lg-4-custom { grid-column: span 4; }
+            .col-lg-8-custom { grid-column: span 8; }
+        }
+
+        /* Live Session Tracker */
+        .session-tracker-card {
+            padding: 20px;
+        }
+        .session-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .session-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .session-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .session-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--muted-text);
+        }
+        .session-indicator.active {
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+            animation: pulse-session 1.5s infinite;
+        }
+        @keyframes pulse-session {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.6; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .session-time {
+            font-size: var(--font-size-xs);
+            color: var(--muted-text);
+        }
+
+        /* Currency Strength */
+        .strength-meter-card {
+            padding: 20px;
+        }
+        .strength-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .strength-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .currency-label {
+            width: 40px;
+            font-weight: 700;
+            font-size: var(--font-size-sm);
+        }
+        .strength-bar-container {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .strength-bar {
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+        .strength-value {
+            width: 25px;
+            text-align: right;
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Interactive Economic Calendar */
+        .calendar-table {
+            color: var(--text);
+            margin-bottom: 0;
+        }
+        .calendar-table th {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--muted-text);
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+        }
+        .calendar-table td {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 10px;
+            vertical-align: middle;
+            font-size: var(--font-size-sm);
+        }
+        .impact-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .impact-high { background: rgba(255, 71, 87, 0.2); color: #ff4757; border: 1px solid #ff4757; }
+        .impact-medium { background: rgba(255, 165, 2, 0.2); color: #ffa502; border: 1px solid #ffa502; }
+        .impact-low { background: rgba(170, 178, 200, 0.2); color: var(--muted-text); border: 1px solid rgba(170, 178, 200, 0.4); }
+
+        /* Trading Signals */
+        .signals-card {
+            padding: 20px;
+        }
+        .signal-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-base);
+        }
+        .signal-item:hover {
+            border-color: rgba(0, 245, 212, 0.3);
+            transform: translateY(-2px);
+        }
+        .signal-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+        .signal-item.buy::before { background: var(--primary); }
+        .signal-item.sell::before { background: #ff4757; }
+        .signal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .signal-pair {
+            font-weight: 700;
+            font-size: var(--font-size-base);
+        }
+        .signal-type {
+            font-weight: 600;
+            font-size: var(--font-size-xs);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .signal-type.buy { background: rgba(0, 245, 212, 0.1); color: var(--primary); }
+        .signal-type.sell { background: rgba(255, 71, 87, 0.1); color: #ff4757; }
+        .signal-levels {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            font-size: var(--font-size-xs);
+            color: var(--muted-text);
+            margin-top: 10px;
+        }
+        .signal-status-badge {
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 50px;
+            padding: 2px 10px;
+            text-transform: uppercase;
+        }
+        .signal-status-badge.active { background: rgba(0, 187, 249, 0.15); color: var(--secondary); border: 1px solid var(--secondary); }
+        .signal-status-badge.completed { background: rgba(46, 213, 115, 0.15); color: #2ed573; border: 1px solid #2ed573; }
+        .signal-status-badge.stopped { background: rgba(255, 71, 87, 0.15); color: #ff4757; border: 1px solid #ff4757; }
+
+        /* Sentiment Cards */
+        .sentiment-card {
+            padding: 20px;
+        }
+        .sentiment-gauge-wrapper {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .sentiment-bar-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        .sentiment-ratio-bar {
+            height: 12px;
+            background: #ff4757;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+        }
+        .sentiment-long-fill {
+            height: 100%;
+            background: var(--primary);
+            transition: width 1s ease-in-out;
+        }
+
+        /* News Center Feed */
+        .news-tabs {
+            display: flex;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+        .news-tab-btn {
+            background: none;
+            border: none;
+            color: var(--muted-text);
+            padding: 10px 15px;
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            transition: all var(--transition-base);
+            position: relative;
+        }
+        .news-tab-btn.active {
+            color: var(--primary);
+        }
+        .news-tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+        .news-item {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        .news-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 11px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .news-time {
+            color: var(--muted-text);
+        }
+        .news-title {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--text);
+            transition: color var(--transition-fast);
+        }
+        .news-title:hover {
+            color: var(--primary);
+            cursor: pointer;
+        }
+        .news-snippet {
+            font-size: var(--font-size-xs);
+            color: var(--muted-text);
+            display: none;
+            margin-top: 5px;
+            line-height: 1.5;
+            animation: slideDown 0.3s ease-out forwards;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dynamic Loading Screen overlay inside widgets */
+        .widget-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 15, 25, 0.9);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .widget-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Learn Trading Section */
+        .edu-lesson-card {
+            height: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .lesson-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .lesson-tags {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .lesson-tag {
+            font-size: 10px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: var(--muted-text);
+        }
+    </style>
 </head>
 <body class="loaded">
     
-    <!-- Loading Screen -->
+    <!-- Preloader -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-logo">PARAMCGWALABOTS</div>
         <div class="loading-bar"></div>
-        <div class="loading-text">LOADING...</div>
+        <div class="loading-text">CONNECTING TO MARKETS...</div>
     </div>
     
-    <!-- Mouse Follow Glow -->
+    <!-- Mouse Glow & Particles -->
     <div class="mouse-glow" id="mouseGlow"></div>
-    
-    <!-- Floating Particles Container -->
     <div class="particles-container" id="particlesContainer"></div>
     
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scrollProgress"></div>
-    
-    <!-- Back To Top Button -->
-    <button class="back-to-top" id="backToTop">
-        <i class="bi bi-arrow-up"></i>
-    </button>
-    
-    <!-- AI Chatbot Button -->
-    <button class="chatbot-toggle" id="chatbotToggle">
-        <i class="bi bi-chat-dots"></i>
-    </button>
-    
-    <!-- Sticky WhatsApp Button -->
-    <a href="https://wa.me/919617422068" target="_blank" class="whatsapp-float">
-        <i class="bi bi-whatsapp"></i>
-    </a>
-    
-    <!-- AI Chatbot Window -->
-    <div class="chatbot-window" id="chatbotWindow">
-        <div class="chatbot-header">
-            <div class="chatbot-title">
-                <i class="bi bi-robot"></i>
-                <span>PARAMCGWALA AI Assistant</span>
-            </div>
-            <button class="chatbot-close" id="chatbotClose">
-                <i class="bi bi-x-lg"></i>
-            </button>
-        </div>
-        <div class="chatbot-messages" id="chatbotMessages">
-            <div class="chatbot-message bot">
-                <div class="message-content">
-                    <p>Hello! I'm the PARAMCGWALA AI Assistant. How can I help you with market intelligence and trading tools today?</p>
-                </div>
-            </div>
-        </div>
-        <div class="chatbot-input">
-            <input type="text" id="chatbotInput" placeholder="Type your message...">
-            <button id="chatbotSend">
-                <i class="bi bi-send"></i>
-            </button>
-        </div>
-    </div>
-    
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+    <nav class="navbar navbar-expand-lg fixed-top scrolled" id="navbar">
         <div class="container">
             <a class="navbar-brand" href="index.html">
                 <i class="bi bi-robot"></i>
@@ -99,398 +440,382 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="courses.html">Courses</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="bots.html">Trading Bots</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="market-intelligence.html">Market Intelligence</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="bitcoin-sip.html">Bitcoin SIP</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="bots.html">Trading Bots</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ai-automation.html">AI Automation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="bitcoin-sip.html">Bitcoin SIP</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="market-intelligence.html">Market Hub</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                 </ul>
-                <a href="courses.html" class="btn btn-primary btn-cta">Get Started</a>
+                <div id="authButtons">
+                    <!-- Session buttons will be auto injected or show guest defaults -->
+                    <a href="login.php" class="btn btn-outline-light me-2 btn-sm">Login</a>
+                    <a href="signup.php" class="btn btn-primary btn-cta btn-sm">Sign Up</a>
+                </div>
             </div>
         </div>
     </nav>
     
-    <!-- Hero Section -->
-    <section class="hero-section" id="home">
+    <!-- Market Terminal -->
+    <main class="market-terminal">
         <div class="container">
-            <div class="row align-items-center min-vh-100">
-                <div class="col-lg-12">
-                    <div class="hero-content text-center" data-aos="fade-up" data-aos-duration="1000">
-                        <span class="hero-badge">
-                            <i class="bi bi-stars"></i>
-                            Premium Market Intelligence
-                        </span>
-                        <h1 class="hero-title">
-                            Trader Command Center
-                        </h1>
-                        <p class="hero-subtitle">
-                            Your ultimate hub for real-time market data, news, analysis, and trading tools. Access premium Forex and Crypto intelligence in one place.
-                        </p>
-                        <div class="hero-buttons justify-content-center">
-                            <a href="#forex-news" class="btn btn-primary btn-lg magnetic-btn">
-                                <i class="bi bi-currency-dollar"></i>
-                                Forex News
-                            </a>
-                            <a href="#crypto-news" class="btn btn-outline-light btn-lg magnetic-btn">
-                                <i class="bi bi-currency-bitcoin"></i>
-                                Crypto News
-                            </a>
-                            <a href="#trading-tools" class="btn btn-gradient btn-lg magnetic-btn">
-                                <i class="bi bi-tools"></i>
-                                Trading Tools
-                            </a>
-                        </div>
-                    </div>
+            <!-- Terminal Header -->
+            <div class="row terminal-header align-items-center">
+                <div class="col-md-8">
+                    <span class="section-badge"><i class="bi bi-broadcast"></i> Live Trading Desk</span>
+                    <h1 class="gradient-text-animated" style="font-size:var(--font-size-3xl); font-weight:800; margin:5px 0 0;">Forex & Market Intelligence Hub</h1>
+                    <p class="text-muted" style="margin-top: 5px;">Real-time execution analytics, automated signals, economic alerts, and analysis desk.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Forex News Section -->
-    <section class="intelligence-section" id="forex-news">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-header text-center" data-aos="fade-up">
-                        <span class="section-badge">Forex Intelligence</span>
-                        <h2 class="section-title">Forex News & Analysis</h2>
-                        <p class="section-text">Real-time Forex news, economic calendar, and market analysis from premium sources</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <a href="https://www.forexfactory.com/" target="_blank" class="intelligence-card forex-card glass-card premium-card" data-aos="fade-up" data-aos-delay="0">
-                        <div class="card-glow"></div>
-                        <div class="card-icon">
-                            <i class="bi bi-graph-up-arrow"></i>
+                <div class="col-md-4 text-md-end">
+                    <div class="glass-card p-2 d-inline-flex align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="status-dot"></span>
+                            <span style="font-size:12px; font-weight:600; color:var(--primary);">FEED: CONNECTED</span>
                         </div>
-                        <h4>Forex Factory</h4>
-                        <p>Economic Calendar • High Impact News</p>
-                        <div class="card-features">
-                            <span><i class="bi bi-check-circle-fill"></i> Economic Calendar</span>
-                            <span><i class="bi bi-check-circle-fill"></i> High Impact News</span>
-                            <span><i class="bi bi-check-circle-fill"></i> Market Sentiment</span>
-                        </div>
-                        <div class="card-action">
-                            <span>Visit Site</span>
-                            <i class="bi bi-box-arrow-up-right"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <a href="https://www.investing.com/" target="_blank" class="intelligence-card investing-card glass-card premium-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card-glow"></div>
-                        <div class="card-icon">
-                            <i class="bi bi-bar-chart-line"></i>
-                        </div>
-                        <h4>Investing.com</h4>
-                        <p>Live Market News • Forex • Commodities</p>
-                        <div class="card-features">
-                            <span><i class="bi bi-check-circle-fill"></i> Live Market News</span>
-                            <span><i class="bi bi-check-circle-fill"></i> Forex News</span>
-                            <span><i class="bi bi-check-circle-fill"></i> Commodity News</span>
-                            <span><i class="bi bi-check-circle-fill"></i> Market Analysis</span>
-                        </div>
-                        <div class="card-action">
-                            <span>Visit Site</span>
-                            <i class="bi bi-box-arrow-up-right"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <a href="https://www.fxstreet.com/" target="_blank" class="intelligence-card fxstreet-card glass-card premium-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="card-glow"></div>
-                        <div class="card-icon">
-                            <i class="bi bi-lightning"></i>
-                        </div>
-                        <h4>FXStreet</h4>
-                        <p>Real-time Forex News • Analysis</p>
-                        <div class="card-features">
-                            <span><i class="bi bi-check-circle-fill"></i> Real-time News</span>
-                            <span><i class="bi bi-check-circle-fill"></i> Technical Analysis</span>
-                            <span><i class="bi bi-check-circle-fill"></i> Economic Calendar</span>
-                        </div>
-                        <div class="card-action">
-                            <span>Visit Site</span>
-                            <i class="bi bi-box-arrow-up-right"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <a href="https://www.myfxbook.com/calendar" target="_blank" class="intelligence-card myfxbook-card glass-card premium-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="card-glow"></div>
-                        <div class="card-icon">
-                            <i class="bi bi-calendar-event"></i>
-                        </div>
-                        <h4>Myfxbook Calendar</h4>
-                        <p>Economic Calendar • Trading Tools</p>
-                        <div class="card-features">
-                            <span><i class="bi bi-check-circle-fill"></i> Economic Calendar</span>
-                            <span><i class="bi bi-check-circle-fill"></i> Trading Tools</span>
-                            <span><i class="bi bi-check-circle-fill"></i> Community Forums</span>
-                        </div>
-                        <div class="card-action">
-                            <span>Visit Site</span>
-                            <i class="bi bi-box-arrow-up-right"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Crypto News Section -->
-    <section class="intelligence-section" id="crypto-news">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-header text-center" data-aos="fade-up">
-                        <span class="section-badge">Crypto Intelligence</span>
-                        <h2 class="section-title">Crypto News & Analysis</h2>
-                        <p class="section-text">Latest cryptocurrency news, market data, and trading insights</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-2-4 col-md-4 col-sm-6">
-                    <a href="https://coinmarketcap.com/" target="_blank" class="intelligence-card crypto-card coinmarketcap-card glass-card premium-card" data-aos="fade-up" data-aos-delay="0">
-                        <div class="card-glow"></div>
-                        <div class="card-icon">
-                            <i class="bi bi-pie-chart"></i>
-                        </div>
-                        <h4>CoinMarketCap</h4>
-                        <p>Cryptocurrency Market Data</p>
-                        <div class="card-action">
-                            <span>Visit Site</span>
-                            <i class="bi bi-box-arrow-up-right"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-2-4 col-md-4 col-sm-6">
-                    <a href="https://www.coindesk.com/" target="_blank" class="intelligence-card crypto-card coindesk-card glass-card premium-card" data-aos="fade-up" data-aos-delay="50">
-                        <div class="card-glow"></div>
-                        <div class="card-icon">
-                            <i class="bi bi-newspaper"></i>
-                        </div>
-                        <h4>CoinDesk</h4>
-                        <p>Crypto News & Analysis</p>
-                        <div class="card-action">
-                            <span>Visit Site</span>
-                            <i class="bi bi-box-arrow-up-right"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-2-4 col-md-4 col-sm-6">
-                    <a href="https://cointelegraph.com/" target="_blank" class="intelligence-card crypto-card cointelegraph-card glass-card premium-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card-glow"></div>
-                        <div class="card-icon">
-                            <i class="bi bi-broadcast"></i>
-                        </div>
-                        <h4>Cointelegraph</h4>
-                        <p>Blockchain & Crypto News</p>
-                        <div class="card-action">
-                            <span>Visit Site</span>
-                            <i class="bi bi-box-arrow-up-right"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-2-4 col-md-4 col-sm-6">
-                    <a href="https://cryptopanic.com/" target="_blank" class="intelligence-card crypto-card cryptopanic-card glass-card premium-card" data-aos="fade-up" data-aos-delay="150">
-                        <div class="card-glow"></div>
-                        <div class="card-icon">
-                            <i class="bi bi-exclamation-triangle"></i>
-                        </div>
-                        <h4>CryptoPanic</h4>
-                        <p>News Aggregator Platform</p>
-                        <div class="card-action">
-                            <span>Visit Site</span>
-                            <i class="bi bi-box-arrow-up-right"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-2-4 col-md-4 col-sm-6">
-                    <a href="https://www.tradingview.com/crypto/" target="_blank" class="intelligence-card crypto-card tradingview-card glass-card premium-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="card-glow"></div>
-                        <div class="card-icon">
-                            <i class="bi bi-graph-up"></i>
-                        </div>
-                        <h4>TradingView Crypto</h4>
-                        <p>Crypto Charts & Analysis</p>
-                        <div class="card-action">
-                            <span>Visit Site</span>
-                            <i class="bi bi-box-arrow-up-right"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Trader Command Center Section -->
-    <section class="command-center-section" id="trading-tools">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-header text-center" data-aos="fade-up">
-                        <span class="section-badge">Trading Tools</span>
-                        <h2 class="section-title">Trader Command Center</h2>
-                        <p class="section-text">Premium trading calculators and tools for professional traders</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="tool-card glass-card" data-aos="fade-up" data-aos-delay="0">
-                        <div class="tool-icon">
-                            <i class="bi bi-calculator"></i>
-                        </div>
-                        <h3>Risk Calculator</h3>
-                        <p>Calculate position size based on risk percentage and stop loss</p>
-                        <div class="tool-form">
-                            <div class="form-group">
-                                <label>Account Balance ($)</label>
-                                <input type="number" class="form-control" id="riskBalance" placeholder="10000">
-                            </div>
-                            <div class="form-group">
-                                <label>Risk Percentage (%)</label>
-                                <input type="number" class="form-control" id="riskPercent" placeholder="2">
-                            </div>
-                            <div class="form-group">
-                                <label>Stop Loss (pips)</label>
-                                <input type="number" class="form-control" id="riskStopLoss" placeholder="50">
-                            </div>
-                            <button class="btn btn-primary w-100 magnetic-btn" onclick="calculateRisk()">
-                                Calculate Risk
-                            </button>
-                            <div class="tool-result" id="riskResult"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="tool-card glass-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="tool-icon">
-                            <i class="bi bi-rulers"></i>
-                        </div>
-                        <h3>Position Size Calculator</h3>
-                        <p>Determine optimal position size for your trades</p>
-                        <div class="tool-form">
-                            <div class="form-group">
-                                <label>Account Balance ($)</label>
-                                <input type="number" class="form-control" id="posBalance" placeholder="10000">
-                            </div>
-                            <div class="form-group">
-                                <label>Risk per Trade ($)</label>
-                                <input type="number" class="form-control" id="posRisk" placeholder="200">
-                            </div>
-                            <div class="form-group">
-                                <label>Entry Price</label>
-                                <input type="number" class="form-control" id="posEntry" placeholder="1.1000">
-                            </div>
-                            <div class="form-group">
-                                <label>Stop Loss Price</label>
-                                <input type="number" class="form-control" id="posStop" placeholder="1.0950">
-                            </div>
-                            <button class="btn btn-primary w-100 magnetic-btn" onclick="calculatePosition()">
-                                Calculate Position
-                            </button>
-                            <div class="tool-result" id="posResult"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="tool-card glass-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="tool-icon">
-                            <i class="bi bi-currency-bitcoin"></i>
-                        </div>
-                        <h3>Bitcoin SIP Calculator</h3>
-                        <p>Calculate your Bitcoin Systematic Investment Plan returns</p>
-                        <div class="tool-form">
-                            <div class="form-group">
-                                <label>Monthly Investment ($)</label>
-                                <input type="number" class="form-control" id="sipAmount" placeholder="100">
-                            </div>
-                            <div class="form-group">
-                                <label>Investment Period (Years)</label>
-                                <input type="number" class="form-control" id="sipYears" placeholder="5">
-                            </div>
-                            <div class="form-group">
-                                <label>Expected Annual Return (%)</label>
-                                <input type="number" class="form-control" id="sipReturn" placeholder="15">
-                            </div>
-                            <button class="btn btn-primary w-100 magnetic-btn" onclick="calculateSIP()">
-                                Calculate SIP
-                            </button>
-                            <div class="tool-result" id="sipResult"></div>
+                        <div style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 15px;">
+                            <span id="marketTimer" style="font-family:'Courier New', monospace; font-weight:700; color:var(--text);">00:00:00 UTC</span>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Quick Links -->
-            <div class="row mt-5">
-                <div class="col-12">
-                    <div class="quick-links-grid" data-aos="fade-up">
-                        <a href="https://www.forexfactory.com/calendar" target="_blank" class="quick-link-card glass-card magnetic-btn">
-                            <div class="quick-link-icon">
-                                <i class="bi bi-calendar3"></i>
+            <!-- Quick Hub Navigation Buttons -->
+            <div class="navigation-hub-bar" id="hubNavigation">
+                <button class="hub-nav-btn active" onclick="scrollToSection('home-overview')"><i class="bi bi-grid-1x2"></i> Overview</button>
+                <button class="hub-nav-btn" onclick="scrollToSection('forex-news-sec')"><i class="bi bi-newspaper"></i> Forex News</button>
+                <button class="hub-nav-btn" onclick="scrollToSection('economic-calendar-sec')"><i class="bi bi-calendar3"></i> Economic Calendar</button>
+                <button class="hub-nav-btn" onclick="scrollToSection('market-analysis-sec')"><i class="bi bi-graph-up"></i> Market Analysis</button>
+                <button class="hub-nav-btn" onclick="scrollToSection('trading-signals-sec')"><i class="bi bi-lightning-charge"></i> Trading Signals</button>
+                <button class="hub-nav-btn" onclick="scrollToSection('gold-sec')"><i class="bi bi-gem"></i> Gold Updates</button>
+                <button class="hub-nav-btn" onclick="scrollToSection('crypto-sec')"><i class="bi bi-currency-bitcoin"></i> Crypto News</button>
+                <button class="hub-nav-btn" onclick="scrollToSection('learn-trading-sec')"><i class="bi bi-mortarboard"></i> Learn Trading</button>
+            </div>
+            
+            <!-- Grid Layout -->
+            <div class="terminal-grid" id="home-overview">
+                <!-- Live Ticker (Top Spanned Card) -->
+                <div class="terminal-card glass-card p-2" style="grid-column: span 12; min-height: 46px;">
+                    <!-- TradingView Ticker Widget -->
+                    <div class="tradingview-widget-container">
+                        <div class="tradingview-widget-container__widget"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+                        {
+                            "symbols": [
+                                { "proName": "FOREXCOM:SPX500", "title": "S&P 500 Index" },
+                                { "proName": "FX_IDC:EURUSD", "title": "EURUSD" },
+                                { "proName": "FX_IDC:GBPUSD", "title": "GBPUSD" },
+                                { "proName": "FX:USDJPY", "title": "USDJPY" },
+                                { "proName": "OANDA:XAUUSD", "title": "XAUUSD (Gold)" },
+                                { "proName": "BINANCE:BTCUSDT", "title": "Bitcoin" }
+                            ],
+                            "colorTheme": "dark",
+                            "isTransparent": true,
+                            "showSymbolLogo": true,
+                            "locale": "en"
+                        }
+                        </script>
+                    </div>
+                </div>
+
+                <!-- LEFT SIDEBAR: Sessions, Currency Strength, Sentiment (Span 3) -->
+                <div class="terminal-card col-lg-3-custom d-flex flex-column gap-3">
+                    
+                    <!-- Session Tracker -->
+                    <div class="glass-card session-tracker-card">
+                        <h4 style="font-size:var(--font-size-sm); font-weight:700; margin-bottom:5px;"><i class="bi bi-clock"></i> Session Tracker</h4>
+                        <p style="font-size:11px; color:var(--muted-text); margin-bottom:15px;">Monitor live market operations</p>
+                        
+                        <div class="session-list">
+                            <div class="session-row" id="session-sydney">
+                                <div class="session-info">
+                                    <div class="session-indicator"></div>
+                                    <span style="font-size:13px; font-weight:600;">Sydney</span>
+                                </div>
+                                <span class="session-time">22:00 - 07:00</span>
                             </div>
-                            <span>Economic Calendar</span>
-                        </a>
-                        <a href="https://www.investing.com/economic-calendar/" target="_blank" class="quick-link-card glass-card magnetic-btn">
-                            <div class="quick-link-icon">
-                                <i class="bi bi-graph-up"></i>
+                            <div class="session-row" id="session-tokyo">
+                                <div class="session-info">
+                                    <div class="session-indicator"></div>
+                                    <span style="font-size:13px; font-weight:600;">Tokyo</span>
+                                </div>
+                                <span class="session-time">00:00 - 09:00</span>
                             </div>
-                            <span>Live Markets</span>
-                        </a>
-                        <a href="https://www.tradingview.com/" target="_blank" class="quick-link-card glass-card magnetic-btn">
-                            <div class="quick-link-icon">
-                                <i class="bi bi-diagram-3"></i>
+                            <div class="session-row" id="session-london">
+                                <div class="session-info">
+                                    <div class="session-indicator"></div>
+                                    <span style="font-size:13px; font-weight:600;">London</span>
+                                </div>
+                                <span class="session-time">08:00 - 17:00</span>
                             </div>
-                            <span>TradingView Charts</span>
-                        </a>
-                        <a href="https://coinmarketcap.com/" target="_blank" class="quick-link-card glass-card magnetic-btn">
-                            <div class="quick-link-icon">
-                                <i class="bi bi-currency-exchange"></i>
+                            <div class="session-row" id="session-newyork">
+                                <div class="session-info">
+                                    <div class="session-indicator"></div>
+                                    <span style="font-size:13px; font-weight:600;">New York</span>
+                                </div>
+                                <span class="session-time">13:00 - 22:00</span>
                             </div>
-                            <span>Crypto Prices</span>
-                        </a>
-                        <a href="bitcoin-sip.html" class="quick-link-card glass-card magnetic-btn">
-                            <div class="quick-link-icon">
-                                <i class="bi bi-piggy-bank"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Currency Strength Meter -->
+                    <div class="glass-card strength-meter-card">
+                        <h4 style="font-size:var(--font-size-sm); font-weight:700; margin-bottom:5px;"><i class="bi bi-speedometer2"></i> Currency Strength</h4>
+                        <p style="font-size:11px; color:var(--muted-text); margin-bottom:15px;">Real-time relative strength metrics</p>
+                        
+                        <div class="strength-list" id="strengthMeterList">
+                            <!-- Populated dynamically -->
+                            <div class="text-center py-3"><i class="bi bi-arrow-repeat spin"></i> Calculating...</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Market Sentiment Card -->
+                    <div class="glass-card sentiment-card">
+                        <h4 style="font-size:var(--font-size-sm); font-weight:700; margin-bottom:5px;"><i class="bi bi-people"></i> Market Sentiment</h4>
+                        <p style="font-size:11px; color:var(--muted-text); margin-bottom:15px;">Retail trader positioning (Long/Short)</p>
+                        
+                        <div id="sentimentContainer">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MIDDLE MAIN COLUMN: Charts & Signals (Span 6) -->
+                <div class="terminal-card col-lg-6-custom d-flex flex-column gap-3">
+                    
+                    <!-- Interactive Chart Card -->
+                    <div class="glass-card p-2 position-relative" style="min-height: 400px;" id="market-analysis-sec">
+                        <div class="p-3 d-flex justify-content-between align-items-center" style="border-bottom:1px solid rgba(255,255,255,0.05)">
+                            <h4 style="font-size:var(--font-size-sm); font-weight:700; margin:0;"><i class="bi bi-graph-up"></i> Technical Analysis Terminal</h4>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary active btn-sm" onclick="changeChartSymbol('OANDA:XAUUSD')">Gold</button>
+                                <button class="btn btn-outline-primary btn-sm" onclick="changeChartSymbol('BINANCE:BTCUSDT')">Bitcoin</button>
+                                <button class="btn btn-outline-primary btn-sm" onclick="changeChartSymbol('FX:EURUSD')">EURUSD</button>
+                                <button class="btn btn-outline-primary btn-sm" onclick="changeChartSymbol('FX:GBPUSD')">GBPUSD</button>
                             </div>
-                            <span>Bitcoin SIP</span>
-                        </a>
-                        <a href="bots.html" class="quick-link-card glass-card magnetic-btn">
-                            <div class="quick-link-icon">
-                                <i class="bi bi-robot"></i>
+                        </div>
+                        
+                        <!-- TradingView Advanced Chart Widget -->
+                        <div class="w-100" style="height: 380px;" id="tradingview_chart_container">
+                            <div id="tradingview_widget"></div>
+                            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                            <script type="text/javascript">
+                            let currentSymbol = 'OANDA:XAUUSD';
+                            function initChart(symbol) {
+                                new TradingView.widget({
+                                    "width": "100%",
+                                    "height": "100%",
+                                    "symbol": symbol,
+                                    "interval": "D",
+                                    "timezone": "Etc/UTC",
+                                    "theme": "dark",
+                                    "style": "1",
+                                    "locale": "en",
+                                    "enable_publishing": false,
+                                    "hide_side_toolbar": false,
+                                    "allow_symbol_change": true,
+                                    "container_id": "tradingview_widget"
+                                });
+                            }
+                            document.addEventListener('DOMContentLoaded', () => initChart(currentSymbol));
+                            function changeChartSymbol(symbol) {
+                                currentSymbol = symbol;
+                                // Highlight active button
+                                const buttons = document.querySelectorAll('#market-analysis-sec .btn-group button');
+                                buttons.forEach(btn => {
+                                    if(btn.textContent.toLowerCase().includes('gold') && symbol.includes('XAU')) btn.classList.add('active');
+                                    else if(btn.textContent.toLowerCase().includes('bitcoin') && symbol.includes('BTC')) btn.classList.add('active');
+                                    else if(btn.textContent.toLowerCase().includes('eurusd') && symbol.includes('EUR')) btn.classList.add('active');
+                                    else if(btn.textContent.toLowerCase().includes('gbpusd') && symbol.includes('GBP')) btn.classList.add('active');
+                                    else btn.classList.remove('active');
+                                });
+                                initChart(symbol);
+                            }
+                            </script>
+                        </div>
+                    </div>
+                    
+                    <!-- Trading Signals Section -->
+                    <div class="glass-card signals-card" id="trading-signals-sec">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h4 style="font-size:var(--font-size-sm); font-weight:700; margin-bottom:5px;"><i class="bi bi-lightning-charge"></i> Live Trading Signals</h4>
+                                <p style="font-size:11px; color:var(--muted-text); margin:0;">Automated AI analysis alert systems</p>
                             </div>
-                            <span>Trading Bots</span>
-                        </a>
+                            <button class="btn btn-outline-primary btn-sm" onclick="generateRandomSignal()"><i class="bi bi-arrow-clockwise"></i> Request Signal</button>
+                        </div>
+                        
+                        <div class="row" id="signalsGrid">
+                            <!-- Signals populate here dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: News, Calendar, Tools (Span 3) -->
+                <div class="terminal-card col-lg-3-custom d-flex flex-column gap-3">
+                    
+                    <!-- Forex News Center -->
+                    <div class="glass-card p-3 position-relative" style="min-height: 380px;" id="forex-news-sec">
+                        <h4 style="font-size:var(--font-size-sm); font-weight:700; margin-bottom:5px;"><i class="bi bi-newspaper"></i> Live News Center</h4>
+                        <p style="font-size:11px; color:var(--muted-text); margin-bottom:15px;">Live financial events feed desk</p>
+                        
+                        <div class="news-tabs" id="newsTabs">
+                            <button class="news-tab-btn active" onclick="switchNewsTab('all')">All</button>
+                            <button class="news-tab-btn" onclick="switchNewsTab('forex')">Forex</button>
+                            <button class="news-tab-btn" onclick="switchNewsTab('gold')" id="gold-sec">Gold</button>
+                            <button class="news-tab-btn" onclick="switchNewsTab('crypto')" id="crypto-sec">Crypto</button>
+                        </div>
+                        
+                        <div id="newsFeedContainer" style="max-height: 400px; overflow-y: auto;">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Calculators -->
+                    <div class="glass-card p-3">
+                        <h4 style="font-size:var(--font-size-sm); font-weight:700; margin-bottom:5px;"><i class="bi bi-calculator"></i> Trading Quick Tools</h4>
+                        <p style="font-size:11px; color:var(--muted-text); margin-bottom:15px;">Fast parameters risk calculation</p>
+                        
+                        <ul class="nav nav-tabs" id="calcTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link p-2 active" id="risk-tab" data-bs-toggle="tab" data-bs-target="#riskCalc" type="button" style="font-size:12px;">Risk</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link p-2" id="position-tab" data-bs-toggle="tab" data-bs-target="#positionCalc" type="button" style="font-size:12px;">Pos Size</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content pt-3" id="calcTabsContent">
+                            <div class="tab-pane fade show active" id="riskCalc" role="tabpanel">
+                                <div class="form-group mb-2">
+                                    <label style="font-size:11px; color:var(--muted-text);">Account Balance ($)</label>
+                                    <input type="number" class="form-control form-control-sm" id="riskBalance" value="10000">
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label style="font-size:11px; color:var(--muted-text);">Risk Percentage (%)</label>
+                                    <input type="number" class="form-control form-control-sm" id="riskPercent" value="1">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label style="font-size:11px; color:var(--muted-text);">Stop Loss (pips)</label>
+                                    <input type="number" class="form-control form-control-sm" id="riskStopLoss" value="30">
+                                </div>
+                                <button class="btn btn-primary btn-sm w-100" onclick="calculateRisk()">Calculate</button>
+                                <div class="mt-2 p-2 rounded bg-dark" id="riskResult" style="font-size:12px; display:none;"></div>
+                            </div>
+                            <div class="tab-pane fade" id="positionCalc" role="tabpanel">
+                                <div class="form-group mb-2">
+                                    <label style="font-size:11px; color:var(--muted-text);">Risk Amount ($)</label>
+                                    <input type="number" class="form-control form-control-sm" id="posRisk" value="100">
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label style="font-size:11px; color:var(--muted-text);">Entry Price</label>
+                                    <input type="number" class="form-control form-control-sm" id="posEntry" value="1.1000" step="0.0001">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label style="font-size:11px; color:var(--muted-text);">Stop Loss Price</label>
+                                    <input type="number" class="form-control form-control-sm" id="posStop" value="1.0970" step="0.0001">
+                                </div>
+                                <button class="btn btn-primary btn-sm w-100" onclick="calculatePosition()">Calculate</button>
+                                <div class="mt-2 p-2 rounded bg-dark" id="posResult" style="font-size:12px; display:none;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FULL LENGTH CARD: Economic Calendar (Span 12) -->
+                <div class="terminal-card glass-card p-4" id="economic-calendar-sec" style="grid-column: span 12;">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                        <div>
+                            <h4 style="font-size:var(--font-size-base); font-weight:700; margin-bottom:5px;"><i class="bi bi-calendar3"></i> Interactive Economic Calendar</h4>
+                            <p style="font-size:12px; color:var(--muted-text); margin:0;">Major financial announcements and market volatility triggers.</p>
+                        </div>
+                        <div class="d-flex gap-2 align-items-center mt-2 mt-md-0">
+                            <span style="font-size:12px; color:var(--muted-text);">Impact Filters:</span>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary active btn-sm" id="filter-all" onclick="filterCalendar('all')">All</button>
+                                <button class="btn btn-outline-danger btn-sm" id="filter-high" onclick="filterCalendar('high')">High</button>
+                                <button class="btn btn-outline-warning btn-sm" id="filter-medium" onclick="filterCalendar('medium')">Medium</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table calendar-table">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Cur</th>
+                                    <th>Impact</th>
+                                    <th>Event Details</th>
+                                    <th class="text-end">Previous</th>
+                                    <th class="text-end">Forecast</th>
+                                    <th class="text-end">Actual</th>
+                                </tr>
+                            </thead>
+                            <tbody id="economicCalendarBody">
+                                <!-- Calendar populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- FULL LENGTH CARD: Learn Trading Section (Span 12) -->
+                <div class="terminal-card glass-card p-4" id="learn-trading-sec" style="grid-column: span 12;">
+                    <div class="section-header text-center mb-4">
+                        <span class="section-badge">Trading Education</span>
+                        <h2 class="section-title" style="font-size:1.8rem; margin-top:5px;">Professional Trading Learning Path</h2>
+                        <p class="section-text" style="font-size:13px; color:var(--muted-text);">Get structured knowledge on SMC, Price Action, and Automated Risk Management.</p>
+                    </div>
+                    
+                    <div class="row g-4">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="glass-card edu-lesson-card">
+                                <div>
+                                    <div class="lesson-icon"><i class="bi bi-book"></i></div>
+                                    <div class="lesson-tags">
+                                        <span class="lesson-tag">Forex Basics</span>
+                                        <span class="lesson-tag">Beginner</span>
+                                    </div>
+                                    <h4 style="font-weight:700;">1. Intro to Financial Markets</h4>
+                                    <p class="text-muted" style="font-size:12px;">Understand leverage, spreads, currency pairs dynamics, bid/ask differentials, and MT4/MT5 software configurations.</p>
+                                </div>
+                                <a href="forex-course.html" class="btn btn-outline-primary btn-sm mt-3 w-100">Access Course Module</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="glass-card edu-lesson-card">
+                                <div>
+                                    <div class="lesson-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                                    <div class="lesson-tags">
+                                        <span class="lesson-tag">Price Action</span>
+                                        <span class="lesson-tag">Intermediate</span>
+                                    </div>
+                                    <h4 style="font-weight:700;">2. Price Action Patterns</h4>
+                                    <p class="text-muted" style="font-size:12px;">Master support & resistance structures, trendlines, breakout confirmations, candle setups, and chart patterns analysis.</p>
+                                </div>
+                                <a href="price-action-course.html" class="btn btn-outline-primary btn-sm mt-3 w-100">Access Course Module</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="glass-card edu-lesson-card">
+                                <div>
+                                    <div class="lesson-icon"><i class="bi bi-shield-check"></i></div>
+                                    <div class="lesson-tags">
+                                        <span class="lesson-tag">SMC Concepts</span>
+                                        <span class="lesson-tag">Advanced</span>
+                                    </div>
+                                    <h4 style="font-weight:700;">3. Smart Money Concepts</h4>
+                                    <p class="text-muted" style="font-size:12px;">Learn order block structures, market imbalances (FVG), liquidity sweeps, mitigation processes, and institutional orderflow tracking.</p>
+                                </div>
+                                <a href="smc-course.html" class="btn btn-outline-primary btn-sm mt-3 w-100">Access Course Module</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    
+    </main>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -502,7 +827,7 @@
                             <span>PARAMCGWALA</span><span class="accent">BOTS</span>
                         </a>
                         <p class="footer-description">
-                            Premium Market Intelligence Hub for professional traders. Access real-time data, news, and advanced trading tools.
+                            Next-generation algorithmic automation and market intelligence dashboard built for elite traders and modern enterprises.
                         </p>
                         <div class="social-links">
                             <a href="https://wa.me/919617422068" target="_blank"><i class="bi bi-whatsapp"></i></a>
@@ -514,12 +839,12 @@
                 </div>
                 <div class="col-lg-2 col-md-6">
                     <div class="footer-links">
-                        <h4>Quick Links</h4>
+                        <h4>Navigation</h4>
                         <ul>
                             <li><a href="index.html">Home</a></li>
-                            <li><a href="market-intelligence.html">Market Intelligence</a></li>
                             <li><a href="courses.html">Courses</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="bots.html">Trading Bots</a></li>
+                            <li><a href="market-intelligence.html">Market Hub</a></li>
                         </ul>
                     </div>
                 </div>
@@ -527,150 +852,40 @@
                     <div class="footer-links">
                         <h4>Tools</h4>
                         <ul>
-                            <li><a href="#trading-tools">Risk Calculator</a></li>
-                            <li><a href="#trading-tools">Position Calculator</a></li>
+                            <li><a href="market-intelligence.html#trading-tools">Risk Calculator</a></li>
+                            <li><a href="market-intelligence.html#trading-tools">Position Size</a></li>
                             <li><a href="bitcoin-sip.html">Bitcoin SIP</a></li>
-                            <li><a href="bots.html">Trading Bots</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6">
-                    <div class="footer-links">
-                        <h4>Resources</h4>
-                        <ul>
-                            <li><a href="#forex-news">Forex News</a></li>
-                            <li><a href="#crypto-news">Crypto News</a></li>
-                            <li><a href="resources.html">Resources</a></li>
-                            <li><a href="ai-automation.html">AI Automation</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="footer-newsletter">
                         <h4>Newsletter</h4>
-                        <p>Subscribe for market updates.</p>
+                        <p>Receive trade setup breakdowns and automation updates directly in your inbox.</p>
                         <form class="newsletter-form">
-                            <input type="email" placeholder="Your email">
+                            <input type="email" placeholder="Your email" required>
                             <button type="submit"><i class="bi bi-send"></i></button>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="footer-bottom">
-                        <p>&copy; 2024 PARAMCGWALABOTS. All rights reserved.</p>
-                        <div class="footer-bottom-links">
-                            <a href="index.html">Home</a>
-                            <a href="privacy-policy.html">Privacy Policy</a>
-                            <a href="terms-of-service.html">Terms of Service</a>
-                            <a href="cookie-policy.html">Cookie Policy</a>
-                        </div>
+            <div class="row mt-4 pt-4" style="border-top: 1px solid rgba(255,255,255,0.05)">
+                <div class="col-md-6">
+                    <p>&copy; 2026 PARAMCGWALABOTS. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="footer-bottom-links">
+                        <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="terms-of-service.html">Terms of Service</a>
+                        <a href="cookie-policy.html">Cookie Policy</a>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
     
-    <!-- Bootstrap 5 JS -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- AOS Animation Library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <!-- GSAP Animation Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-    
-    <!-- Custom JS -->
-    <script src="js/script.js"></script>
-    
-    <!-- Market Intelligence JS -->
-    <script>
-        // Calculator Functions
-        function calculateRisk() {
-            const balance = parseFloat(document.getElementById('riskBalance').value);
-            const riskPercent = parseFloat(document.getElementById('riskPercent').value);
-            const stopLoss = parseFloat(document.getElementById('riskStopLoss').value);
-            
-            if (balance && riskPercent && stopLoss) {
-                const riskAmount = balance * (riskPercent / 100);
-                const positionSize = riskAmount / stopLoss;
-                
-                document.getElementById('riskResult').innerHTML = `
-                    <div class="result-item">
-                        <span>Risk Amount:</span>
-                        <strong>$${riskAmount.toFixed(2)}</strong>
-                    </div>
-                    <div class="result-item">
-                        <span>Position Size:</span>
-                        <strong>${positionSize.toFixed(2)} lots</strong>
-                    </div>
-                `;
-            }
-        }
-        
-        function calculatePosition() {
-            const balance = parseFloat(document.getElementById('posBalance').value);
-            const risk = parseFloat(document.getElementById('posRisk').value);
-            const entry = parseFloat(document.getElementById('posEntry').value);
-            const stop = parseFloat(document.getElementById('posStop').value);
-            
-            if (balance && risk && entry && stop) {
-                const pipValue = (entry - stop);
-                const positionSize = risk / pipValue;
-                
-                document.getElementById('posResult').innerHTML = `
-                    <div class="result-item">
-                        <span>Risk Amount:</span>
-                        <strong>$${risk.toFixed(2)}</strong>
-                    </div>
-                    <div class="result-item">
-                        <span>Pip Value:</span>
-                        <strong>${pipValue.toFixed(5)}</strong>
-                    </div>
-                    <div class="result-item">
-                        <span>Position Size:</span>
-                        <strong>${positionSize.toFixed(2)} lots</strong>
-                    </div>
-                `;
-            }
-        }
-        
-        function calculateSIP() {
-            const monthlyAmount = parseFloat(document.getElementById('sipAmount').value);
-            const years = parseFloat(document.getElementById('sipYears').value);
-            const annualReturn = parseFloat(document.getElementById('sipReturn').value) / 100;
-            
-            if (monthlyAmount && years && annualReturn) {
-                const months = years * 12;
-                const monthlyReturn = annualReturn / 12;
-                
-                let futureValue = 0;
-                for (let i = 0; i < months; i++) {
-                    futureValue = (futureValue + monthlyAmount) * (1 + monthlyReturn);
-                }
-                
-                const totalInvested = monthlyAmount * months;
-                const returns = futureValue - totalInvested;
-                
-                document.getElementById('sipResult').innerHTML = `
-                    <div class="result-item">
-                        <span>Total Invested:</span>
-                        <strong>$${totalInvested.toFixed(2)}</strong>
-                    </div>
-                    <div class="result-item">
-                        <span>Future Value:</span>
-                        <strong>$${futureValue.toFixed(2)}</strong>
-                    </div>
-                    <div class="result-item">
-                        <span>Returns:</span>
-                        <strong class="text-success">$${returns.toFixed(2)}</strong>
-                    </div>
-                `;
-            }
-        }
-    </script>
+    <script src="js/market-dashboard.js"></script>
 </body>
 </html>

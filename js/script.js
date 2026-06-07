@@ -1291,7 +1291,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    img.src = img.dataset.src;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                    }
                     img.classList.add('loaded');
                     observer.unobserve(img);
                 }
@@ -1302,6 +1304,20 @@ document.addEventListener('DOMContentLoaded', async function() {
             imageObserver.observe(img);
         });
     }
+    
+    // Smooth fade-in for native lazy loaded images
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        if (img.complete) {
+            img.classList.add('loaded');
+        } else {
+            img.addEventListener('load', function() {
+                img.classList.add('loaded');
+            });
+            img.addEventListener('error', function() {
+                img.classList.add('loaded');
+            });
+        }
+    });
     
     // Add loading animation
     window.addEventListener('load', function() {
