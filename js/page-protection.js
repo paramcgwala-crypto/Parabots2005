@@ -12,13 +12,13 @@ async function protectPage() {
         if (!session) {
             // Store intended destination
             sessionStorage.setItem('intendedDestination', window.location.pathname);
-            window.location.href = 'login.html';
+            window.location.href = 'login.php';
             return false;
         }
         return true;
     } catch (error) {
         console.error('Page protection error:', error);
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
         return false;
     }
 }
@@ -32,7 +32,7 @@ async function protectPremiumPage() {
         const session = await getSession();
         if (!session) {
             sessionStorage.setItem('intendedDestination', window.location.pathname);
-            window.location.href = 'login.html';
+            window.location.href = 'login.php';
             return false;
         }
 
@@ -58,7 +58,7 @@ async function protectAdminPage() {
     try {
         const session = await getSession();
         if (!session) {
-            window.location.href = 'login.html';
+            window.location.href = 'login.php';
             return false;
         }
 

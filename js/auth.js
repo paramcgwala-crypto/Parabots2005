@@ -32,7 +32,7 @@ async function signUp(email, password, metadata = {}) {
             password,
             options: {
                 data: metadata,
-                emailRedirectTo: `${window.location.origin}/dashboard.html`
+                emailRedirectTo: `${window.location.origin}/dashboard.php`
             }
         });
 
@@ -153,7 +153,7 @@ async function getCurrentUser() {
 async function resetPassword(email) {
     try {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
-            redirectTo: `${window.location.origin}/reset-password.html`
+            redirectTo: `${window.location.origin}/reset-password.php`
         });
 
         if (error) throw error;
@@ -204,7 +204,7 @@ async function resendConfirmationEmail(email) {
             type: 'signup',
             email,
             options: {
-                emailRedirectTo: `${window.location.origin}/dashboard.html`
+                emailRedirectTo: `${window.location.origin}/dashboard.php`
             }
         });
 
@@ -371,7 +371,7 @@ async function getProfile() {
 /**
  * Protect page - redirect if not authenticated
  */
-async function protectPage(redirectUrl = 'login.html') {
+async function protectPage(redirectUrl = 'login.php') {
     const session = await getSession();
     if (!session) {
         // Store intended destination
@@ -389,7 +389,7 @@ async function protectPremiumPage(redirectUrl = 'premium-membership.html') {
     const session = await getSession();
     if (!session) {
         sessionStorage.setItem('intendedDestination', window.location.pathname);
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
         return false;
     }
 
@@ -408,7 +408,7 @@ async function protectPremiumPage(redirectUrl = 'premium-membership.html') {
 async function protectAdminPage(redirectUrl = 'index.html') {
     const session = await getSession();
     if (!session) {
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
         return false;
     }
 
@@ -444,10 +444,10 @@ async function updateNavbarAuth() {
                     <span class="d-none d-sm-inline">${displayName}</span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-                    <li><a class="dropdown-item" href="dashboard.html#profile"><i class="bi bi-person"></i> Profile</a></li>
-                    <li><a class="dropdown-item" href="dashboard.html#courses"><i class="bi bi-mortarboard"></i> My Courses</a></li>
-                    ${role === 'premium' ? '<li><a class="dropdown-item" href="dashboard.html#downloads"><i class="bi bi-download"></i> Downloads</a></li>' : ''}
+                    <li><a class="dropdown-item" href="dashboard.php"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+                    <li><a class="dropdown-item" href="dashboard.php#profile"><i class="bi bi-person"></i> Profile</a></li>
+                    <li><a class="dropdown-item" href="dashboard.php#courses"><i class="bi bi-mortarboard"></i> My Courses</a></li>
+                    ${role === 'premium' ? '<li><a class="dropdown-item" href="dashboard.php#downloads"><i class="bi bi-download"></i> Downloads</a></li>' : ''}
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#" onclick="handleSignOut(event)"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
                 </ul>
@@ -455,8 +455,8 @@ async function updateNavbarAuth() {
         `;
     } else {
         authButtonsContainer.innerHTML = `
-            <a href="login.html" class="btn btn-outline-light me-2">Login</a>
-            <a href="signup.html" class="btn btn-primary">Sign Up</a>
+            <a href="login.php" class="btn btn-outline-light me-2">Login</a>
+            <a href="signup.php" class="btn btn-primary">Sign Up</a>
         `;
     }
 }

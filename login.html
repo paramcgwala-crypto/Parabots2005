@@ -74,7 +74,7 @@
                         <input type="checkbox" id="rememberMe">
                         <label for="rememberMe">Remember me</label>
                     </label>
-                    <a href="forgot-password.html" class="forgot-password">Forgot password?</a>
+                    <a href="forgot-password.php" class="forgot-password">Forgot password?</a>
                 </div>
                 
                 <button type="submit" class="auth-btn" id="loginBtn">
@@ -101,7 +101,7 @@
             
             <!-- Auth Links -->
             <div class="auth-links">
-                <p>Don't have an account? <a href="signup.html" class="auth-link"><strong>Sign up</strong></a></p>
+                <p>Don't have an account? <a href="signup.php" class="auth-link"><strong>Sign up</strong></a></p>
                 <p><a href="index.html" class="auth-link">Back to Home</a></p>
             </div>
         </div>
@@ -195,7 +195,7 @@
                     // Redirect to dashboard or intended destination
                     const intendedDestination = sessionStorage.getItem('intendedDestination');
                     setTimeout(() => {
-                        window.location.href = intendedDestination || 'dashboard.html';
+                        window.location.href = intendedDestination || 'dashboard.php';
                     }, 1000);
                 } else {
                     showAlert(result.message, 'error');
