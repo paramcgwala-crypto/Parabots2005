@@ -12,8 +12,7 @@ function initLoadingScreen() {
     const loadingScreen = document.getElementById('loadingScreen');
     if (!loadingScreen) return;
 
-    // Hide loading screen after page load
-    window.addEventListener('load', () => {
+    const hideLoader = () => {
         setTimeout(() => {
             loadingScreen.classList.add('hidden');
             
@@ -21,8 +20,16 @@ function initLoadingScreen() {
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
             }, 500);
-        }, 1500);
-    });
+        }, 400); // Optimized delay for rapid rendering
+    };
+
+    if (document.readyState === 'complete') {
+        hideLoader();
+    } else {
+        window.addEventListener('load', hideLoader);
+        // Fallback safety timeout of 3 seconds to ensure page renders
+        setTimeout(hideLoader, 3000);
+    }
 }
 
 // ===================================
